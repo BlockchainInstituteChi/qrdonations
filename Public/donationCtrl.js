@@ -6,8 +6,7 @@ console.log('loaded ');
 angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', function( $http, $scope, $window ){
 
-	
-
+	//  
 	$scope.init = function () {
 		var canvas = document.getElementById('qrCode')
 		var data = "0x10928naihxn1i7fh9iunjasqwdfcsa"
@@ -36,11 +35,34 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		];
 	};
 
+	// Pagination Controls
+	$scope.next = function (stepId) {
+		hide(stepId - 1);
+		show(stepId);
+		$scope.checkStep = checkStep[stepId]
+	}
+	$scope.back = function (stepId) {
+		hide(stepId - 1);
+		show(stepId - 2);
+	}
+
+	$scope.done = function () {
+		$window.close();
+	}
+
+	function hide (divId) {
+		$scope.display[divId] = "hidden";
+	}
+
+	function show (divId) {
+		$scope.display[divId] = "";
+	}
+
 	$scope.init();
 
 	$scope.key = "6Lef510UAAAAAHytDRJTVDGAUA_aMPaAnDDCkxV_";
 
-  // Recaptcha Logic
+	// Recaptcha Logic
     $scope.setResponse = function (response) {
         console.info('Response available');
         $scope.response = response;

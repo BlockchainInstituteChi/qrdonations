@@ -8,7 +8,18 @@
     display: inline-block;
     margin-right: 1em;
 }
-
+fieldset.currencyList {
+    width: 15em;
+    margin: auto;
+    text-align: center;
+}
+button.nextBtn {
+    width: 10%;
+    height: 2em;
+    border-radius: 0.25em;
+    font-size: 1.5em;
+    margin-left: 45%;
+}
 :checked + label {
    color: blue;
 }
