@@ -1,9 +1,8 @@
 module.exports = function(app){
 
-  var mail = require('./controllers/mail.js');
-  app.get('/helloWorld', mail.helloWorld);
-  app.get('/', mail.healthCheck);
-  app.post('/checkCaptcha/', mail.checkCaptcha);
+  var donations = require('./controllers/donations.js');
+  app.get('/helloWorld', donations.helloWorld);
+  app.post('/checkCaptcha/', donations.checkCaptcha);
 
 }
 
