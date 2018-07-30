@@ -11,24 +11,51 @@
     <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
+    <link rel='stylesheet' id='cryptocoins-css'  href='./css/cryptocoins.css'> 
+    <link rel='stylesheet' id='custom-css'  href='./css/style.css'> 
+
+
     <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-functions.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-messaging.js"></script>
-<!--     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://rawgit.com/VividCortex/angular-recaptcha/master/release/angular-recaptcha.js"></script> -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://rawgit.com/VividCortex/angular-recaptcha/master/release/angular-recaptcha.js"></script>
     <script type="text/javascript" src="scripts/qrcode.js"></script>
 
 
   </head>
 
-  <body ng-app="mailManager">
-    <div class="container" ng-controller="mailCtrl">
-        <input type="text" ng-model="name" placeholder="name">
-        <input type="text" ng-model="email" placeholder="email">
-        <input type="text" ng-model="comment" placeholder="comment">
-        <form ng-submit="submit()">
+  <body ng-app="donationsManager">
+    <div class="container" ng-controller="donationsCtrl">
+
+        <div class="currencySelect {{display[0]}}">
+            <h1>Select a currency below to get started</h1>
+            <fieldset class="currencyList">
+                <div class="radioSet" ng-repeat="x in supportedCurrencies">
+                    <input type="radio" class="currencyIcon" id="{{x.name}}" name="currencySelect"/>
+                    <label for="{{x.name}}"><i class="cc {{x.name}}"> {{x.name}}</i></label>
+                </div>
+            </fieldset>
+            <br>
+            <button class="btn" type="next" ng-click="next('1')">Next</button> 
+        </div>
+
+        <div class="taxReceipt {{display[1]}}">
+            <h1>Would you like to receive a tax receipt for your donation?</h1>
+            <br>
+            <input type="checkbox" ng-model="taxReceipt">
+            <br>
+            <hr>
+            <p>A tax receipt can be issued for any donation of more than $50. Tax receipts are valid in the US only. Please <a href="/contact-us">contact us</a> for more information.</p>
+            <br>
+            <button class="btn" type="next" ng-click="next('1')">Next</button> 
+
+        </div>
+
+        <div class="reCaptcha {{display[2]}}">
+            <h1>Please verify that you're human:</h1>
             <div
                 vc-recaptcha
                 theme="'light'"
@@ -37,11 +64,32 @@
                 on-success="setResponse(response)"
                 on-expire="cbExpiration()"
             ></div>
-            <button class="btn" type="submit">Captcha</button>
-        </form>
+            <br>
+            <button class="btn" type="next" ng-click="next('2')">Next</button>           
+        </div>
+
+        <div class="qrcode {{display[3]}}">
+            <h1> Scan the QR Code below to donate your funds:</h1>
+            <canvas id="qrCode">
+            </canvas>
+            <hr>
+            <div class="donationAmount">
+                {{donationAmount}} in {{donationCurrency}}
+            </div> 
+            <br>
+            <button class="btn" type="next" ng-click="next('3')">Next</button> 
+
+        </div>
+
+        <div class="thanks {{display[4]}}">
+            <h1>Thanks for your contribution.</h1>
+            <p>Your donation helps keep the institute strong. Our team couldn't do it without you! <br> If you selected the option to receive a tax receipt, please stay posted and you should receive an email from a member of our staff shortly.</p>
+            <a href="#" onClick="window.open('http://webdev-il.blogspot.com/?m=1','mywindow','width=320,height=480,toolbar=no,location=no,directories=no,statu s=no,menubar=no,scrollbars=yes,copyhistory=no,resizable=yes')">Link Text</a>
+            <br>
+            <button class="btn" type="next" ng-click="next('4')" >Done</button> 
+        </div>        
+
     </div>
-    <canvas id="canvas" class="canvas">
-    </canvas>
   </body>
 
 

@@ -1,0 +1,14 @@
+.hidden {
+	display: none;
+}
+.radioSet input {
+    display: none;
+}
+.radioSet.ng-scope {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+:checked + label {
+   color: blue;
+}
