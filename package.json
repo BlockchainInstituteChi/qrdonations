@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "mailchimp-api-v3": "^1.12.0"
+  }
+}

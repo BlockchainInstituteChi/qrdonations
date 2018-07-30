@@ -1,0 +1,31 @@
+{
+  "name": "markup",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^6.2.1",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "firebase": "^5.0.4",
+    "fs": "0.0.1-security",
+    "jade": "~1.11.0",
+    "mongoose": "^5.0.0-rc1",
+    "morgan": "~1.8.1",
+    "node-cron": "^1.2.1",
+    "password-hash": "^1.2.2",
+    "phantom": "^4.0.12",
+    "request-promise": "^4.2.2",
+    "serve-favicon": "~2.4.2",
+    "sha256": "^0.2.0"
+  },
+  "devDependencies": {},
+  "description": ""
+}
