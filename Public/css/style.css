@@ -19,6 +19,7 @@ button.nextBtn {
     border-radius: 0.25em;
     font-size: 1.5em;
     margin-left: 35%;
+    margin-bottom: 1em;
 }
 :checked + label {
    color: blue;

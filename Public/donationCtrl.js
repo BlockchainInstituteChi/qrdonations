@@ -36,11 +36,40 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	};
 
 	// Pagination Controls
-	$scope.next = function (stepId) {
-		hide(stepId - 1);
-		show(stepId);
-		$scope.checkStep = checkStep[stepId]
+	$scope.next = function (stepId, callBackTest) {
+		console.log('next triggered');
+		console.log(stepId, callBackTest)
+		// console.log(callBackTest)
+		if (callBackTest) {
+			console.log('testing with ' + callBackTest)
+			callBackTest( stepId, function(result) {
+				if (true === result.success) {
+					proceed (stepId)
+				} else {
+					$scope.error = result.error
+				}
+			});
+		} else {
+			proceed (stepId)
+		}
+
 	}
+
+	$scope.checkCurrencyChoice = function () {
+		console.log($scope.checkCurrencyChoice);
+		if ( $scope.checkCurrencyChoice ) {
+			var result = {
+				'success':true
+			};
+			return result
+		} else {
+			var result = {
+				'errr':'No currency choice selected.'
+			};
+			return result;
+		}
+	}
+
 	$scope.back = function (stepId) {
 		hide(stepId - 1);
 		show(stepId - 2);
@@ -48,6 +77,11 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	$scope.done = function () {
 		$window.close();
+	}
+
+	function proceed (stepId) {
+		hide(stepId - 1)
+		show(stepId)
 	}
 
 	function hide (divId) {
