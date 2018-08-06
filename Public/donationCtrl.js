@@ -6,12 +6,15 @@ console.log('loaded ');
 angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', function( $http, $scope, $window ){
 
+	$scope.server = "http://localhost:8889/";
+
 	//  
 	$scope.init = function () {
+
 		var canvas = document.getElementById('qrCode')
-		var data = "0x10928naihxn1i7fh9iunjasqwdfcsa"
-		console.log(canvas, data)
-		QRCode.toCanvas(canvas, data, function (error) {
+		$scope.data = "xxxxxxxx"
+		console.log(canvas, $scope.data)
+		QRCode.toCanvas(canvas, $scope.data, function (error) {
 		  if (error) return console.error(error)
 		  return console.log('success!');
 		})
@@ -38,11 +41,11 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	// Pagination Controls
 	$scope.next = function (stepId, callBackTest) {
 		console.log('next triggered');
-		console.log(stepId, callBackTest)
+		// console.log(stepId, callBackTest)
 		// console.log(callBackTest)
 		if (callBackTest) {
-			console.log('testing with ' + callBackTest)
-			callBackTest( stepId, function(result) {
+			// console.log('testing with ' + callBackTest)
+			callBackTest( stepId, function(result, stepId) {
 				if (true === result.success) {
 					proceed (stepId)
 				} else {
@@ -55,19 +58,43 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	}
 
-	$scope.checkCurrencyChoice = function () {
-		console.log($scope.checkCurrencyChoice);
-		if ( $scope.checkCurrencyChoice ) {
+	$scope.setCurrency = function (code) {
+		// console.log("Setting currency to " + code);
+		$scope.currency = code;
+	}
+
+	$scope.checkCurrencyChoice = function (stepId, callback) {
+		console.log($scope.currency);
+
+		if ( $scope.currency ) {
 			var result = {
 				'success':true
 			};
-			return result
+
+			updateWalletAddress($scope.currency);
+
+			return callback(result, stepId)
+
 		} else {
 			var result = {
 				'errr':'No currency choice selected.'
 			};
-			return result;
+
+			return callback(result, stepId)
 		}
+	}
+
+	function updateWalletAddress (currencyChoice) {
+		console.log("entered updateWalletAddress");
+		// Load the view-data from the node.js server
+	  	$http.get( $scope.server + '/getRandomAddress' + currencyChoice)
+	  		.then(function(response) { 
+	          console.log(response);
+     	
+	        }). 
+	        catch(function(error) { 
+	          console.log(error);
+	        }); 
 	}
 
 	$scope.back = function (stepId) {
