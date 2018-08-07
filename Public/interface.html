@@ -69,9 +69,10 @@
                 on-success="setResponse(response)"
                 on-expire="cbExpiration()"
             ></div>
+
             <br>            
             <button class="nextBtn" type="next" ng-click="back('3')">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next('3', checkCaptcha())">Next</button>           
+            <button class="nextBtn" type="next" ng-click="next('3', checkCaptcha)">Next</button>           
         </div>
 
         <div class="qrcode {{display[3]}}">

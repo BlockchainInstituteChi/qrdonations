@@ -11,13 +11,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	//  
 	$scope.init = function () {
 
-		var canvas = document.getElementById('qrCode')
-		$scope.data = "xxxxxxxx"
-		console.log(canvas, $scope.data)
-		QRCode.toCanvas(canvas, $scope.data, function (error) {
-		  if (error) return console.error(error)
-		  return console.log('success!');
-		})
 
 		$scope.supportedCurrencies = [{
 			"name":"BTC"
@@ -44,9 +37,9 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		// console.log(stepId, callBackTest)
 		// console.log(callBackTest)
 		if (callBackTest) {
-			// console.log('testing with ' + callBackTest)
-			callBackTest( stepId, function(result, stepId) {
-				if (true === result.success) {
+			console.log('testing with ' + callBackTest)
+			callBackTest( function(result) {
+				if (true === result) {
 					proceed (stepId)
 				} else {
 					$scope.error = result.error
@@ -63,32 +56,30 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.currency = code;
 	}
 
-	$scope.checkCurrencyChoice = function (stepId, callback) {
+	$scope.checkCurrencyChoice = function (callback) {
 		console.log($scope.currency);
 
 		if ( $scope.currency ) {
-			var result = {
-				'success':true
-			};
 
-			updateWalletAddress($scope.currency);
+			// updateWalletAddress($scope.currency);
 
-			return callback(result, stepId)
+			return callback(true)
 
 		} else {
 			var result = {
 				'errr':'No currency choice selected.'
 			};
 
-			return callback(result, stepId)
+			return callback(false)
 		}
 	}
 
 	function updateWalletAddress (currencyChoice) {
 		console.log("entered updateWalletAddress");
 		// Load the view-data from the node.js server
-	  	$http.get( $scope.server + '/getRandomAddress' + currencyChoice)
+	  	$http.get( $scope.server + 'checkCaptcha/' + currencyChoice)
 	  		.then(function(response) { 
+	  		  $scope.address = response.address;
 	          console.log(response);
      	
 	        }). 
@@ -122,6 +113,38 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	$scope.init();
 
 	$scope.key = "6Lef510UAAAAAHytDRJTVDGAUA_aMPaAnDDCkxV_";
+
+    $scope.checkCaptcha = function (cb) {
+
+    	var payload = {};
+
+		// console.log('testing captcha');
+		payload.response = $scope.response;
+		
+	  // Load the view-data from the node.js server
+	  	$http.post( $scope.server + 'checkCaptcha/', payload)
+	  		.then(function(response) { 
+	          // console.log(response.data.address);
+	          initCanvas(response.data.address);
+	          cb(true);      	
+	        }). 
+	        catch(function(error) { 
+	          // console.log(error);
+	          cb(false);
+	        }); 
+
+    }
+
+	function initCanvas (address) {
+
+		var canvas = document.getElementById('qrCode')
+		console.log(canvas, address)
+		QRCode.toCanvas(canvas, address, function (error) {
+		  if (error) return console.error(error)
+		  console.log('successfully set QR Code')
+
+		})
+	}
 
 	// Recaptcha Logic
     $scope.setResponse = function (response) {
