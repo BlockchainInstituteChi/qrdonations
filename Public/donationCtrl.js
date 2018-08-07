@@ -67,7 +67,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 		} else {
 			var result = {
-				'errr':'No currency choice selected.'
+				'error':'No currency choice selected.'
 			};
 
 			return callback(false)
