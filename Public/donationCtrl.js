@@ -6,7 +6,7 @@ console.log('loaded ');
 angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', function( $http, $scope, $window ){
 
-	$scope.server = "http://localhost:8889/";
+	$scope.server = "http://localhost:8887/";
 
 	//  
 	$scope.init = function () {
@@ -124,6 +124,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	  // Load the view-data from the node.js server
 	  	$http.post( $scope.server + 'checkCaptcha/', payload)
 	  		.then(function(response) { 
+  			  $scope.address = response.data.address
 	          // console.log(response.data.address);
 	          initCanvas(response.data.address);
 	          cb(true);      	
