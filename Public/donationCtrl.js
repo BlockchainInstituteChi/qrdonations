@@ -80,6 +80,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	  	$http.get( $scope.server + 'checkCaptcha/' + currencyChoice)
 	  		.then(function(response) { 
 	  		  $scope.address = response.address;
+	  		  $scope.currencyChoice = currencyChoice
 	          console.log(response);
      	
 	        }). 
@@ -112,7 +113,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	$scope.init();
 
-	$scope.key = "6Lef510UAAAAAHytDRJTVDGAUA_aMPaAnDDCkxV_";
+	$scope.key = "6LfPSXEUAAAAABf03vn6PgBLvv8O9IwTqPcUuJ3J";
 
     $scope.checkCaptcha = function (cb) {
 
@@ -120,13 +121,16 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 		// console.log('testing captcha');
 		payload.response = $scope.response;
-		
+
+		var url = $scope.server + 'checkCaptcha/' + $scope.currency
+
 	  // Load the view-data from the node.js server
-	  	$http.post( $scope.server + 'checkCaptcha/', payload)
+	  	$http.post( url, payload)
 	  		.then(function(response) { 
   			  $scope.address = response.data.address
-	          // console.log(response.data.address);
-	          initCanvas(response.data.address);
+
+	          console.log("response received", response);
+	          initCanvas($scope.address);
 	          cb(true);      	
 	        }). 
 	        catch(function(error) { 
