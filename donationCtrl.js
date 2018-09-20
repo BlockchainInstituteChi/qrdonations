@@ -37,12 +37,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		// console.log(stepId, callBackTest)
 		// console.log(callBackTest)
 		if (callBackTest) {
-			console.log('testing with ' + callBackTest)
+			// console.log('testing with ' + callBackTest)
 			callBackTest( function(result) {
 				if (true === result) {
 					proceed (stepId)
 				} else {
-					$scope.error = result.error
+					console.log(result)
+					$scope.errorMessage = result.error
 				}
 			});
 		} else {
@@ -69,9 +70,32 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			var result = {
 				'error':'No currency choice selected.'
 			};
-
-			return callback(false)
+			return callback(result)
 		}
+	}
+
+	$scope.checkTaxReceiptChoice = function (callback) {
+		console.log($scope.taxReceipt)
+		if ( $scope.taxReceipt ) {
+			if ( validateEmail($scope.email) ) {
+				// updateWalletAddress($scope.currency);
+
+				return callback(true)
+
+			} else {
+				var result = {
+					'error':'You must enter an email address to receive a tax receipt.'
+				};
+				return callback(result)
+			}
+		} else {
+			return callback(true)
+		}		 
+	}
+
+	function validateEmail(email) {
+	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    return re.test(String(email).toLowerCase());
 	}
 
 	function updateWalletAddress (currencyChoice) {
@@ -120,8 +144,9 @@ angular.module('donationsManager', ['vcRecaptcha'])
     	var payload = {};
 
 		// console.log('testing captcha');
-		payload.response = $scope.response;
-
+		payload.response = $scope.response
+		payload.taxReceipt = $scope.taxReceipt
+		payload.email = $scope.email
 		var url = $scope.server + 'checkCaptcha/' + $scope.currency
 
 	  // Load the view-data from the node.js server

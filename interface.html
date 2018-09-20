@@ -46,15 +46,18 @@
         <div class="taxReceipt {{display[1]}}">
             <h1>Would you like to receive a tax receipt for your donation?</h1>
             <br>
+            <p class="errorMessage">{{errorMessage}}</p>
             <fieldset class="taxReceiptSelector">
                 <input type="checkbox" id="taxReceiptCheckBox" ng-model="taxReceipt" checked>
-                <label for="taxReceiptCheckBox"> I would like a tax receipt</label>
+                <label for="taxReceiptCheckBox"> I would like a tax receipt</label><br>
+                <input type="text" class="emailInput" id="taxReceiptEmail" ng-model="email" placeholder="email (optional)">
             </fieldset>    
             <hr>
-            <p>A tax receipt can be issued for any donation of more than $50. Tax receipts are valid in the US only. Please <a href="/contact-us">contact us</a> for more information.</p>
+            <p>A tax receipt can be issued for any donation of more than $50. Tax receipts are valid in the US only. Please <a href="/contact-us">contact us</a> for more information.</p><br>
+            
             <br>
             <button class="nextBtn" type="next" ng-click="back('2')">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next('2')">Next</button> 
+            <button class="nextBtn" type="next" ng-click="next('2', checkTaxReceiptChoice)">Next</button> 
         </div>
 
         <div class="reCaptcha {{display[2]}}">
