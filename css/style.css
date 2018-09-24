@@ -1,3 +1,6 @@
+body {
+    font-family: 'Kanit',sans-serif;
+} 
 .hidden {
 	display: none;
 }
@@ -19,7 +22,6 @@ button.nextBtn {
     height: 2em;
     border-radius: 0.25em;
     font-size: 1.5em;
-    margin-left: 35%;
     margin-bottom: 1em;
 }
 :checked + label {
@@ -32,4 +34,35 @@ button.nextBtn {
 }
 button.currencySelect {
     width: 100%;
+    border-radius: 0.5em;
+}
+i.cc {
+    font-size: 3em;
+}
+input#search {
+    width: 100%;
+    height: 1.5em;
+    font-size: 1.5em;
+}
+
+h1 {
+    text-align: left;
+    text-transform: uppercase;
+}
+.container {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+fieldset {
+    border: transparent;
+}
+input#taxReceiptEmail {
+    width: 15em;
+    height: 1.5em;
+    font-size: 1.5em;
+    margin-top: 1em;
+}
+input#taxReceiptCheckBox {
+    height: 1.5em;
 }

@@ -23,6 +23,9 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://rawgit.com/VividCortex/angular-recaptcha/master/release/angular-recaptcha.js"></script>
     <script type="text/javascript" src="scripts/qrcode.js"></script>
+    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif', rel='stylesheet'>
+    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700', rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
 
   </head>
@@ -33,8 +36,8 @@
 
         <div class="currencySelect {{display[0]}}">
             <h1>Select a currency below to get started</h1>
-            <p class="selectedCurrency">Currency: {{currency}}</p>
-            <input class="form-control" class="container-fluid" type="text" placeholder="search for anything you like" id="search" ng-model="searchBarText" ng-keyup="search();"><hr>
+            <p class="errorMessage">{{errorMessage}}</p>
+            <input class="form-control" class="container-fluid" type="text" placeholder="Start typing to filter currency choices" id="search" ng-model="searchBarText" ng-keyup="search();"><hr>
                 <div ng-repeat="x in set" class="currencySelectButton">
                     <button class="radioSet currencySelect {{x.selected}}" ng-click="setCurrency(x.code)">
                         <br>
@@ -42,7 +45,8 @@
                         <h3>{{x.name}}<br>({{x.code}})</h3>
                     </button>
                 </div>
-            <br>           
+            <br>         
+            <p class="selectedCurrency">Currency: {{currency}}</p>              
             <button class="nextBtn" type="next" ng-click="next('1', checkCurrencyChoice)">Next</button>
         </div>
 
@@ -56,7 +60,7 @@
                 <input type="text" class="emailInput" id="taxReceiptEmail" ng-model="email" placeholder="email (optional)">
             </fieldset>    
             <hr>
-            <p>A tax receipt can be issued for any donation of more than $50. Tax receipts are valid in the US only. Please <a href="/contact-us">contact us</a> for more information.</p><br>
+            <p>A tax receipt can be issued for any donation of more than $50. Tax receipts are valid in the US only. Please <a href="{{contactUrl}}">contact us</a> for more information.</p><br>
             
             <br>
             <button class="nextBtn" type="next" ng-click="back('2')">Back</button> 

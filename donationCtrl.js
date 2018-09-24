@@ -8,19 +8,59 @@ angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', function( $http, $scope, $window ){
 
 	$scope.server = "http://localhost:8887/";
-	var currencyList = [{
-			"name":"Bitcoin",
-			"code":"BTC",
-			"icon":"BTC"
-		},{
-			"name":"Ethereum",
-			"code":"ETH",
-			"icon":"ETH"
-		},{
-			"name":"Litecoin",
-			"code":"LTC",
-			"icon":"LTC"
-		}];
+	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
+
+	var currencyList = [
+							{
+								"name":"Bitcoin",
+								"code":"BTC",
+								"icon":"BTC"
+							},{
+								"name":"Ethereum",
+								"code":"ETH",
+								"icon":"ETH"
+							},{
+								"name":"Litecoin",
+								"code":"LTC",
+								"icon":"LTC"
+							},{
+								"name":"Dogecoin",
+								"code":"DOGE",
+								"icon":"DOGE"
+							},{
+								"name":"Ripple",
+								"code":"XRP",
+								"icon":"XRP"
+							},{
+								"name":"EOS",
+								"code":"EOS",
+								"icon":"EOS"
+							},{
+								"name":"Monero",
+								"code":"XMR",
+								"icon":"XMR"
+							},{
+								"name":"Dash",
+								"code":"DASH",
+								"icon":"DASH"
+							},{
+								"name":"Bitcoin Cash",
+								"code":"BCH",
+								"icon":"BCH"
+							},{
+								"name":"Stellar",
+								"code":"XLM",
+								"icon":"XLM"
+							},{
+								"name":"Tether",
+								"code":"USDT",
+								"icon":"USDT"
+							},{
+								"name":"Cardano",
+								"code":"ADA",
+								"icon":"ADA"
+							}
+		];
 
 	//  
 	$scope.init = function () {
@@ -57,6 +97,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			// console.log('testing with ' + callBackTest)
 			callBackTest( function(result) {
 				if (true === result) {
+					$scope.errorMessage = undefined;
 					proceed (stepId)
 				} else {
 					console.log(result)
@@ -94,7 +135,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 		} else {
 			var result = {
-				'error':'No currency choice selected.'
+				'error':'You must choose a currency to proceed.'
 			};
 			return callback(result)
 		}
@@ -110,7 +151,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 			} else {
 				var result = {
-					'error':'You must enter an email address to receive a tax receipt.'
+					'error':'You must enter a valid email address to receive a tax receipt.'
 				};
 				return callback(result)
 			}
