@@ -160,6 +160,16 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}		 
 	}
 
+	$scope.checkCountryOfOriginVerification = function (callback) {
+		console.log($scope.countryOfOrigin)
+		if ( $scope.countryOfOrigin ) {
+			return callback(true)
+		} else {
+			self.close();
+		}		 
+	}
+
+
 	function validateEmail(email) {
 	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    return re.test(String(email).toLowerCase());

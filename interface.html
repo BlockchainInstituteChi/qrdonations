@@ -67,7 +67,20 @@
             <button class="nextBtn" type="next" ng-click="next('2', checkTaxReceiptChoice)">Next</button> 
         </div>
 
-        <div class="reCaptcha {{display[2]}}">
+        <div class="origin {{display[2]}}">
+            <h1>Verify Country of Origin</h1>
+            <br>
+            <p class="errorMessage">{{errorMessage}}</p>
+            <fieldset class="taxReceiptSelector">
+                <input type="checkbox" id="countryOfOrigin" ng-model="countryOfOrigin" checked>
+                <label for="countryOfOrigin"> I am not a current resident of any countries subject to sanctions by the United States Government, and my name does not appear in any of the lists maintained by the Office of Foreign Asset Controls. If you are unsure whether you appear on these lists, please use the search <a href="https://sanctionssearch.ofac.treas.gov/">here.</a></label>
+            </fieldset>    
+            <br>
+            <button class="nextBtn" type="next" ng-click="back('3')">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next('3', checkCountryOfOriginVerification)">Next</button> 
+        </div>        
+
+        <div class="reCaptcha {{display[3]}}">
             <h1>Please verify that you're human:</h1>
             <div
                 vc-recaptcha
@@ -79,11 +92,11 @@
             ></div>
 
             <br>            
-            <button class="nextBtn" type="next" ng-click="back('3')">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next('3', checkCaptcha)">Next</button>           
+            <button class="nextBtn" type="next" ng-click="back('4')">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next('4', checkCaptcha)">Next</button>           
         </div>
 
-        <div class="qrcode {{display[3]}}">
+        <div class="qrcode {{display[4]}}">
             <h1> Scan the QR Code below to donate your funds:</h1>
             <canvas id="qrCode">
             </canvas>
@@ -93,8 +106,8 @@
             </div> 
             <br>
             <p>Address: {{address}}</p>
-            <button class="nextBtn" type="next" ng-click="back('4')">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next('4')">Next</button> 
+            <button class="nextBtn" type="next" ng-click="back('5')">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next('5')">Next</button> 
 
         </div>
 
