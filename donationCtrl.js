@@ -1,4 +1,5 @@
 console.log('loaded ');
+
 // index.js -> bundle.js
 // var QRCode = require('qrcode')
 
@@ -7,6 +8,19 @@ angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', function( $http, $scope, $window ){
 
 	$scope.server = "http://localhost:8887/";
+	var currencyList = [{
+			"name":"Bitcoin",
+			"code":"BTC",
+			"icon":"BTC"
+		},{
+			"name":"Ethereum",
+			"code":"ETH",
+			"icon":"ETH"
+		},{
+			"name":"Litecoin",
+			"code":"LTC",
+			"icon":"LTC"
+		}];
 
 	//  
 	$scope.init = function () {
@@ -29,6 +43,9 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			"hidden",
 			"hidden"
 		];
+
+		$scope.set = currencyList;
+
 	};
 
 	// Pagination Controls
@@ -53,8 +70,17 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.setCurrency = function (code) {
-		// console.log("Setting currency to " + code);
+		console.log("Setting currency to " + code);
 		$scope.currency = code;
+		updateSelected(code);
+	}
+
+	function updateSelected (code) {
+		for ( var i = 0; i < $scope.set.length; i++ ) {
+			if ( $scope.set[i].code === code ) {
+				$scope.set[i].selected = "selected";
+			}
+		}
 	}
 
 	$scope.checkCurrencyChoice = function (callback) {
@@ -164,6 +190,40 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	        }); 
 
     }
+
+    $scope.search = function ( ) {
+
+    	console.log('search:' + $scope.searchBarText);
+  	
+    	var str = $scope.searchBarText;
+    	$scope.set = search( currencyList, str );
+
+    	str = 0;
+
+    };
+	
+	function search ( data, str ) {
+
+			var set = [];
+
+			for ( var i = 0; i < data.length; i ++ ) {
+				// check to see that the first characters of the result match the stirng submitted
+				//console.log(data[i].key.substring(0,str.length));
+
+				if ( data[i].name.substring(0,str.length).toUpperCase() === str.toUpperCase() ) {
+
+					set.push( data[i] );
+
+				}
+			}
+
+			console.log(set);
+			return set;
+		
+	}
+
+
+
 
 	function initCanvas (address) {
 

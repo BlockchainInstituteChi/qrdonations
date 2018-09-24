@@ -33,12 +33,15 @@
 
         <div class="currencySelect {{display[0]}}">
             <h1>Select a currency below to get started</h1>
-            <fieldset class="currencyList" ng-model="currency" >
-                <div class="radioSet" ng-repeat="x in supportedCurrencies">
-                    <input type="radio" ng-model="currency"  class="currencyIcon" value="{{x.name}}" id="{{x.name}}" name="currencySelect"/>
-                    <label for="{{x.name}}" ng-click="setCurrency(x.name);"><i class="cc {{x.name}}"> {{x.name}}</i></label>
+            <p class="selectedCurrency">Currency: {{currency}}</p>
+            <input class="form-control" class="container-fluid" type="text" placeholder="search for anything you like" id="search" ng-model="searchBarText" ng-keyup="search();"><hr>
+                <div ng-repeat="x in set" class="currencySelectButton">
+                    <button class="radioSet currencySelect {{x.selected}}" ng-click="setCurrency(x.code)">
+                        <br>
+                        <i class="cc {{x.code}}"></i>
+                        <h3>{{x.name}}<br>({{x.code}})</h3>
+                    </button>
                 </div>
-            </fieldset>
             <br>           
             <button class="nextBtn" type="next" ng-click="next('1', checkCurrencyChoice)">Next</button>
         </div>
