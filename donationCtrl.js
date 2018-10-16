@@ -20,6 +20,18 @@ angular.module('donationsManager', ['vcRecaptcha'])
 								"code":"ETH",
 								"icon":"ETH"
 							},{
+								"name":"zCash",
+								"code":"ZEC",
+								"icon":"ZEC"
+							},{
+								"name":"Vertcoin",
+								"code":"VTC",
+								"icon":"VTC"
+							},{
+								"name":"NEM",
+								"code":"XEM",
+								"icon":"XEM"
+							},{
 								"name":"Litecoin",
 								"code":"LTC",
 								"icon":"LTC"
