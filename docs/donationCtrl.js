@@ -226,7 +226,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	$scope.init();
 
-	$scope.key = "6LfPSXEUAAAAABf03vn6PgBLvv8O9IwTqPcUuJ3J";
+	$scope.key = "6LdlEHkUAAAAAHpHvXxmG1mbtKGq1Pz3T0CbuP2N";
 
     $scope.checkCaptcha = function (cb) {
 
