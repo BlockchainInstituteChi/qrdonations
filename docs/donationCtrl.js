@@ -97,8 +97,22 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		];
 
 		$scope.set = currencyList;
-
+		$scope.mode = ""
 	};
+
+
+	$scope.setMode = function (mode) {
+		console.log('mode', mode)
+		if ( mode === "cash") {
+			$scope.mode = "cash"
+			proceed(1)
+			proceed(2)
+		} else if ( mode === "crypto" ) {
+			$scope.mode = "crypto"
+			proceed(1)	
+		} 
+		
+	}
 
 	// Pagination Controls
 	$scope.next = function (stepId, callBackTest) {
@@ -121,6 +135,19 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}
 
 	}
+
+	$scope.back = function (stepId) {
+		console.log('display', $scope.display, "mode:", $scope.mode, "stepId", stepId)
+		if ( ( $scope.mode === "cash") && ( stepId === 3 ) ) {
+			
+			hide(2);
+			show(0);			
+		} else {
+			hide(stepId - 1);
+			show(stepId - 2);			
+		}
+
+	}	
 
 	$scope.setCurrency = function (code) {
 		console.log("Setting currency to " + code);
@@ -202,10 +229,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	        }); 
 	}
 
-	$scope.back = function (stepId) {
-		hide(stepId - 1);
-		show(stepId - 2);
-	}
 
 	$scope.done = function () {
 		$window.close();

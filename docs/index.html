@@ -13,7 +13,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
     <link rel='stylesheet' id='cryptocoins-css'  href='./css/cryptocoins.css'> 
     <link rel='stylesheet' id='custom-css'  href='./css/style.css'> 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-functions.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-auth.js"></script>
@@ -34,7 +34,27 @@
 
     <div class="container" ng-controller="donationsCtrl">
 
-        <div class="currencySelect {{display[0]}}">
+        <div class="modeSelect {{display[0]}}">
+            <h1>Cash or Crypto?</h1>
+            <p class="errorMessage">{{errorMessage}}</p>
+            <div class="modeSelectButton">
+                <button class="radioSet modeSelect" ng-click="setMode('cash')">
+                    <br>
+                    <i class="fa fa-dollar"></i>
+                    <h3>Cash</h3>
+                </button>
+            </div>
+            <div class="modeSelectButton">
+                <button class="radioSet modeSelect" ng-click="setMode('crypto')">
+                    <br>
+                    <i class="fa fa-bitcoin"></i>
+                    <h3>Crypto</h3>
+                </button>
+            </div>
+            <br>         
+        </div>
+
+        <div class="currencySelect {{display[1]}}">
             <h1>Select a currency below to get started</h1>
             <p class="errorMessage">{{errorMessage}}</p>
             <input class="form-control" class="container-fluid" type="text" placeholder="Start typing to filter currency choices" id="search" ng-model="searchBarText" ng-keyup="search();"><hr>
@@ -46,11 +66,12 @@
                     </button>
                 </div>
             <br>         
-            <p class="selectedCurrency">Currency: {{currency}}</p>              
-            <button class="nextBtn" type="next" ng-click="next('1', checkCurrencyChoice)">Next</button>
+            <p class="selectedCurrency">Currency: {{currency}}</p> 
+            <button class="nextBtn" type="next" ng-click="back(2)">Back</button>  
+            <button class="nextBtn" type="next" ng-click="next(2, checkCurrencyChoice)">Next</button>
         </div>
 
-        <div class="taxReceipt {{display[1]}}">
+        <div class="taxReceipt {{display[2]}}">
             <h1>Would you like to receive a tax receipt for your donation?</h1>
             <br>
             <p class="errorMessage">{{errorMessage}}</p>
@@ -63,11 +84,11 @@
             <p>A tax receipt can be issued for any donation of more than $50. Tax receipts are valid in the US only. Please <a href="{{contactUrl}}">contact us</a> for more information.</p><br>
             
             <br>
-            <button class="nextBtn" type="next" ng-click="back('2')">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next('2', checkTaxReceiptChoice)">Next</button> 
+            <button class="nextBtn" type="next" ng-click="back(3)">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next(3, checkTaxReceiptChoice)">Next</button> 
         </div>
 
-        <div class="origin {{display[2]}}">
+        <div class="origin {{display[3]}}">
             <h1>Verify Country of Origin</h1>
             <br>
             <p class="errorMessage">{{errorMessage}}</p>
@@ -76,11 +97,11 @@
                 <label for="countryOfOrigin"> I am not a current resident of any countries subject to sanctions by the United States Government, and my name does not appear in any of the lists maintained by the Office of Foreign Asset Controls. If you are unsure whether you appear on these lists, please use the search <a href="https://sanctionssearch.ofac.treas.gov/">here.</a></label>
             </fieldset>    
             <br>
-            <button class="nextBtn" type="next" ng-click="back('3')">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next('3', checkCountryOfOriginVerification)">Next</button> 
+            <button class="nextBtn" type="next" ng-click="back(4)">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next(4, checkCountryOfOriginVerification)">Next</button> 
         </div>        
 
-        <div class="reCaptcha {{display[3]}}">
+        <div class="reCaptcha {{display[4]}}">
             <h1>Please verify that you're human:</h1>
             <div
                 vc-recaptcha
@@ -92,11 +113,11 @@
             ></div>
 
             <br>            
-            <button class="nextBtn" type="next" ng-click="back('4')">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next('4', checkCaptcha)">Next</button>           
+            <button class="nextBtn" type="next" ng-click="back(5)">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next(5, checkCaptcha)">Next</button>           
         </div>
 
-        <div class="qrcode {{display[4]}}">
+        <div class="qrcode {{display[5]}}">
             <h1> Scan the QR Code below to donate your funds:</h1>
             <canvas id="qrCode">
             </canvas>
@@ -106,8 +127,8 @@
             </div> 
             <br>
             <p>Address: {{address}}</p>
-            <button class="nextBtn" type="next" ng-click="back('5')">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next('5')">Next</button> 
+            <button class="nextBtn" type="next" ng-click="back(6)">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next(6)">Next</button> 
 
         </div>
 
