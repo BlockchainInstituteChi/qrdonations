@@ -93,11 +93,16 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			"hidden",
 			"hidden",
 			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
 			"hidden"
 		];
 
 		$scope.set = currencyList;
 		$scope.mode = ""
+		$scope.donationAmount = 100.00
 	};
 
 
@@ -124,7 +129,14 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			callBackTest( function(result) {
 				if (true === result) {
 					$scope.errorMessage = undefined;
-					proceed (stepId)
+
+					if ( ( stepId === 5 ) && ( $scope.mode === "crypto" ) ) {
+						hide(4)
+						show(6)
+					} else {
+						proceed (stepId)
+					}
+
 				} else {
 					console.log(result)
 					$scope.errorMessage = result.error
@@ -142,6 +154,9 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			
 			hide(2);
 			show(0);			
+		} else if ( ( stepId === 7 ) && ( $scope.mode === "crypto" ) ) {
+			hide(6)
+			show(4)
 		} else {
 			hide(stepId - 1);
 			show(stepId - 2);			
@@ -208,6 +223,48 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}		 
 	}
 
+	$scope.checkMaximumDonationVerification = function (callback) {
+		console.log($scope.maximumDonation)
+		if ( $scope.maximumDonation ) {
+			return callback(true)
+		} else {
+			self.close();
+		}		 
+	}
+
+    // stripe will call this once it has successfully created a token for the payment details
+    $scope.onToken = function(token) {
+        console.log(token);
+        $scope.token = token
+        hide(5)
+        show(6)
+        $scope.$apply();
+    };
+
+    $scope.onStripe = function(apiKey, userEmail) {
+    	console.log('donating', $scope.donationAmount)
+        var handler = StripeCheckout.configure({
+            key: apiKey,
+            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            locale: 'auto',
+            token: $scope.onToken
+        });
+
+        handler.open({
+            panelLabel : 'Donate',
+            name : 'Blockchain Institute',
+            amount : $scope.donationAmount * 100, 
+            description : 'Amount in USD',
+            email : userEmail,
+            zipCode : true,
+            allowRememberMe : false
+        });
+    };
+
+	$scope.checkStripe = function (callback) {
+
+	}
+
 
 	function validateEmail(email) {
 	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -235,16 +292,22 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	function proceed (stepId) {
+		console.log('proceed triggered for step id', stepId)
 		hide(stepId - 1)
 		show(stepId)
+		console.log('display', $scope.display)
 	}
 
 	function hide (divId) {
+		console.log('hide triggered for div id', divId)
 		$scope.display[divId] = "hidden";
+		console.log('display', $scope.display)
 	}
 
 	function show (divId) {
+		console.log('show triggered for div id', divId)
 		$scope.display[divId] = "";
+		console.log('display', $scope.display)
 	}
 
 	$scope.init();
@@ -252,23 +315,40 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	$scope.key = "6LdlEHkUAAAAAHpHvXxmG1mbtKGq1Pz3T0CbuP2N";
 
     $scope.checkCaptcha = function (cb) {
-
+    	
     	var payload = {};
 
-		// console.log('testing captcha');
-		payload.response = $scope.response
-		payload.taxReceipt = $scope.taxReceipt
-		payload.email = $scope.email
-		var url = $scope.server + 'checkCaptcha/' + $scope.currency
+    	if ( $scope.mode === "crypto" ) {
+			// console.log('testing captcha');
+			payload.response = $scope.response
+			payload.taxReceipt = $scope.taxReceipt
+			payload.email = $scope.email
+			var url = $scope.server + 'checkCaptcha/' + $scope.currency
+    	} else if ( $scope.mode === "cash" ) {
+			payload.response = $scope.response
+			payload.taxReceipt = $scope.taxReceipt
+			payload.email = $scope.email
+			payload.stripe = $scope.token    		
+    		var url = $scope.server + 'checkCaptcha/USD'
+    	} 
+
+
 
 	  // Load the view-data from the node.js server
 	  	$http.post( url, payload)
 	  		.then(function(response) { 
-  			  $scope.address = response.data.address
-
-	          console.log("response received", response);
-	          initCanvas($scope.address);
-	          cb(true);      	
+	  		  	
+	  			if ( $scope.mode === "crypto" ) {
+					$scope.address = response.data.address
+		        	console.log("crypto mode response received", response);
+		        	initCanvas($scope.address);
+		        	cb(true);   
+		    	} else if ( $scope.mode === "cash" ) {	
+		    		console.log("cash mode response received", response);	    	
+					cb(true)
+					proceed(8)
+		    	} 	
+   	
 	        }). 
 	        catch(function(error) { 
 	          // console.log(error);

@@ -46,7 +46,7 @@ input#search {
 }
 
 h1 {
-    text-align: left;
+    text-align: center;
     text-transform: uppercase;
 }
 .container {
@@ -65,4 +65,34 @@ input#taxReceiptEmail {
 }
 input#taxReceiptCheckBox {
     height: 1.5em;
+}
+
+/* Cash payments screen */
+span.currencyTypeLabel {
+    position: relative;
+    margin-right: -20px;
+    font-size: 1.25em;
+}
+input.donationAmount {
+    padding-left: 20px;
+    text-align: left;
+    font-size: 1.25em;
+}
+button.submitDonation {
+    padding: 2em;
+    border-radius: 5px;
+    width: 30%;
+    font-size: 0.75em;
+    display: block;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    text-transform: uppercase;
+    background-color: darkseagreen;
+}
+.securePaymentsMessage img {
+    max-width: 400px;
+    width: 25em;
+    margin: auto;
+    display: block;
 }
