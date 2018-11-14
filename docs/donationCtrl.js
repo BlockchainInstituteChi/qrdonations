@@ -288,7 +288,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 
 	$scope.done = function () {
-		$window.close();
+		$window.location = "https://theblockchaininstitute.org"
 	}
 
 	function proceed (stepId) {
@@ -328,7 +328,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			payload.response = $scope.response
 			payload.taxReceipt = $scope.taxReceipt
 			payload.email = $scope.email
-			payload.stripe = $scope.token    		
+			payload.stripe = $scope.token 
+			payload.amount = $scope.donationAmount   		
     		var url = $scope.server + 'checkCaptcha/USD'
     	} 
 
