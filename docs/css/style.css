@@ -17,13 +17,7 @@ fieldset.currencyList {
     text-align: center;
     border-color: transparent;    
 }
-button.nextBtn {
-    width: 30%;
-    height: 2em;
-    border-radius: 0.25em;
-    font-size: 1.5em;
-    margin-bottom: 1em;
-}
+
 :checked + label {
    color: blue;
 }
@@ -57,12 +51,6 @@ h1 {
 fieldset {
     border: transparent;
 }
-input#taxReceiptEmail {
-    width: 15em;
-    height: 1.5em;
-    font-size: 1.5em;
-    margin-top: 1em;
-}
 input#taxReceiptCheckBox {
     height: 1.5em;
 }
@@ -95,4 +83,74 @@ button.submitDonation {
     width: 25em;
     margin: auto;
     display: block;
+}
+
+/* Mode Selection */
+.modeSelectButton {
+    display: inline-block;
+    width: 30%;
+}
+button.radioSet.modeSelect {
+    width: 70%;
+    display: inline-block;
+    border-radius: 5px;
+}
+.modeSelect i {
+    background-color: grey;
+    padding: 1em;
+    border-radius: 5em;
+    color: white;
+    font-size: 1.5em;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+}
+.modeSelect h3 {
+    font-size: 2em;
+    text-transform: uppercase;
+    margin-bottom: 0.35em;
+}
+button.radioSet.modeSelect:hover, button.radioSet.currencySelect:hover, button.radioSet.currencySelect.selected {
+    background-color: #00ca2a91;
+}
+
+/* Recaptcha */
+.ng-isolate-scope {
+    width: 30%;
+    margin: auto;
+}
+
+button.nextBtn {
+    width: 30%;
+    height: 2em;
+    border-radius: 0.25em;
+    font-size: 1.25em;
+    margin-bottom: 1em;
+    text-transform: uppercase;
+}
+
+/* Stripe */
+button.submitDonation {
+    padding: 0.25em;
+    border-radius: 5px;
+    width: 30%;
+    font-size: 1.5em;
+    display: block;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 0.25em;
+    text-transform: uppercase;
+    background-color: #1073aa;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+}
+.stripe a {
+    text-decoration: none;
+}
+.emailInput {
+    width: 15em;
+    height: 1.5em;
+    font-size: 1.25em;
+    margin-top: 1em;
+    padding-left: 0.4em;
 }

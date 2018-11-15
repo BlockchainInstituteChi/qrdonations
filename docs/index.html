@@ -58,8 +58,8 @@
             <h1>Select a currency below to get started</h1>
             <p class="errorMessage">{{errorMessage}}</p>
             <input class="form-control" class="container-fluid" type="text" placeholder="Start typing to filter currency choices" id="search" ng-model="searchBarText" ng-keyup="search();"><hr>
-                <div ng-repeat="x in set" class="currencySelectButton">
-                    <button class="radioSet currencySelect {{x.selected}}" ng-click="setCurrency(x.code)">
+                <div  ng-repeat="x in set" class="currencySelectButton">
+                    <button id="{{x.code}}_button" class="radioSet currencySelect {{x.selected}}" ng-click="setCurrency(x.code)">
                         <br>
                         <i class="cc {{x.code}}"></i>
                         <h3>{{x.name}}<br>({{x.code}})</h3>
@@ -76,9 +76,12 @@
             <br>
             <p class="errorMessage">{{errorMessage}}</p>
             <fieldset class="taxReceiptSelector">
-                <input type="checkbox" id="taxReceiptCheckBox" ng-model="taxReceipt" checked>
+                <input ng-click="showEmailFn()" type="checkbox" id="taxReceiptCheckBox" ng-model="taxReceipt" checked>
                 <label for="taxReceiptCheckBox"> I would like a tax receipt</label><br>
-                <input type="text" class="emailInput" id="taxReceiptEmail" ng-model="email" placeholder="email (optional)">
+                <div class="{{showEmail}}">
+                    <h3>Please enter an email address so we can send you your receipt.</h3>
+                    <input type="text" class="emailInput" id="taxReceiptEmail" ng-model="email" placeholder="email (optional)">
+                </div>
             </fieldset>    
             <hr>
             <p>A tax receipt can be issued for any donation of more than $50. Tax receipts are valid in the US only. Please <a href="{{contactUrl}}">contact us</a> for more information.</p><br>

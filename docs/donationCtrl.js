@@ -99,7 +99,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			"hidden",
 			"hidden"
 		];
-
+		$scope.showEmail = "hidden"
 		$scope.set = currencyList;
 		$scope.mode = ""
 		$scope.donationAmount = 100.00
@@ -164,7 +164,18 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	}	
 
+	$scope.showEmailFn = function () {
+		console.log('displaying email input')
+		$scope.showEmail = ""
+	}
+
 	$scope.setCurrency = function (code) {
+
+		if ( typeof($scope.currency) != "undefined" ) {
+			// Deselect previous item
+			document.getElementById($scope.currency + "_button").className = ((document.getElementById($scope.currency + "_button").className).split('selected')).join(' ')	
+		}
+
 		console.log("Setting currency to " + code);
 		$scope.currency = code;
 		updateSelected(code);
