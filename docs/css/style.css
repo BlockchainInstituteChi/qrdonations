@@ -86,6 +86,14 @@ button.submitDonation {
 }
 
 /* Mode Selection */
+.modeSelectButton:hover i {
+    background-color: #2fd151;
+    color: black;
+}
+
+.modeSelectButton:hover h3 {
+    color: #2fd151;
+}
 .modeSelectButton {
     display: inline-block;
     width: 30%;
@@ -96,7 +104,7 @@ button.radioSet.modeSelect {
     border-radius: 5px;
 }
 .modeSelect i {
-    background-color: grey;
+    background-color: black;
     padding: 1em;
     border-radius: 5em;
     color: white;
@@ -109,9 +117,19 @@ button.radioSet.modeSelect {
     text-transform: uppercase;
     margin-bottom: 0.35em;
 }
-button.radioSet.modeSelect:hover, button.radioSet.currencySelect:hover, button.radioSet.currencySelect.selected {
-    background-color: #00ca2a91;
+
+/* Currency Select */
+button.currencySelect:hover i, button.currencySelect:hover h3, .radioSet.currencySelect.selected i, .radioSet.currencySelect.selected h3 {
+    color: #2fd151;
 }
+
+button.currencySelect.selected {
+    border: solid #2fd151;
+}
+button {
+    outline: none;
+}
+
 
 /* Recaptcha */
 .ng-isolate-scope {
