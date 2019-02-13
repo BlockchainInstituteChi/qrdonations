@@ -172,3 +172,10 @@ button.submitDonation {
     margin-top: 1em;
     padding-left: 0.4em;
 }
+
+.donationAmountInput {
+    display: block;
+    margin: auto;
+    margin-bottom: 1em;
+}
+

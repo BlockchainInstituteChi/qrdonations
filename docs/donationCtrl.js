@@ -151,13 +151,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	$scope.back = function (stepId) {
 		console.log('display', $scope.display, "mode:", $scope.mode, "stepId", stepId)
-		if ( ( $scope.mode === "cash") && ( stepId === 3 ) ) {
+		if ( ( $scope.mode === "cash") && ( stepId === 2 ) ) {
 			
-			hide(2);
+			hide(1);
 			show(0);			
-		} else if ( ( stepId === 7 ) && ( $scope.mode === "crypto" ) ) {
-			hide(6)
-			show(4)
+		} else if ( ( stepId === 6 ) && ( $scope.mode === "crypto" ) ) {
+			hide(5)
+			show(3)
 		} else {
 			hide(stepId - 1);
 			show(stepId - 2);			
