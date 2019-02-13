@@ -60,10 +60,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 								"code":"BCH",
 								"icon":"BCH"
 							},{
-								"name":"Stellar",
-								"code":"XLM",
-								"icon":"XLM"
-							},{
 								"name":"Tether",
 								"code":"USDT",
 								"icon":"USDT"
@@ -71,6 +67,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 								"name":"Cardano",
 								"code":"ADA",
 								"icon":"ADA"
+							},{
+								"name":"Dollars",
+								"code":"USD",
+								"icon":"USD"
 							}
 		];
 
@@ -110,18 +110,19 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		console.log('mode', mode)
 		if ( mode === "cash") {
 			$scope.mode = "cash"
-			proceed(1)
-			proceed(2)
+			// proceed(1)
+			// proceed(2)
 		} else if ( mode === "crypto" ) {
 			$scope.mode = "crypto"
-			proceed(1)	
+			// proceed(1)	
 		} 
 		
 	}
 
 	// Pagination Controls
 	$scope.next = function (stepId, callBackTest) {
-		console.log('next triggered');
+
+		console.log('next triggered', $scope.currency, $scope.currencyChoice, $scope.mode, stepId);
 		// console.log(stepId, callBackTest)
 		// console.log(callBackTest)
 		if (callBackTest) {
@@ -130,9 +131,9 @@ angular.module('donationsManager', ['vcRecaptcha'])
 				if (true === result) {
 					$scope.errorMessage = undefined;
 
-					if ( ( stepId === 5 ) && ( $scope.mode === "crypto" ) ) {
-						hide(4)
-						show(6)
+					if ( ( stepId === 4 ) && ( $scope.mode === "crypto" ) ) {
+						hide(3)
+						show(5)
 					} else {
 						proceed (stepId)
 					}
@@ -175,6 +176,12 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			// Deselect previous item
 			document.getElementById($scope.currency + "_button").className = ((document.getElementById($scope.currency + "_button").className).split('selected')).join(' ')	
 		}
+
+		if ( code === "USD" ) {
+			$scope.setMode('cash')
+		} else {
+			$scope.setMode('crypto')
+		}		
 
 		console.log("Setting currency to " + code);
 		$scope.currency = code;

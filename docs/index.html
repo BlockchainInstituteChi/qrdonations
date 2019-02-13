@@ -34,7 +34,7 @@
 
     <div class="container" ng-controller="donationsCtrl">
 
-        <div class="modeSelect {{display[0]}}">
+        <div class="modeSelect hidden">
             <h1>Cash or Crypto?</h1>
             <p class="errorMessage">{{errorMessage}}</p>
             <div class="modeSelectButton">
@@ -54,7 +54,7 @@
             <br>         
         </div>
 
-        <div class="currencySelect {{display[1]}}">
+        <div class="currencySelect {{display[0]}}">
             <h1>Select a currency below to get started</h1>
             <p class="errorMessage">{{errorMessage}}</p>
             <input class="form-control" class="container-fluid" type="text" placeholder="Start typing to filter currency choices" id="search" ng-model="searchBarText" ng-keyup="search();"><hr>
@@ -67,11 +67,11 @@
                 </div>
             <br>         
             <p class="selectedCurrency">Currency: {{currency}}</p> 
-            <button class="nextBtn" type="next" ng-click="back(2)">Back</button>  
-            <button class="nextBtn" type="next" ng-click="next(2, checkCurrencyChoice)">Next</button>
+            <button class="nextBtn" type="next" ng-click="back(1)">Back</button>  
+            <button class="nextBtn" type="next" ng-click="next(1, checkCurrencyChoice)">Next</button>
         </div>
 
-        <div class="taxReceipt {{display[2]}}">
+        <div class="taxReceipt {{display[1]}}">
             <h1>Would you like to receive a tax receipt for your donation?</h1>
             <br>
             <p class="errorMessage">{{errorMessage}}</p>
@@ -87,11 +87,11 @@
             <p>A tax receipt can be issued for any donation of more than $50. Tax receipts are valid in the US only. Please <a href="{{contactUrl}}">contact us</a> for more information.</p><br>
             
             <br>
-            <button class="nextBtn" type="next" ng-click="back(3)">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next(3, checkTaxReceiptChoice)">Next</button> 
+            <button class="nextBtn" type="next" ng-click="back(2)">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next(2, checkTaxReceiptChoice)">Next</button> 
         </div>
 
-        <div class="origin {{display[3]}}">
+        <div class="origin {{display[2]}}">
             <h1>Verify Country of Origin</h1>
             <br>
             <p class="errorMessage">{{errorMessage}}</p>
@@ -100,11 +100,11 @@
                 <label for="countryOfOrigin"> I am not a current resident of any countries subject to sanctions by the United States Government, and my name does not appear in any of the lists maintained by the Office of Foreign Asset Controls. If you are unsure whether you appear on these lists, please use the search <a href="https://sanctionssearch.ofac.treas.gov/">here.</a></label>
             </fieldset>    
             <br>
-            <button class="nextBtn" type="next" ng-click="back(4)">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next(4, checkCountryOfOriginVerification)">Next</button> 
+            <button class="nextBtn" type="next" ng-click="back(3)">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next(3, checkCountryOfOriginVerification)">Next</button> 
         </div>  
 
-        <div class="maxDonations {{display[4]}}">
+        <div class="maxDonations {{display[3]}}">
             <h1>MAXIMUM DONATIONS</h1>
             <br>
             <p class="errorMessage">{{errorMessage}}</p>
@@ -113,22 +113,22 @@
                 <label for="maximumDonation"> I am not and have not donated more than $5000 USD or cryptocurrency of equivalent value in the past year.</label>
             </fieldset>    
             <br>
-            <button class="nextBtn" type="next" ng-click="back(5)">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next(5, checkMaximumDonationVerification)">Next</button> 
+            <button class="nextBtn" type="next" ng-click="back(4)">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next(4, checkMaximumDonationVerification)">Next</button> 
         </div>                        
 
 
-        <div class="stripe {{display[5]}}">
+        <div class="stripe {{display[4]}}">
              <h1>Please Choose a Donation Amount</h1>
             <span class="currencyTypeLabel">$</span><input class="donationAmount" ng-model="donationAmount" type="number" value="100.00" placeholder="100.00" min="0.01" step="0.01" max="5000">
             <a href="" ng-click="onStripe('pk_live_j9F9S8Av7YGE4VH0CH4y891l')"><button class="submitDonation">Pay with Stripe</button></a>
-            <button class="nextBtn" type="next" ng-click="back(6)">Back</button> 
+            <button class="nextBtn" type="next" ng-click="back(5)">Back</button> 
             
             <div class="securePaymentsMessage"><img src="/images/secure-stripe-payment-logo.png"></div>
 
         </div>
 
-        <div class="reCaptcha {{display[6]}}">
+        <div class="reCaptcha {{display[5]}}">
             <h1>Please verify that you're human:</h1>
             <div
                 vc-recaptcha
@@ -140,12 +140,12 @@
             ></div>
 
             <br>            
-            <button class="nextBtn" type="next" ng-click="back(7)">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next(7, checkCaptcha)">Next</button>           
+            <button class="nextBtn" type="next" ng-click="back(6)">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next(6, checkCaptcha)">Next</button>           
         </div>
 
 
-        <div class="qrcode {{display[7]}}">
+        <div class="qrcode {{display[6]}}">
             <h1> Scan the QR Code below to donate your funds:</h1>
             <canvas id="qrCode">
             </canvas>
@@ -155,14 +155,14 @@
             </div> 
             <br>
             <p>Address: {{address}}</p>
-            <button class="nextBtn" type="next" ng-click="back(8)">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next(8)">Next</button> 
+            <button class="nextBtn" type="next" ng-click="back(7)">Back</button> 
+            <button class="nextBtn" type="next" ng-click="next(7)">Next</button> 
             <div class="securePaymentsMessage"><h3>Secure payments powered by</h3><img src="/images/coinpayments-logo.png"></div>            
 
         </div>
 
 
-        <div class="thanks {{display[8]}}">
+        <div class="thanks {{display[7]}}">
             <h1>Thanks for your contribution.</h1>
             <p>Your donation helps keep the institute strong. Our team couldn't do it without you! <br> If you selected the option to receive a tax receipt, please stay posted and you should receive an email from a member of our staff shortly.</p>
             
