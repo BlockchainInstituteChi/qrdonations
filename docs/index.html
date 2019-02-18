@@ -54,79 +54,74 @@
             <div class="backButton" ng-click="back(1)">
                 <i class="fas fa-chevron-left"></i>
             </div>
-            <h1>Select a currency:</h1>
-            <p class="errorMessage">{{errorMessage}}</p>
-            <input class="form-control" class="container-fluid" type="text" placeholder="Start typing to filter currency choices" id="search" ng-model="searchBarText" ng-keyup="search();"><hr>
+            <!-- <h1>Select a currency:</h1> -->
+            <!-- <p class="errorMessage">{{errorMessage}}</p> -->
+            <!-- <input class="form-control" class="container-fluid" type="text" placeholder="Start typing to filter currency choices" id="search" ng-model="searchBarText" ng-keyup="search();"><hr> -->
                 <div  ng-repeat="x in set" class="currencySelectButton">
                     <button id="{{x.code}}_button" class="radioSet currencySelect {{x.selected}}" ng-click="setCurrency(x.code)">
                         <br>
-                        <i class="cc {{x.code}}"></i>
+                        <i class="{{x.icon}}"></i>
                         <h3>{{x.name}}<br>({{x.code}})</h3>
                     </button>
                 </div>
             <br>         
-            <p class="selectedCurrency">Currency: {{currency}}</p> 
+            <!-- <p class="selectedCurrency">Currency: {{currency}}</p>  -->
             
         </div>
 
         <div class="taxReceipt {{display[2]}}">
-            <h1>Would you like to receive a tax receipt for your donation?</h1>
+            <div class="backButton" ng-click="back(2)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+
+            <h1>Declarations</h1>
+            <span>Some message about how we're sorry about all the boxes but it's important because terrorists are bad.</span>
             <br>
+
             <p class="errorMessage">{{errorMessage}}</p>
+
             <fieldset class="taxReceiptSelector">
-                <input ng-click="showEmailFn()" type="checkbox" id="taxReceiptCheckBox" ng-model="taxReceipt" checked>
-                <label for="taxReceiptCheckBox"> I would like a tax receipt</label><br>
-                <div class="{{showEmail}}">
-                    <h3>Please enter an email address so we can send you your receipt.</h3>
-                    <input type="number" class="emailInput" id="taxReceiptEmail" ng-model="email" placeholder="email (optional)">
+                <div class="checkbox-container">
+                    <input class="checkbox-box" ng-click="showEmailFn()" type="checkbox" id="taxReceiptCheckBox" ng-model="taxReceipt" checked>
+                    <label  class="checkbox-label" for="taxReceiptCheckBox"> I would like a tax receipt</label><br>
                 </div>
-            </fieldset>    
+                <div class="checkbox-container">
+                    <input class="checkbox-box" type="checkbox" id="countryOfOrigin" ng-model="countryOfOrigin" checked>
+                    <label class="checkbox-label" for="countryOfOrigin"> I am not a current resident of any countries subject to sanctions by the United States Government, and my name does not appear in any of the lists maintained by the Office of Foreign Asset Controls. If you are unsure whether you appear on these lists, please use the search <a href="https://sanctionssearch.ofac.treas.gov/">here.</a></label>
+                </div>
+                <div class="checkbox-container">
+                    <input class="checkbox-box" type="checkbox" id="maximumDonation" ng-model="maximumDonation" checked>
+                    <label class="checkbox-label" for="maximumDonation"> I have not donated more than $5000 USD or cryptocurrency of equivalent value in the past year.</label>
+                </div>
+            </fieldset>
+
+            <div class="{{showEmail}}">
+                <span>Please enter an email address so we can send you your receipt.</span>
+                <input class="emailInput" id="taxReceiptEmail" ng-model="email" placeholder="email (optional)">
+                <span class="cancelTaxReceiptButton" ng-click="showEmailFn()">✕</span>
+            </div>
             <hr>
             <p>A tax receipt can be issued for any donation of more than $50. Tax receipts are valid in the US only. Please <a href="{{contactUrl}}">contact us</a> for more information.</p><br>
-            
-            <br>
-            <button class="nextBtn" type="next" ng-click="back(2)">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next(2, checkTaxReceiptChoice)">Next</button> 
-        </div>
-
-        <div class="origin {{display[3]}}">
-            <h1>Verify Country of Origin</h1>
-            <br>
-            <p class="errorMessage">{{errorMessage}}</p>
-            <fieldset class="taxReceiptSelector">
-                <input type="checkbox" id="countryOfOrigin" ng-model="countryOfOrigin" checked>
-                <label for="countryOfOrigin"> I am not a current resident of any countries subject to sanctions by the United States Government, and my name does not appear in any of the lists maintained by the Office of Foreign Asset Controls. If you are unsure whether you appear on these lists, please use the search <a href="https://sanctionssearch.ofac.treas.gov/">here.</a></label>
-            </fieldset>    
-            <br>
-            <button class="nextBtn" type="next" ng-click="back(3)">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next(3, checkCountryOfOriginVerification)">Next</button> 
+            <span>Next:</span><br>
+            <button class="nextBtn" type="next" ng-click="next(3, checkDeclarations)">Payment Info</button> 
         </div>  
 
-        <div class="maxDonations {{display[4]}}">
-            <h1>MAXIMUM DONATIONS</h1>
-            <br>
-            <p class="errorMessage">{{errorMessage}}</p>
-            <fieldset class="taxReceiptSelector">
-                <input type="checkbox" id="maximumDonation" ng-model="maximumDonation" checked>
-                <label for="maximumDonation"> I am not and have not donated more than $5000 USD or cryptocurrency of equivalent value in the past year.</label>
-            </fieldset>    
-            <br>
-            <button class="nextBtn" type="next" ng-click="back(4)">Back</button> 
-            <button class="nextBtn" type="next" ng-click="next(4, checkMaximumDonationVerification)">Next</button> 
-        </div>                        
-
-
-        <div class="stripe {{display[5]}}">
-             <h1>Please Choose a Donation Amount</h1>
+        <div class="stripe {{display[3]}}">
+            <div class="backButton" ng-click="back(3)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <h1>Please Choose a Donation Amount</h1>
             <span class="currencyTypeLabel">$</span><input class="donationAmount" ng-model="donationAmount" type="number" value="100.00" placeholder="100.00" min="0.01" step="0.01" max="5000">
             <a href="" ng-click="onStripe('pk_live_j9F9S8Av7YGE4VH0CH4y891l')"><button class="submitDonation">Pay with Stripe</button></a>
-            <button class="nextBtn" type="next" ng-click="back(5)">Back</button> 
             
             <div class="securePaymentsMessage"><img src="/images/secure-stripe-payment-logo.png"></div>
 
         </div>
 
-        <div class="reCaptcha {{display[6]}}">
+        <div class="reCaptcha {{display[4]}}">
+            <div class="backButton" ng-click="back(5)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
             <h1>Please verify that you're human:</h1>
             <div
                 vc-recaptcha
@@ -138,12 +133,13 @@
             ></div>
 
             <br>            
-            <button class="nextBtn" type="next" ng-click="back(6)">Back</button> 
             <button class="nextBtn" type="next" ng-click="next(6, checkCaptcha)">Next</button>           
         </div>
 
-
-        <div class="qrcode {{display[7]}}">
+        <div class="qrcode {{display[5]}}">
+            <div class="backButton" ng-click="back(7)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
             <h1> Scan the QR Code below to donate your funds:</h1>
             <canvas id="qrCode">
             </canvas>
@@ -160,7 +156,10 @@
         </div>
 
 
-        <div class="thanks {{display[8]}}">
+        <div class="thanks {{display[6]}}">
+            <div class="backButton" ng-click="back(8)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
             <h1>Thanks for your contribution.</h1>
             <p>Your donation helps keep the institute strong. Our team couldn't do it without you! <br> If you selected the option to receive a tax receipt, please stay posted and you should receive an email from a member of our staff shortly.</p>
             

@@ -192,3 +192,22 @@ i.fas.fa-chevron-left {
     font-size: 2em;
     color: #00000078;
 }
+.currencySelectButton i.fas {
+    font-size: 2.5em;
+}
+label.checkbox-label {
+    float: left;
+    text-align: left;
+    max-width: calc(100% - 2em);
+}
+.checkbox-box {
+    float: right;
+}
+.checkbox-container {
+    margin-top: 1em;
+    display: inline-block;
+    width: 100%;
+}
+p.errorMessage {
+    color: red;
+}

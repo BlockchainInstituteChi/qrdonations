@@ -14,63 +14,63 @@ angular.module('donationsManager', ['vcRecaptcha'])
 							{
 								"name":"Bitcoin",
 								"code":"BTC",
-								"icon":"BTC"
+								"icon":"cc BTC"
 							},{
 								"name":"Ethereum",
 								"code":"ETH",
-								"icon":"ETH"
+								"icon":"cc ETH"
 							},{
 								"name":"zCash",
 								"code":"ZEC",
-								"icon":"ZEC"
+								"icon":"cc ZEC"
 							},{
 								"name":"Vertcoin",
 								"code":"VTC",
-								"icon":"VTC"
+								"icon":"cc VTC"
 							},{
 								"name":"NEM",
 								"code":"XEM",
-								"icon":"XEM"
+								"icon":"cc XEM"
 							},{
 								"name":"Litecoin",
 								"code":"LTC",
-								"icon":"LTC"
+								"icon":"cc LTC"
 							},{
 								"name":"Dogecoin",
 								"code":"DOGE",
-								"icon":"DOGE"
+								"icon":"cc DOGE"
 							},{
 								"name":"Ripple",
 								"code":"XRP",
-								"icon":"XRP"
+								"icon":"cc XRP"
 							},{
 								"name":"EOS",
 								"code":"EOS",
-								"icon":"EOS"
+								"icon":"cc EOS"
 							},{
 								"name":"Monero",
 								"code":"XMR",
-								"icon":"XMR"
+								"icon":"cc XMR"
 							},{
 								"name":"Dash",
 								"code":"DASH",
-								"icon":"DASH"
+								"icon":"cc DASH"
 							},{
 								"name":"Bitcoin Cash",
 								"code":"BCH",
-								"icon":"BCH"
+								"icon":"cc BCH"
 							},{
 								"name":"Tether",
 								"code":"USDT",
-								"icon":"USDT"
+								"icon":"cc USDT"
 							},{
 								"name":"Cardano",
 								"code":"ADA",
-								"icon":"ADA"
+								"icon":"cc ADA"
 							},{
 								"name":"Dollars",
-								"code":"USD",
-								"icon":"USD"
+							 	"code":"USD",
+								"icon":"fas fa-dollar-sign"
 							}
 		];
 
@@ -159,11 +159,15 @@ angular.module('donationsManager', ['vcRecaptcha'])
 				if (true === result) {
 					$scope.errorMessage = undefined;
 
-					if ( ( stepId === 4 ) && ( $scope.mode === "crypto" ) ) {
-						hide(3)
-						show(5)
+					if (  ( $scope.currency != "USD" ) && ( stepId === 3 )  ) {
+					
+						show(4)
+						hide(2)
+
 					} else {
+
 						proceed (stepId)
+					
 					}
 
 				} else {
@@ -174,6 +178,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		} else {
 			proceed (stepId)
 		}
+
+		console.log('hidden is', $scope.display)
 
 	}
 
@@ -197,9 +203,54 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	}	
 
+	$scope.checkDeclarations = function (callback) {
+		console.log('checking declarations')
+		// Check required check boxes
+		if ( $scope.maximumDonation ) {
+			console.log('max donation is good')
+		} else {
+			var result = {
+				'error':'You are not permitted to exceed the maximum donation of $5000 per year.'
+			};
+			return callback(result)
+		}	
+
+		if ( $scope.countryOfOrigin ) {
+			console.log('country of origin is good')
+		} else {
+			var result = {
+				'error':'Unfortunately we cannot accept donations from sanctioned individuals.'
+			};
+			return callback(result)
+		}	
+
+		// Check tax receipt info 
+		if ( $scope.taxReceipt ) {
+			if ( validateEmail($scope.email) ) {
+				// updateWalletAddress($scope.currency);
+
+				return callback(true)
+
+			} else {
+				var result = {
+					'error':'You must enter a valid email address to receive a tax receipt.'
+				};
+				return callback(result)
+			}
+		} else {
+			return callback(true)
+		}	
+	}
+
 	$scope.showEmailFn = function () {
-		console.log('displaying email input')
-		$scope.showEmail = ""
+		console.log('displaying email input', $scope.taxReceipt)
+		
+		if ( $scope.showEmail === "" ) {
+			$scope.showEmail = "hidden"
+			$scope.taxReceipt = ""
+		} else {
+			$scope.showEmail = ""
+		}
 	}
 
 	$scope.setCurrency = function (code) {
@@ -218,6 +269,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		console.log("Setting currency to " + code);
 		$scope.currency = code;
 		updateSelected(code);
+		$scope.next(2)
 	}
 
 	function updateSelected (code) {
@@ -474,6 +526,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     $scope.setResponse = function (response) {
         console.info('Response available');
         $scope.response = response;
+        $scope.next(5, $scope.checkCaptcha)
     };
     $scope.setWidgetId = function (widgetId) {
         console.info('Created widget ID: %s', widgetId);
