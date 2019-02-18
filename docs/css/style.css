@@ -179,3 +179,16 @@ button.submitDonation {
     margin-bottom: 1em;
 }
 
+
+span.yourDonationMatters {
+    margin-bottom: 2em !important;
+    display: inline-block;
+}
+
+i.fas.fa-chevron-left {
+    position: absolute;
+    left: 1em;
+    top: 1em;
+    font-size: 2em;
+    color: #00000078;
+}

@@ -74,6 +74,34 @@ angular.module('donationsManager', ['vcRecaptcha'])
 							}
 		];
 
+	$scope.donationOptions = [ 
+		{
+			"id" : "1",
+			"amount" : "1000.00"
+		},{
+			"id" : "2",
+			"amount" : "500.00"
+		},{
+			"id" : "3",
+			"amount" : "250.00"
+		},{
+			"id" : "4",
+			"amount" : "100.00"
+		},{
+			"id" : "5",
+			"amount" : "50.00"
+		},{
+			"id" : "6",
+			"amount" : "25.00"
+		}
+	]
+
+	$scope.setDonationAmount = function (amount) {
+		console.log('setting donations amount to', amount)
+		$scope.donationAmount = parseInt(amount, 10);;
+		console.log('set amount to ', $scope.donationAmount)
+	} 
+
 	//  
 	$scope.init = function () {
 
@@ -151,17 +179,21 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	$scope.back = function (stepId) {
 		console.log('display', $scope.display, "mode:", $scope.mode, "stepId", stepId)
-		if ( ( $scope.mode === "cash") && ( stepId === 2 ) ) {
+
+		show(stepId - 1)
+		hide(stepId)
+
+		// if ( ( $scope.mode === "cash") && ( stepId === 2 ) ) {
 			
-			hide(1);
-			show(0);			
-		} else if ( ( stepId === 6 ) && ( $scope.mode === "crypto" ) ) {
-			hide(5)
-			show(3)
-		} else {
-			hide(stepId - 1);
-			show(stepId - 2);			
-		}
+		// 	hide(1);
+		// 	show(0);			
+		// } else if ( ( stepId === 6 ) && ( $scope.mode === "crypto" ) ) {
+		// 	hide(5)
+		// 	show(3)
+		// } else {
+		// 	hide(stepId - 1);
+		// 	show(stepId - 2);			
+		// }
 
 	}	
 
@@ -193,6 +225,23 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			if ( $scope.set[i].code === code ) {
 				$scope.set[i].selected = "selected";
 			}
+		}
+	}
+
+	$scope.checkAmountChoice = function (callback) {
+		console.log($scope.donationAmount);
+
+		if ( $scope.donationAmount > 0 ) {
+
+			// updateWalletAddress($scope.currency);
+
+			return callback(true)
+
+		} else {
+			var result = {
+				'error':'You must choose a currency amount.'
+			};
+			return callback(result)
 		}
 	}
 
