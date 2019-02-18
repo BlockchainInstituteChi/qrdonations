@@ -466,7 +466,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		    	} else if ( $scope.mode === "cash" ) {	
 		    		console.log("cash mode response received", response);	    	
 					cb(true)
-					proceed(8)
+					// proceed(8)
 		    	} 	
    	
 	        }). 
