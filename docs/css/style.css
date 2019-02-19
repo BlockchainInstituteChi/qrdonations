@@ -211,3 +211,12 @@ label.checkbox-label {
 p.errorMessage {
     color: red;
 }
+.donationAmount button {
+    padding: 1.25em 0.5em 1.25em 0.5em;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: white;
+    background-color: #1073aa;
+}
+
+
