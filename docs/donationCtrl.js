@@ -7,8 +7,8 @@ console.log('loaded ');
 angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', function( $http, $scope, $window ){
 
-	// $scope.server = "https://app.theblockchaininstitute.org/";
-	$scope.server = "http://localhost:5000/";
+	$scope.server = "https://app.theblockchaininstitute.org/";
+	// $scope.server = "https://localhost:5000/";
 	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
 
 	var currencyList = [
@@ -64,10 +64,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 								"name":"Tether",
 								"code":"USDT",
 								"icon":"cc USDT"
-							},{
-								"name":"Cardano",
-								"code":"ADA",
-								"icon":"cc ADA"
 							},{
 								"name":"Dollars",
 							 	"code":"USD",
@@ -187,20 +183,18 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	$scope.back = function (stepId) {
 		console.log('display', $scope.display, "mode:", $scope.mode, "stepId", stepId)
 
-		show(stepId - 1)
-		hide(stepId)
-
-		// if ( ( $scope.mode === "cash") && ( stepId === 2 ) ) {
+		if ( ( $scope.currency === "USD") && ( stepId === 6 ) ) {
 			
-		// 	hide(1);
-		// 	show(0);			
-		// } else if ( ( stepId === 6 ) && ( $scope.mode === "crypto" ) ) {
-		// 	hide(5)
-		// 	show(3)
-		// } else {
-		// 	hide(stepId - 1);
-		// 	show(stepId - 2);			
-		// }
+			hide(6);
+			show(3);	
+
+		} else if ( ( stepId === 4 ) && ( $scope.currency != "USD" ) ) {
+			hide(4)
+			show(2)
+		} else {
+			show(stepId - 1)
+			hide(stepId)	
+		}
 
 	}	
 
