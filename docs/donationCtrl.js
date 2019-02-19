@@ -441,6 +441,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		console.log('show triggered for div id', divId)
 		$scope.display[divId] = "";
 		console.log('display', $scope.display)
+
+		if (divId === 4) {
+			grecaptcha.reset();
+		}
 	}
 
 	$scope.init();
