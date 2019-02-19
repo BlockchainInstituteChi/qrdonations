@@ -220,3 +220,11 @@ p.errorMessage {
 }
 
 
+button.yesToAll {
+    float: right;
+    margin-right: -2em;
+    background: white;
+    color: #1073aa;
+    border-radius: 0.25em;
+    border: solid 0.5px #1073aa;
+}

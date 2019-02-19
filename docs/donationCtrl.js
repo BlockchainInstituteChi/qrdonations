@@ -203,6 +203,25 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	}	
 
+    $scope.checkAll = function () {
+    	console.log('check all triggered')
+    	console.log('declarations', $scope.maximumDonation, $scope.countryOfOrigin, $scope.taxReceipt )
+    	if ( $scope.taxReceipt === true ) {
+			$scope.maximumDonation = false
+	    	$scope.countryOfOrigin = false
+	    	$scope.taxReceipt = false
+	    	$scope.showEmailFn()
+
+    	} else {
+			$scope.maximumDonation = true
+	    	$scope.countryOfOrigin = true
+	    	$scope.taxReceipt = true
+	    	$scope.showEmailFn()
+    	}
+    	console.log('declarations', $scope.maximumDonation, $scope.countryOfOrigin, $scope.taxReceipt )
+    	
+    }
+
 	$scope.checkDeclarations = function (callback) {
 		console.log('checking declarations')
 		// Check required check boxes
@@ -476,6 +495,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	        }); 
 
     }
+
 
     $scope.search = function ( ) {
 

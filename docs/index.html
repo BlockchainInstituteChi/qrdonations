@@ -82,6 +82,9 @@
 
             <fieldset class="taxReceiptSelector">
                 <div class="checkbox-container">
+                    <button class="yesToAll" ng-click="checkAll()">Check All</button>
+                </div>
+                <div class="checkbox-container">
                     <input class="checkbox-box" ng-click="showEmailFn()" type="checkbox" id="taxReceiptCheckBox" ng-model="taxReceipt" checked>
                     <label  class="checkbox-label" for="taxReceiptCheckBox"> I would like a tax receipt</label><br>
                 </div>
@@ -145,7 +148,7 @@
             </canvas>
             <hr>
             <div class="donationAmount">
-                {{donationAmount}} in {{donationCurrency}}
+                {{donationAmount}} in {{currency}}
             </div> 
             <br>
             <p>Address: {{address}}</p>
