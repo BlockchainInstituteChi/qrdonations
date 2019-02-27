@@ -13,6 +13,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	var currencyList = [
 							{
+								"name":"Dollars",
+							 	"code":"USD",
+								"icon":"fas fa-dollar-sign"
+							},{
 								"name":"Bitcoin",
 								"code":"BTC",
 								"icon":"cc BTC"
@@ -64,10 +68,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 								"name":"Tether",
 								"code":"USDT",
 								"icon":"cc USDT"
-							},{
-								"name":"Dollars",
-							 	"code":"USD",
-								"icon":"fas fa-dollar-sign"
 							}
 		];
 
