@@ -100,7 +100,7 @@
 
             <div class="{{showEmail}}">
                 <span>Please enter an email address so we can send you your receipt.</span>
-                <input class="emailInput" id="taxReceiptEmail" ng-model="email" placeholder="email (optional)">
+                <input class="emailInput" id="taxReceiptEmail" ng-model="email" placeholder="username@example.com">
                 <span class="cancelTaxReceiptButton" ng-click="showEmailFn()">✕</span>
             </div>
             <hr>
@@ -136,7 +136,7 @@
             ></div>
 
             <br>            
-            <button class="nextBtn" type="next" ng-click="next(5, checkCaptcha)">Next</button>           
+            <!-- <button class="nextBtn" type="next" ng-click="next(5, checkCaptcha)">Next</button>   -->         
         </div>
 
         <div class="qrcode {{display[5]}}">

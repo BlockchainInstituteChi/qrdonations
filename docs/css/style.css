@@ -167,8 +167,8 @@ button.submitDonation {
 }
 .emailInput {
     width: 15em;
-    height: 1.5em;
-    font-size: 1.25em;
+    height: 1em;
+    font-size: 1em;
     margin-top: 1em;
     padding-left: 0.4em;
 }
@@ -227,4 +227,8 @@ button.yesToAll {
     color: #1073aa;
     border-radius: 0.25em;
     border: solid 0.5px #1073aa;
+}
+
+input:focus, button:focus {
+    outline: none;
 }
