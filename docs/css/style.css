@@ -22,14 +22,23 @@ fieldset.currencyList {
    color: blue;
 }
 .currencySelectButton.ng-scope {
-    display: inline-block;
     margin: 0.5em;
-    width: 5em;
+    width: 8em;
+    display: inline-grid;
+    height: 8em;
+    position: relative;
 }
 button.currencySelect {
     width: 100%;
     border-radius: 0.5em;
+    height: 100%;
+    position: absolute;
 }
+.currencySelectButton.donationAmount.ng-scope {
+    width: 6em;
+    height: 3.25em;
+}
+
 i.cc {
     font-size: 3em;
 }
