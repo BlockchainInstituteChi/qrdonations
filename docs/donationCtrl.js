@@ -68,6 +68,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 								"name":"Tether",
 								"code":"USDT",
 								"icon":"cc USDT"
+							},{
+								"name":"Bitcoin Gold",
+								"code":"BTG",
+								"icon":"cc BTC"
 							}
 		];
 
