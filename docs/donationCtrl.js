@@ -7,8 +7,8 @@ console.log('loaded ');
 angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', function( $http, $scope, $window ){
 
-	$scope.server = "https://app.theblockchaininstitute.org/";
-	// $scope.server = "https://localhost:5000/";
+	// $scope.server = "https://app.theblockchaininstitute.org/";
+	$scope.server = "http://localhost:8889/";
 	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
 
 	var currencyList = [
@@ -267,7 +267,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}
 	}
 
-	$scope.setCurrency = function (code) {
+	$scope.setCurrency = function (code, name) {
 
 		if ( typeof($scope.currency) != "undefined" ) {
 			// Deselect previous item
@@ -282,6 +282,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 		console.log("Setting currency to " + code);
 		$scope.currency = code;
+		$scope.currencyName = name;
 		updateSelected(code);
 		$scope.next(2)
 	}
@@ -477,14 +478,29 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	  		.then(function(response) { 
 	  		  	
 	  			if ( $scope.mode === "crypto" ) {
+					console.log("crypto mode response received", response)
 					$scope.address = response.data.address
-		        	console.log("crypto mode response received", response);
-		        	initCanvas($scope.address);
-		        	cb(true);   
+					
+					if ( typeof(response.data.price) === "undefined" ) {
+						console.log('response.data.price was undefined', response.data.price)
+						var transactionURI = $scope.currencyName.toLowerCase() + ":" + response.data.address 
+
+					} else {
+						console.log('response.data.price was defined', parseFloat(response.data.price), $scope.donationAmount)
+						var amount = ($scope.donationAmount / parseFloat(response.data.price))
+						console.log('amount is', amount.toFixed(18))
+						var transactionURI = $scope.currencyName.toLowerCase() + ":" + response.data.address + "?amount=" + amount.toFixed(8)
+						console.log('trans:', transactionURI)
+					}
+					console.log('trans:', transactionURI)
+		        	initCanvas(transactionURI);
+		        	cb(true); 
+
 		    	} else if ( $scope.mode === "cash" ) {	
 		    		console.log("cash mode response received", response);	    	
 					cb(true)
 					// proceed(8)
+
 		    	} 	
    	
 	        }). 
@@ -531,7 +547,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 
 	function initCanvas (address) {
-
+		console.log('init canvas:', address)
 		var canvas = document.getElementById('qrCode')
 		console.log(canvas, address)
 		QRCode.toCanvas(canvas, address, function (error) {
