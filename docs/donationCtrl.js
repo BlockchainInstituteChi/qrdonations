@@ -7,8 +7,8 @@ console.log('loaded ');
 angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', function( $http, $scope, $window ){
 
-	// $scope.server = "https://app.theblockchaininstitute.org/";
-	$scope.server = "http://localhost:8889/";
+	$scope.server = "https://app.theblockchaininstitute.org/";
+	// $scope.server = "http://localhost:8889/";
 	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
 
 	var currencyList = [
@@ -489,7 +489,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 						console.log('response.data.price was defined', parseFloat(response.data.price), $scope.donationAmount)
 						var amount = ($scope.donationAmount / parseFloat(response.data.price))
 						console.log('amount is', amount.toFixed(18))
-						var transactionURI = $scope.currencyName.toLowerCase() + ":" + response.data.address + "?amount=" + amount.toFixed(8)
+						var transactionURI = $scope.currencyName.toLowerCase() + ":" + response.data.address + "?amount=" + amount.toFixed(8) + "?value=" + amount.toFixed(8)
 						console.log('trans:', transactionURI)
 					}
 					console.log('trans:', transactionURI)
