@@ -370,7 +370,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     $scope.onToken = function(token) {
         console.log(token);
         $scope.token = token
-        hide(5)
+        hide(3)
         show(6)
         $scope.$apply();
     };
