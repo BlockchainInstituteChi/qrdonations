@@ -1,6 +1,9 @@
 body {
     font-family: 'Kanit',sans-serif;
 } 
+a {
+    color: #4bab9f;
+}
 .hidden {
 	display: none;
 }
@@ -19,7 +22,7 @@ fieldset.currencyList {
 }
 
 :checked + label {
-   color: blue;
+   color: black;
 }
 .currencySelectButton.ng-scope {
     margin: 0.5em;
@@ -129,11 +132,11 @@ button.radioSet.modeSelect {
 
 /* Currency Select */
 button.currencySelect:hover i, button.currencySelect:hover h3, .radioSet.currencySelect.selected i, .radioSet.currencySelect.selected h3 {
-    color: #2fd151;
+    color: #4bab9f;
 }
 
 button.currencySelect.selected {
-    border: solid #2fd151;
+    border: solid #4bab9f;
 }
 button {
     outline: none;
