@@ -244,3 +244,8 @@ button.yesToAll {
 input:focus, button:focus {
     outline: none;
 }
+
+
+.donationAmount button, button.nextBtn  {
+    border-radius: 0;
+}
