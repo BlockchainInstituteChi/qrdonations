@@ -296,3 +296,21 @@ span.addressCopier {
 .addressCopier label {
     margin-right: 1em;
 }
+.securePaymentsMessage, .securePaymentsMessage img {
+    max-width: 100%;
+    overflow: hidden;
+}
+button.nextBtn {
+    min-width: 200px;
+    max-width: 100vw;
+    min-height: 3em;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .recaptchaContainer {
+        width: 100%;
+        overflow: hidden;
+        height: -webkit-fill-available;
+    }
+}
