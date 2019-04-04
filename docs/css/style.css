@@ -252,5 +252,47 @@ input:focus, button:focus {
 .norecaptcha {
     display: none;
     width: 75%;
-    
+
+}
+
+/* CopyMessage */
+.copySuccessMessage {
+    max-width: 150px;
+    position: absolute;
+    left: calc(50vw - 5em);
+    top: calc(50vh - 3em);
+    background: #4bab9fde;
+    padding: 1em;
+    border-radius: 0.5em;
+    font-weight: bold;
+    color: white;
+}
+.copySuccessMessage a {
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0.25em;
+}
+
+/* Address Display */
+span.addressCopier {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 1em;
+}
+.copyButton i {
+    margin-left: 1em;
+    background: #bababa;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    color: white;
+}
+.addressCopier input {
+    width: 150px;
+    max-width: 100vw;
+    min-width: 30vw;
+    text-align: center;
+}
+.addressCopier label {
+    margin-right: 1em;
 }

@@ -152,7 +152,7 @@
                 ${{donationAmount}} in {{currency}}
             </div> 
             <br>
-            <span><label for="addressCopier">Address:</label><input id="addressCopier" type="text" class="addressCopier"></input><a ng-click="copyAddressToClipboard()" class="copyButton"><i class="fas fa-copy"></i></a></span>
+            <span class="addressCopier"><label for="addressCopier">Address:</label><input id="addressCopier" type="text" ng-model="address" class="addressCopier"></input><a ng-click="copyAddressToClipboard()" class="copyButton"><i class="fas fa-copy"></i></a></span>
             <button class="nextBtn" type="next" ng-click="next(6)">Next</button> 
             <div class="securePaymentsMessage"><h3>Secure payments powered by</h3><img src="/images/coinpayments-logo.png"></div>            
             <div class="copySuccessMessage {{copySuccessMessage}}">

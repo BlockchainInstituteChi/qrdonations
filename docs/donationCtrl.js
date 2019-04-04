@@ -581,11 +581,12 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		
 	}
 
-	$scope.share = function (text_to_share) {
-	    
+	$scope.copyAddressToClipboard = function () {
+	    console.log('copy triggered ')
+
 	    // create temp element
 	    var copyElement = document.createElement("span");
-	    copyElement.appendChild(document.createTextNode(text_to_share));
+	    copyElement.appendChild(document.createTextNode($scope.address));
 	    copyElement.id = 'tempCopyToClipboard';
 	    angular.element(document.body.append(copyElement));
 
@@ -604,14 +605,14 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.hideCopySuccessMessage = function () {
-
+		console.log('hiding copy success message')
 		$scope.copySuccessMessage = "hidden";
 
 	}
 
 
 	function displayCopySuccessMessage () {
-
+		console.log('displaying copy success message')
 		$scope.copySuccessMessage = "";
 
 	}
