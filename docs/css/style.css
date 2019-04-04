@@ -239,6 +239,10 @@ button.yesToAll {
     color: #1073aa;
     border-radius: 0.25em;
     border: solid 0.5px #1073aa;
+    float: initial;
+    padding: 0.5em;
+    font-size: 0.85em;
+    font-weight: 500;
 }
 
 input:focus, button:focus {
@@ -313,4 +317,8 @@ button.nextBtn {
         overflow: hidden;
         height: -webkit-fill-available;
     }
+}
+
+.hidden {
+    display: none;
 }

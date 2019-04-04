@@ -1,4 +1,4 @@
-console.log('loaded ');
+// console.log('loaded ');
 
 // index.js -> bundle.js
 // var QRCode = require('qrcode')
@@ -98,9 +98,9 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	]
 
 	$scope.setDonationAmount = function (amount) {
-		console.log('setting donations amount to', amount)
+		// console.log('setting donations amount to', amount)
 		$scope.donationAmount = parseInt(amount, 10);;
-		console.log('set amount to ', $scope.donationAmount)
+		// console.log('set amount to ', $scope.donationAmount)
 	} 
 
 	//  
@@ -112,7 +112,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		},{
 			"name":"ETH"
 		}];
-		console.log($scope.supportedCurrencies);
+		// console.log($scope.supportedCurrencies);
 
 		$scope.display = [
 			"",
@@ -148,14 +148,14 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.currencyname = "Bitcoin"
 		$scope.address = "DDSR8DrYfHpj92fdfnVpNXkrJBo2S97J4A"
 		cryptoHandler({"address" : $scope.address}, function(result){
-			console.log('ran', result)
+			// console.log('ran', result)
 		})
 
 		// - - - - - - - - - for testing purposes only - - - - - - - - - 
 
 
 
-
+		$scope.showTaxReceipt = ""
 
 		$scope.copySuccessMessage = "hidden"
 
@@ -168,7 +168,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 
 	$scope.setMode = function (mode) {
-		console.log('mode', mode)
+		// console.log('mode', mode)
 		if ( mode === "cash") {
 			$scope.mode = "cash"
 			// proceed(1)
@@ -183,11 +183,11 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	// Pagination Controls
 	$scope.next = function (stepId, callBackTest) {
 
-		console.log('next triggered', $scope.currency, $scope.currencyChoice, $scope.mode, stepId);
-		// console.log(stepId, callBackTest)
-		// console.log(callBackTest)
+		// console.log('next triggered', $scope.currency, $scope.currencyChoice, $scope.mode, stepId);
+		console.log(stepId, callBackTest)
+		console.log(callBackTest)
 		if (callBackTest) {
-			// console.log('testing with ' + callBackTest)
+			console.log('testing with ' + callBackTest)
 			callBackTest( function(result) {
 				if (true === result) {
 					$scope.errorMessage = undefined;
@@ -204,7 +204,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 					}
 
 				} else {
-					console.log(result)
+					// console.log(result)
 					$scope.errorMessage = result.error
 				}
 			});
@@ -212,12 +212,12 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			proceed (stepId)
 		}
 
-		console.log('hidden is', $scope.display)
-
+		// console.log('hidden is', $scope.display)
+		checkAndHide()
 	}
 
 	$scope.back = function (stepId) {
-		console.log('display', $scope.display, "mode:", $scope.mode, "stepId", stepId)
+		// console.log('display', $scope.display, "mode:", $scope.mode, "stepId", stepId)
 
 		if ( ( $scope.currency === "USD") && ( stepId === 6 ) ) {
 			
@@ -231,12 +231,29 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			show(stepId - 1)
 			hide(stepId)	
 		}
+		checkAndHide()
 
 	}	
 
+	function checkAndHide () {	
+		// console.log('amount is', $scope.donationAmount)
+
+		if ( $scope.donationAmount < 50 ) { 
+
+			$scope.showTaxReceipt = "hidden"
+
+		} else {
+
+			$scope.showTaxReceipt = ""
+
+		}
+		// console.log('tax receipt: ', $scope.showTaxReceipt)
+	}
+
+
     $scope.checkAll = function () {
-    	console.log('check all triggered')
-    	console.log('declarations', $scope.maximumDonation, $scope.countryOfOrigin, $scope.taxReceipt )
+    	// console.log('check all triggered')
+    	// console.log('declarations', $scope.maximumDonation, $scope.countryOfOrigin, $scope.taxReceipt )
     	if ( $scope.countryOfOrigin === true ) {
 			$scope.maximumDonation = false
 	    	$scope.countryOfOrigin = false
@@ -245,15 +262,15 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			$scope.maximumDonation = true
 	    	$scope.countryOfOrigin = true
     	}
-    	console.log('declarations', $scope.maximumDonation, $scope.countryOfOrigin, $scope.taxReceipt )
+    	// console.log('declarations', $scope.maximumDonation, $scope.countryOfOrigin, $scope.taxReceipt )
     	
     }
 
 	$scope.checkDeclarations = function (callback) {
-		console.log('checking declarations')
+		// console.log('checking declarations')
 		// Check required check boxes
 		if ( $scope.maximumDonation ) {
-			console.log('max donation is good')
+			// console.log('max donation is good')
 		} else {
 			var result = {
 				'error':'You are not permitted to exceed the maximum donation of $5000 per year.'
@@ -262,7 +279,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}	
 
 		if ( $scope.countryOfOrigin ) {
-			console.log('country of origin is good')
+			// console.log('country of origin is good')
 		} else {
 			var result = {
 				'error':'Unfortunately we cannot accept donations from sanctioned individuals.'
@@ -289,7 +306,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.showEmailFn = function () {
-		console.log('displaying email input', $scope.taxReceipt)
+		// console.log('displaying email input', $scope.taxReceipt)
 		
 		if ( $scope.showEmail === "" ) {
 			$scope.showEmail = "hidden"
@@ -312,7 +329,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			$scope.setMode('crypto')
 		}		
 
-		console.log("Setting currency to " + code);
+		// console.log("Setting currency to " + code);
 		$scope.currency = code;
 		$scope.currencyName = name;
 		updateSelected(code);
@@ -328,7 +345,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.checkAmountChoice = function (callback) {
-		console.log($scope.donationAmount);
+		// console.log($scope.donationAmount);
 
 		if ( $scope.donationAmount > 0 ) {
 
@@ -345,7 +362,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.checkCurrencyChoice = function (callback) {
-		console.log($scope.currency);
+		// console.log($scope.currency);
 
 		if ( $scope.currency ) {
 
@@ -362,7 +379,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.checkTaxReceiptChoice = function (callback) {
-		console.log($scope.taxReceipt)
+		// console.log($scope.taxReceipt)
 		if ( $scope.taxReceipt ) {
 			if ( validateEmail($scope.email) ) {
 				// updateWalletAddress($scope.currency);
@@ -381,7 +398,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.checkCountryOfOriginVerification = function (callback) {
-		console.log($scope.countryOfOrigin)
+		// console.log($scope.countryOfOrigin)
 		if ( $scope.countryOfOrigin ) {
 			return callback(true)
 		} else {
@@ -390,7 +407,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.checkMaximumDonationVerification = function (callback) {
-		console.log($scope.maximumDonation)
+		// console.log($scope.maximumDonation)
 		if ( $scope.maximumDonation ) {
 			return callback(true)
 		} else {
@@ -400,7 +417,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
     // stripe will call this once it has successfully created a token for the payment details
     $scope.onToken = function(token) {
-        console.log(token);
+        // console.log(token);
         $scope.token = token
         hide(3)
         show(6)
@@ -408,7 +425,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     };
 
     $scope.onStripe = function(apiKey, userEmail) {
-    	console.log('donating', $scope.donationAmount)
+    	// console.log('donating', $scope.donationAmount)
         var handler = StripeCheckout.configure({
             key: apiKey,
             image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -438,17 +455,17 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	function updateWalletAddress (currencyChoice) {
-		console.log("entered updateWalletAddress");
+		// console.log("entered updateWalletAddress");
 		// Load the view-data from the node.js server
 	  	$http.get( $scope.server + 'checkCaptcha/' + currencyChoice)
 	  		.then(function(response) { 
 	  		  $scope.address = response.address;
 	  		  $scope.currencyChoice = currencyChoice
-	          console.log(response);
+	          // console.log(response);
      	
 	        }). 
 	        catch(function(error) { 
-	          console.log(error);
+	          // console.log(error);
 	        }); 
 	}
 
@@ -458,22 +475,22 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	function proceed (stepId) {
-		console.log('proceed triggered for step id', stepId)
+		// console.log('proceed triggered for step id', stepId)
 		hide(stepId - 1)
 		show(stepId)
-		console.log('display', $scope.display)
+		// console.log('display', $scope.display)
 	}
 
 	function hide (divId) {
-		console.log('hide triggered for div id', divId)
+		// console.log('hide triggered for div id', divId)
 		$scope.display[divId] = "hidden";
-		console.log('display', $scope.display)
+		// console.log('display', $scope.display)
 	}
 
 	function show (divId) {
-		console.log('show triggered for div id', divId)
+		// console.log('show triggered for div id', divId)
 		$scope.display[divId] = "";
-		console.log('display', $scope.display)
+		// console.log('display', $scope.display)
 
 		if (divId === 4) {
 			grecaptcha.reset();
@@ -489,7 +506,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     	var payload = {};
 
     	if ( $scope.mode === "crypto" ) {
-			// console.log('testing captcha');
+			console.log('testing captcha');
 			payload.response = $scope.response
 			payload.taxReceipt = $scope.taxReceipt
 			payload.email = $scope.email
@@ -515,7 +532,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	  				});
 
 		    	} else if ( $scope.mode === "cash" ) {	
-		    		console.log("cash mode response received", response);	    	
+		    		// console.log("cash mode response received", response);	    	
 					cb(true)
 					// proceed(8)
 
@@ -523,28 +540,28 @@ angular.module('donationsManager', ['vcRecaptcha'])
    	
 	        }). 
 	        catch(function(error) { 
-	          // console.log(error);
+	          console.log(error);
 	          cb(false);
 	        }); 
 
     }
 
     function cryptoHandler (response, cb) {
-		console.log("crypto mode response received", response, $scope.currencyname)
+		// console.log("crypto mode response received", response, $scope.currencyname)
 		$scope.address = response.address
 		
 		if ( typeof(response.price) === "undefined" ) {
-			console.log('response.data.price was undefined', response.price)
+			// console.log('response.data.price was undefined', response.price)
 			var transactionuri = $scope.currencyname.toLowerCase() + ":" + response.address 
 
 		} else {
-			console.log('response.data.price was defined', parseFloat(response.price), $scope.donationamount)
+			// console.log('response.data.price was defined', parseFloat(response.price), $scope.donationamount)
 			var amount = ($scope.donationamount / parseFloat(response.price))
-			console.log('amount is', amount.tofixed(18))
+			// console.log('amount is', amount.tofixed(18))
 			var transactionuri = $scope.currencyname.toLowerCase() + ":" + response.address + "?amount=" + amount.tofixed(8) + "?value=" + amount.tofixed(8)
-			console.log('trans:', transactionuri)
+			// console.log('trans:', transactionuri)
 		}
-		console.log('trans:', transactionuri)
+		// console.log('trans:', transactionuri)
 		initCanvas(transactionuri);
 		cb(true); 
 
@@ -552,7 +569,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
     $scope.search = function ( ) {
 
-    	console.log('search:' + $scope.searchBarText);
+    	// console.log('search:' + $scope.searchBarText);
   	
     	var str = $scope.searchBarText;
     	$scope.set = search( currencyList, str );
@@ -567,7 +584,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 			for ( var i = 0; i < data.length; i ++ ) {
 				// check to see that the first characters of the result match the stirng submitted
-				//console.log(data[i].key.substring(0,str.length));
+				console.log(data[i].key.substring(0,str.length));
 
 				if ( data[i].name.substring(0,str.length).toUpperCase() === str.toUpperCase() ) {
 
@@ -576,13 +593,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 				}
 			}
 
-			console.log(set);
+			// console.log(set);
 			return set;
 		
 	}
 
 	$scope.copyAddressToClipboard = function () {
-	    console.log('copy triggered ')
+	    // console.log('copy triggered ')
 
 	    // create temp element
 	    var copyElement = document.createElement("span");
@@ -605,26 +622,26 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.hideCopySuccessMessage = function () {
-		console.log('hiding copy success message')
+		// console.log('hiding copy success message')
 		$scope.copySuccessMessage = "hidden";
 
 	}
 
 
 	function displayCopySuccessMessage () {
-		console.log('displaying copy success message')
+		// console.log('displaying copy success message')
 		$scope.copySuccessMessage = "";
 
 	}
 
 
 	function initCanvas (address) {
-		console.log('init canvas:', address)
+		// console.log('init canvas:', address)
 		var canvas = document.getElementById('qrCode')
-		console.log(canvas, address)
+		// console.log(canvas, address)
 		QRCode.toCanvas(canvas, address, function (error) {
 		  if (error) return console.error(error)
-		  console.log('successfully set QR Code')
+		  // console.log('successfully set QR Code')
 
 		})
 	}
