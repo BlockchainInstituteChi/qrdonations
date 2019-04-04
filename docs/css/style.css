@@ -249,3 +249,8 @@ input:focus, button:focus {
 .donationAmount button, button.nextBtn  {
     border-radius: 0;
 }
+.norecaptcha {
+    display: none;
+    width: 75%;
+    
+}

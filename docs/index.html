@@ -15,13 +15,15 @@
     <link rel='stylesheet' id='custom-css'  href='./css/style.css'> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://checkout.stripe.com/checkout.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script><noscript><link rel='stylesheet' id='noscript-css'  href='./css/noscript.css'></noscript>
     <script src="https://rawgit.com/VividCortex/angular-recaptcha/master/release/angular-recaptcha.js"></script>
     <script type="text/javascript" src="scripts/qrcode.js"></script>
     <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif', rel='stylesheet'>
     <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700', rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">     
+
+
 
   </head>
 
@@ -133,6 +135,8 @@
             ></div>
 
             <br>            
+            
+            <span class="norecaptcha">It looks like you might be using a browser that isn't supported by Google's ReCaptcha. We're sorry about the inconvenience, but you may need to try disabling spam protection or use a different browser.</span>
             <!-- <button class="nextBtn" type="next" ng-click="next(5, checkCaptcha)">Next</button>   -->         
         </div>
 
