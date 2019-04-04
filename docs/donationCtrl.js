@@ -130,28 +130,28 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		];
 
 
-		// - - - - - - - - - for testing purposes only - - - - - - - - - 
-		$scope.display = [
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden",
-			"",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden"
-		];
-		$scope.currencyname = "Bitcoin"
-		$scope.address = "DDSR8DrYfHpj92fdfnVpNXkrJBo2S97J4A"
-		cryptoHandler({"address" : $scope.address}, function(result){
-			// console.log('ran', result)
-		})
+		// // - - - - - - - - - for testing purposes only - - - - - - - - - 
+		// $scope.display = [
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden"
+		// ];
+		// $scope.currencyname = "Bitcoin"
+		// $scope.address = "DDSR8DrYfHpj92fdfnVpNXkrJBo2S97J4A"
+		// cryptoHandler({"address" : $scope.address}, function(result){
+		// 	// console.log('ran', result)
+		// })
 
-		// - - - - - - - - - for testing purposes only - - - - - - - - - 
+		// // - - - - - - - - - for testing purposes only - - - - - - - - - 
 
 
 
