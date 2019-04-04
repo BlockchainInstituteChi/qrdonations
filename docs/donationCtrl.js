@@ -128,6 +128,38 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			"hidden",
 			"hidden"
 		];
+
+
+		// - - - - - - - - - for testing purposes only - - - - - - - - - 
+		$scope.display = [
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden"
+		];
+		$scope.currencyname = "Bitcoin"
+		$scope.address = "DDSR8DrYfHpj92fdfnVpNXkrJBo2S97J4A"
+		cryptoHandler({"address" : $scope.address}, function(result){
+			console.log('ran', result)
+		})
+
+		// - - - - - - - - - for testing purposes only - - - - - - - - - 
+
+
+
+
+
+		$scope.copySuccessMessage = "hidden"
+
+
 		$scope.showEmail = "hidden"
 		$scope.set = currencyList;
 		$scope.mode = ""
@@ -478,23 +510,9 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	  		.then(function(response) { 
 	  		  	
 	  			if ( $scope.mode === "crypto" ) {
-					console.log("crypto mode response received", response)
-					$scope.address = response.data.address
-					
-					if ( typeof(response.data.price) === "undefined" ) {
-						console.log('response.data.price was undefined', response.data.price)
-						var transactionURI = $scope.currencyName.toLowerCase() + ":" + response.data.address 
-
-					} else {
-						console.log('response.data.price was defined', parseFloat(response.data.price), $scope.donationAmount)
-						var amount = ($scope.donationAmount / parseFloat(response.data.price))
-						console.log('amount is', amount.toFixed(18))
-						var transactionURI = $scope.currencyName.toLowerCase() + ":" + response.data.address + "?amount=" + amount.toFixed(8) + "?value=" + amount.toFixed(8)
-						console.log('trans:', transactionURI)
-					}
-					console.log('trans:', transactionURI)
-		        	initCanvas(transactionURI);
-		        	cb(true); 
+	  				cryptoHandler(response.data, function(result) {
+	  					cb(result)
+	  				});
 
 		    	} else if ( $scope.mode === "cash" ) {	
 		    		console.log("cash mode response received", response);	    	
@@ -511,6 +529,26 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
     }
 
+    function cryptoHandler (response, cb) {
+		console.log("crypto mode response received", response, $scope.currencyname)
+		$scope.address = response.address
+		
+		if ( typeof(response.price) === "undefined" ) {
+			console.log('response.data.price was undefined', response.price)
+			var transactionuri = $scope.currencyname.toLowerCase() + ":" + response.address 
+
+		} else {
+			console.log('response.data.price was defined', parseFloat(response.price), $scope.donationamount)
+			var amount = ($scope.donationamount / parseFloat(response.price))
+			console.log('amount is', amount.tofixed(18))
+			var transactionuri = $scope.currencyname.toLowerCase() + ":" + response.address + "?amount=" + amount.tofixed(8) + "?value=" + amount.tofixed(8)
+			console.log('trans:', transactionuri)
+		}
+		console.log('trans:', transactionuri)
+		initCanvas(transactionuri);
+		cb(true); 
+
+    }
 
     $scope.search = function ( ) {
 
@@ -543,7 +581,40 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		
 	}
 
+	$scope.share = function (text_to_share) {
+	    
+	    // create temp element
+	    var copyElement = document.createElement("span");
+	    copyElement.appendChild(document.createTextNode(text_to_share));
+	    copyElement.id = 'tempCopyToClipboard';
+	    angular.element(document.body.append(copyElement));
 
+	    // select the text
+	    var range = document.createRange();
+	    range.selectNode(copyElement);
+	    window.getSelection().removeAllRanges();
+	    window.getSelection().addRange(range);
+
+	    // copy & cleanup
+	    document.execCommand('copy');
+	    window.getSelection().removeAllRanges();
+	    copyElement.remove();
+
+	    displayCopySuccessMessage();
+	}
+
+	$scope.hideCopySuccessMessage = function () {
+
+		$scope.copySuccessMessage = "hidden";
+
+	}
+
+
+	function displayCopySuccessMessage () {
+
+		$scope.copySuccessMessage = "";
+
+	}
 
 
 	function initCanvas (address) {
