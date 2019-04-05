@@ -558,7 +558,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			// console.log('response.data.price was defined', parseFloat(response.price), $scope.donationamount)
 			var amount = ($scope.donationAmount / parseFloat(response.price))
 			// console.log('amount is', amount.tofixed(18))
-			var transactionuri = $scope.currencyName.toLowerCase() + ":" + response.address + "?amount=" + amount.tofixed(8) + "?value=" + amount.tofixed(8)
+			var transactionuri = $scope.currencyName.toLowerCase() + ":" + response.address + "?amount=" + amount.toFixed(8) + "?value=" + amount.toFixed(8)
 			// console.log('trans:', transactionuri)
 		}
 		// console.log('trans:', transactionuri)
