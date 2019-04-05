@@ -184,10 +184,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	$scope.next = function (stepId, callBackTest) {
 
 		// console.log('next triggered', $scope.currency, $scope.currencyChoice, $scope.mode, stepId);
-		console.log(stepId, callBackTest)
-		console.log(callBackTest)
+		// console.log(stepId, callBackTest)
+		// console.log(callBackTest)
 		if (callBackTest) {
-			console.log('testing with ' + callBackTest)
+			// console.log('testing with ' + callBackTest)
 			callBackTest( function(result) {
 				if (true === result) {
 					$scope.errorMessage = undefined;
@@ -552,13 +552,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		
 		if ( typeof(response.price) === "undefined" ) {
 			// console.log('response.data.price was undefined', response.price)
-			var transactionuri = $scope.currencyname.toLowerCase() + ":" + response.address 
+			var transactionuri = $scope.currencyName.toLowerCase() + ":" + response.address 
 
 		} else {
 			// console.log('response.data.price was defined', parseFloat(response.price), $scope.donationamount)
-			var amount = ($scope.donationamount / parseFloat(response.price))
+			var amount = ($scope.donationAmount / parseFloat(response.price))
 			// console.log('amount is', amount.tofixed(18))
-			var transactionuri = $scope.currencyname.toLowerCase() + ":" + response.address + "?amount=" + amount.tofixed(8) + "?value=" + amount.tofixed(8)
+			var transactionuri = $scope.currencyName.toLowerCase() + ":" + response.address + "?amount=" + amount.tofixed(8) + "?value=" + amount.tofixed(8)
 			// console.log('trans:', transactionuri)
 		}
 		// console.log('trans:', transactionuri)

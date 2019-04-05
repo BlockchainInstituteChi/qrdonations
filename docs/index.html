@@ -9,21 +9,18 @@
     <!-- Angular Components  -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
     <link rel='stylesheet' id='cryptocoins-css'  href='./css/cryptocoins.css'> 
     <link rel='stylesheet' id='custom-css'  href='./css/style.css'> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://checkout.stripe.com/checkout.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script><noscript><link rel='stylesheet' id='noscript-css'  href='./css/noscript.css'></noscript>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <noscript><link rel='stylesheet' id='noscript-css'  href='./css/noscript.css'></noscript>
     <script src="https://rawgit.com/VividCortex/angular-recaptcha/master/release/angular-recaptcha.js"></script>
     <script type="text/javascript" src="scripts/qrcode.js"></script>
     <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif', rel='stylesheet'>
     <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700', rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">     
-
-
 
   </head>
 
@@ -81,7 +78,7 @@
 
             <fieldset class="taxReceiptSelector">
                 <div class="checkbox-container">
-                    <button class="yesToAll" ng-click="checkAll()">I Agree to the Terms</button>
+                    <button class="yesToAll" ng-click="checkAll()">Check Required</button>
                 </div>
                 <div class="checkbox-container">
                     <input class="checkbox-box" type="checkbox" id="countryOfOrigin" ng-model="countryOfOrigin" checked>

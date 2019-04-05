@@ -220,6 +220,7 @@ label.checkbox-label {
     display: inline-block;
     width: 100%;
 }
+
 p.errorMessage {
     color: red;
 }
@@ -233,8 +234,8 @@ p.errorMessage {
 
 
 button.yesToAll {
-    float: right;
-    margin-right: -2em;
+    float: right !important;
+    margin-right: -3em;
     background: white;
     color: #1073aa;
     border-radius: 0.25em;
