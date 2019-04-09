@@ -318,6 +318,15 @@ button.nextBtn {
         overflow: hidden;
         height: -webkit-fill-available;
     }
+    i.fas.fa-chevron-left {
+        left: 0.5em;
+    }
+    button.submitDonation {
+        margin: 0;
+        width: 100%;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
 }
 
 .hidden {

@@ -576,7 +576,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
     	str = 0;
 
-    };
+    }
 	
 	function search ( data, str ) {
 
@@ -645,6 +645,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 		})
 	}
+
 
 	// Recaptcha Logic
     $scope.setResponse = function (response) {
