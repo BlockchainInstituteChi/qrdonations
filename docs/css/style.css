@@ -332,3 +332,8 @@ button.nextBtn {
 .hidden {
     display: none;
 }
+input#addressCopier {
+    font-family: monospace;
+    width: 25em;
+    font-size: 120%;
+}
