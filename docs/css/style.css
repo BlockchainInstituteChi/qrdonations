@@ -5,7 +5,7 @@ a {
     color: #4bab9f;
 }
 .hidden {
-	display: none;
+	display: none !important;
 }
 .radioSet input {
     display: none;
@@ -284,6 +284,7 @@ span.addressCopier {
     width: 100%;
     display: inline-block;
     margin-bottom: 1em;
+    overflow: scroll;
 }
 .copyButton i {
     margin-left: 1em;
@@ -310,7 +311,30 @@ button.nextBtn {
     max-width: 100vw;
     min-height: 3em;
 }
+.addressCopier i {
+    position: absolute;
+    margin-left: -1.25em;
+    margin-top: 0.25em;
+}
 
+input#addressCopier {
+    font-family: monospace;
+    width: 25em;
+    font-size: 120%;
+    max-width: calc(100% - 1em);
+    overflow: scroll;
+}
+
+span.copySuccessMessageFlat {
+    display: block;
+    color: #4bab9fde;
+    margin-bottom: 1em;
+}
+.walletLink {
+    display: block;
+    font-size: 1.15em;
+    margin-bottom: 1em;
+}
 
 @media only screen and (max-width: 800px) {
     .recaptchaContainer {
@@ -330,10 +354,5 @@ button.nextBtn {
 }
 
 .hidden {
-    display: none;
-}
-input#addressCopier {
-    font-family: monospace;
-    width: 25em;
-    font-size: 120%;
+    display: none !important;
 }
