@@ -103,6 +103,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		// console.log('set amount to ', $scope.donationAmount)
 	} 
 
+	$scope.refresh = function () {
+		$window.location = "/"
+	}
+
 	//  
 	$scope.init = function () {
 
