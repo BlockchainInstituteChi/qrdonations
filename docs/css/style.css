@@ -337,7 +337,7 @@ span.copySuccessMessageFlat {
 }
 
 /* Final Page Options */
-.option {
+/*.option {
     width: 30%;
     max-width: 300px;
     display: inline-block;
@@ -351,6 +351,16 @@ span.copySuccessMessageFlat {
 .option h1 {
     font-size: 1em;
     margin-top: 0.25em;
+}*/
+.refreshButton i {
+    padding: 1em;
+}
+.refreshButton {
+    width: 10em;
+    max-width: 100%;
+    display: inline-block;
+    box-shadow: #00000038 1pt 1pt 9px !important;
+    padding: 1em;
 }
 
 @media only screen and (max-width: 800px) {
