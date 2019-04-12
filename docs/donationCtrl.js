@@ -145,10 +145,12 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		// 	"hidden",
 		// 	"hidden"
 		// ];
-		// $scope.currencyname = "Bitcoin"
+		// $scope.currency = "BTC"
+		// $scope.currencyChoice = "BTC"
+		// $scope.currencyName = "Bitcoin"
 		// $scope.address = "DDSR8DrYfHpj92fdfnVpNXkrJBo2S97J4A"
 		// cryptoHandler({"address" : $scope.address}, function(result){
-		// 	// console.log('ran', result)
+		// 	console.log('ran', result)
 		// })
 
 		// // - - - - - - - - - for testing purposes only - - - - - - - - - 
@@ -561,6 +563,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			var transactionuri = $scope.currencyName.toLowerCase() + ":" + response.address + "?amount=" + amount.toFixed(8) + "?value=" + amount.toFixed(8)
 			// console.log('trans:', transactionuri)
 		}
+
+		$scope.uri = transactionuri
 		// console.log('trans:', transactionuri)
 		initCanvas(transactionuri);
 		cb(true); 
@@ -631,7 +635,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	function displayCopySuccessMessage () {
 		// console.log('displaying copy success message')
 		$scope.copySuccessMessage = "";
-
+		setTimeout($scope.hideCopySuccessMessage, 3000)
 	}
 
 
