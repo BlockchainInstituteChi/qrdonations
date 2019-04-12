@@ -336,6 +336,23 @@ span.copySuccessMessageFlat {
     margin-bottom: 1em;
 }
 
+/* Final Page Options */
+.option {
+    width: 30%;
+    max-width: 300px;
+    display: inline-block;
+    overflow: hidden;
+    height: 10em;
+    box-shadow: #00000038 1pt 1pt 9px !important;
+}
+.option img {
+    width: 100%;
+}
+.option h1 {
+    font-size: 1em;
+    margin-top: 0.25em;
+}
+
 @media only screen and (max-width: 800px) {
     .recaptchaContainer {
         width: 100%;
@@ -350,6 +367,14 @@ span.copySuccessMessageFlat {
         width: 100%;
         margin-top: 1em;
         margin-bottom: 1em;
+    }
+    .option {
+        width: 100%;
+        height: 12em;
+    }
+    .option h1 {
+        font-size: 1.5em;
+        margin-top: 0.25em;
     }
 }
 

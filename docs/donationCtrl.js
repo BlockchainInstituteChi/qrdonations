@@ -5,7 +5,7 @@
 
 
 angular.module('donationsManager', ['vcRecaptcha'])
-.controller('donationsCtrl',[ '$http', '$scope', '$window', function( $http, $scope, $window ){
+.controller('donationsCtrl',[ '$http', '$scope', '$window', '$interval', function( $http, $scope, $window, $interval ){
 
 	$scope.server = "https://app.theblockchaininstitute.org/";
 	// $scope.server = "http://localhost:8889/";
@@ -137,8 +137,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		// 	"hidden",
 		// 	"hidden",
 		// 	"hidden",
-		// 	"",
 		// 	"hidden",
+		// 	"",
 		// 	"hidden",
 		// 	"hidden",
 		// 	"hidden",
@@ -168,6 +168,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.donationAmount = 100.00
 	};
 
+	$scope.navToHome = function () {
+		$window.location = "https://theblockchaininstitute.org/"
+	}
+
+	$scope.navToCourses = function () {
+		$window.location = "https://theblockchaininstitute.org/courses/"
+	}	
 
 	$scope.setMode = function (mode) {
 		// console.log('mode', mode)
@@ -625,17 +632,17 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	    displayCopySuccessMessage();
 	}
 
-	$scope.hideCopySuccessMessage = function () {
-		// console.log('hiding copy success message')
+	function hideCopySuccessMessage () {
+		console.log('hiding copy success message')
 		$scope.copySuccessMessage = "hidden";
 
 	}
 
 
 	function displayCopySuccessMessage () {
-		// console.log('displaying copy success message')
+		console.log('displaying copy success message')
 		$scope.copySuccessMessage = "";
-		setTimeout($scope.hideCopySuccessMessage, 3000)
+		$interval(hideCopySuccessMessage, 4000)
 	}
 
 
