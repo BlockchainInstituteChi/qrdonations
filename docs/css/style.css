@@ -387,25 +387,38 @@ label.checkbox-label {
 
 /* Terms and Conditions */
 .termsAndConditionsScroller textarea {
-    height: inherit;
-    width: calc(100% - 1em) !important;
+    font-weight: 600;
+    border: solid 0.2px #9e9e9e59;
+    padding: 1em;
+    width: calc(100% - 6em) !important;
+    line-height: 1.5em;
+    height: 100%;
 }
 .termsAndConditionsScroller {
-    height: calc(100vh - 10em);
-    overflow: scroll;
+    height: calc(100vh - 2em);
     max-width: 500px;
     margin: auto;
 }
 .termsAndConditionsCheckbox .checkbox-box {
     float: right;
     width: 2em;
+    padding-bottom: 3em;    
+
 }
+.termsAndConditionsCheckbox {
+    padding-left: 1em;
+    padding-right: 1.5em;
+}
+
 span.currencyAlt {
     display: block;
     color: grey;
     font-size: 0.75em;
     width: 60%;
     margin: auto;
+}
+a.walletLink {
+    display: none;
 }
 @media only screen and (max-width: 800px) {
     .recaptchaContainer {
