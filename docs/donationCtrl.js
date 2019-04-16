@@ -582,8 +582,9 @@ angular.module('donationsManager', ['vcRecaptcha'])
     }
 
     function cryptoHandler (response, cb) {
-		// console.log("crypto mode response received", response, $scope.currencyname)
+		console.log("crypto mode response received", response, $scope.currencyname)
 		$scope.address = response.address
+
 		
 		if ( typeof(response.price) === "undefined" ) {
 			// console.log('response.data.price was undefined', response.price)
