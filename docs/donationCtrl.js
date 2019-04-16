@@ -72,11 +72,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 								"name":"Bitcoin Gold",
 								"code":"BTG",
 								"icon":"cc BTC"
-							},{
-								"name":"Litecoin Test",
-								"code":"LTCT",
-								"icon":"cc LTC"
 							}
+							
 		];
 
 	$scope.donationOptions = [ 
