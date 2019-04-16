@@ -75,7 +75,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 							},{
 								"name":"Litecoin Test",
 								"code":"LTCT",
-								"icon":"LTC"
+								"icon":"cc LTC"
 							}
 		];
 
@@ -694,7 +694,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     $scope.setResponse = function (response) {
         console.info('Response available');
         $scope.response = response;
-        $scope.next(5, $scope.checkCaptcha)
+        $scope.next(6, $scope.checkCaptcha)
     };
     $scope.setWidgetId = function (widgetId) {
         console.info('Created widget ID: %s', widgetId);
