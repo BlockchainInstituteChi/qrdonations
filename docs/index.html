@@ -66,7 +66,7 @@
         </div>
 
         <div class="currencySelect {{display[2]}}">
-            <div class="backButton" ng-click="back(1)">
+            <div class="backButton" ng-click="back(2)">
                 <i class="fas fa-chevron-left"></i>
             </div>
             <h1>Please enter your name and email address:</h1>
@@ -133,14 +133,14 @@ Sanctions-Lists.aspx], and no individual on the List of Specially Designated Nat
 Blocked Parties maintained by the United States government owns 50% or more of the
 organization.
                 </textarea>
-                <div class="termsAndConditionsCheckbox" ng-click="next(4, passThrough)">
+                <div class="termsAndConditionsCheckbox" ng-click="next(4, acceptConditions)">
                     <input class="checkbox-box" type="checkbox" id="termsAndConditionsCheckbox" ng-model="termsAndConditions" checked>
                     <label  class="checkbox-label" for="taxReceiptCheckBox"> I agree to the terms and conditions.</label><br>
                 </div>
             </div>
         </div>
         <div class="stripe {{display[4]}}">
-            <div class="backButton" ng-click="back(3)">
+            <div class="backButton" ng-click="back(4)">
                 <i class="fas fa-chevron-left"></i>
             </div>
             <h1>Verify Amount</h1>
@@ -152,7 +152,7 @@ organization.
         </div>
 
         <div class="reCaptcha {{display[5]}}">
-            <div class="backButton" ng-click="back(4)">
+            <div class="backButton" ng-click="back(5)">
                 <i class="fas fa-chevron-left"></i>
             </div>
             <h1>Please verify that you're human:</h1>
@@ -173,7 +173,7 @@ organization.
         </div>
 
         <div class="qrcode {{display[6]}}">
-            <div class="backButton" ng-click="back(5)">
+            <div class="backButton" ng-click="back(6)">
                 <i class="fas fa-chevron-left"></i>
             </div>
             <h1> Scan the QR Code below to donate your funds:</h1>

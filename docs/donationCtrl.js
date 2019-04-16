@@ -224,8 +224,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		callback(true)
 	}
 
+	$scope.acceptConditions = function (callback) {
+		$scope.taxReceipt = true;
+		callback(true)
+	}	
+
 	$scope.back = function (stepId) {
-		// console.log('display', $scope.display, "mode:", $scope.mode, "stepId", stepId)
+		console.log('display', $scope.display, "mode:", $scope.mode, "stepId", stepId)
 
 		if ( ( $scope.currency === "USD") && ( stepId === 7 ) ) {
 			
