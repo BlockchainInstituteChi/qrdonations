@@ -7,8 +7,8 @@
 angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', '$interval', function( $http, $scope, $window, $interval ){
 
-	$scope.server = "https://app.theblockchaininstitute.org/";
-	// $scope.server = "http://localhost:8889/";
+	// $scope.server = "https://app.theblockchaininstitute.org/";
+	$scope.server = "http://localhost:8889/";
 	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
 
 	var currencyList = [
@@ -83,17 +83,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			"id" : "2",
 			"amount" : "500.00"
 		},{
-			"id" : "3",
-			"amount" : "250.00"
-		},{
 			"id" : "4",
 			"amount" : "100.00"
-		},{
-			"id" : "5",
-			"amount" : "50.00"
-		},{
-			"id" : "6",
-			"amount" : "25.00"
 		}
 	]
 
@@ -134,15 +125,15 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		];
 
 
-		// // - - - - - - - - - for testing purposes only - - - - - - - - - 
+	    // - - - - - - - - - for testing purposes only - - - - - - - - - 
 		// $scope.display = [
 		// 	"hidden",
 		// 	"hidden",
 		// 	"hidden",
-		// 	"hidden",
-		// 	"hidden",
-		// 	"hidden",
 		// 	"",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
 		// 	"hidden",
 		// 	"hidden",
 		// 	"hidden",
@@ -157,7 +148,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		// 	console.log('ran', result)
 		// })
 
-		// // - - - - - - - - - for testing purposes only - - - - - - - - - 
+		// - - - - - - - - - for testing purposes only - - - - - - - - - 
 
 
 
@@ -196,19 +187,19 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	// Pagination Controls
 	$scope.next = function (stepId, callBackTest) {
 
-		// console.log('next triggered', $scope.currency, $scope.currencyChoice, $scope.mode, stepId);
-		// console.log(stepId, callBackTest)
-		// console.log(callBackTest)
+		console.log('next triggered', $scope.currency, $scope.currencyChoice, $scope.mode, stepId);
+		console.log(stepId, callBackTest)
+		console.log(callBackTest)
 		if (callBackTest) {
-			// console.log('testing with ' + callBackTest)
+			console.log('testing with ' + callBackTest)
 			callBackTest( function(result) {
 				if (true === result) {
 					$scope.errorMessage = undefined;
 
-					if (  ( $scope.currency != "USD" ) && ( stepId === 3 )  ) {
+					if (  ( $scope.currency != "USD" ) && ( stepId === 4 )  ) {
 					
-						show(4)
-						hide(2)
+						show(5)
+						hide(3)
 
 					} else {
 
@@ -225,21 +216,25 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			proceed (stepId)
 		}
 
-		// console.log('hidden is', $scope.display)
+		console.log('hidden is', $scope.display)
 		checkAndHide()
+	}
+
+	$scope.passThrough = function (callback) {
+		callback(true)
 	}
 
 	$scope.back = function (stepId) {
 		// console.log('display', $scope.display, "mode:", $scope.mode, "stepId", stepId)
 
-		if ( ( $scope.currency === "USD") && ( stepId === 6 ) ) {
+		if ( ( $scope.currency === "USD") && ( stepId === 7 ) ) {
 			
-			hide(6);
-			show(3);	
+			hide(7);
+			show(4);	
 
-		} else if ( ( stepId === 4 ) && ( $scope.currency != "USD" ) ) {
-			hide(4)
-			show(2)
+		} else if ( ( stepId === 5 ) && ( $scope.currency != "USD" ) ) {
+			hide(5)
+			show(3)
 		} else {
 			show(stepId - 1)
 			hide(stepId)	
@@ -278,6 +273,21 @@ angular.module('donationsManager', ['vcRecaptcha'])
     	// console.log('declarations', $scope.maximumDonation, $scope.countryOfOrigin, $scope.taxReceipt )
     	
     }
+
+	$scope.checkIdentification = function (callback) {
+		console.log('donorName', $scope.donorName)
+		console.log('donorEmail', $scope.donorEmail)
+		
+		if ( $scope.donorName === "" ) {
+			return callback({'error':'You must enter your name to proceed.'})
+		} else if ( validateEmail($scope.donorEmail) ) {
+			return callback(true)
+
+		} else {
+			return callback({'error':'You must enter a valid email address.'})
+		}
+		
+	}
 
 	$scope.checkDeclarations = function (callback) {
 		// console.log('checking declarations')
@@ -432,8 +442,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
     $scope.onToken = function(token) {
         // console.log(token);
         $scope.token = token
-        hide(3)
-        show(6)
+        hide(4)
+        show(7)
         $scope.$apply();
     };
 
@@ -463,7 +473,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 
 	function validateEmail(email) {
+		console.log('testing email', email)
 	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    console.log('re ', re)
+	    console.log('re-re', re.test(String(email).toLowerCase()))
 	    return re.test(String(email).toLowerCase());
 	}
 
@@ -522,12 +535,12 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			console.log('testing captcha');
 			payload.response = $scope.response
 			payload.taxReceipt = $scope.taxReceipt
-			payload.email = $scope.email
+			payload.email = $scope.donorEmail
 			var url = $scope.server + 'checkCaptcha/' + $scope.currency
     	} else if ( $scope.mode === "cash" ) {
 			payload.response = $scope.response
 			payload.taxReceipt = $scope.taxReceipt
-			payload.email = $scope.email
+			payload.email = $scope.donorEmail
 			payload.stripe = $scope.token 
 			payload.amount = $scope.donationAmount   		
     		var url = $scope.server + 'checkCaptcha/USD'
@@ -571,7 +584,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			// console.log('response.data.price was defined', parseFloat(response.price), $scope.donationamount)
 			var amount = ($scope.donationAmount / parseFloat(response.price))
 			// console.log('amount is', amount.tofixed(18))
-			var transactionuri = $scope.currencyName.toLowerCase() + ":" + response.address + "?amount=" + amount.toFixed(8) + "?value=" + amount.toFixed(8)
+			
+
+			var cleanCurrencyName = $scope.currencyName
+
+			if (cleanCurrencyName === "Bitcoin Gold") cleanCurrencyName = "bitcoin"
+
+			var transactionuri = cleanCurrencyName.toLowerCase() + ":" + response.address + "?amount=" + amount.toFixed(8) + "?value=" + amount.toFixed(8)
 			// console.log('trans:', transactionuri)
 		}
 

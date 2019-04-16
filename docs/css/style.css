@@ -363,6 +363,44 @@ span.copySuccessMessageFlat {
     padding: 1em;
 }
 
+
+.hidden {
+    display: none !important;
+}
+
+/*Name and email screen*/
+.donorNameInput, .donorEmailInput {
+    width: 100%;
+    display: block;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+label.checkbox-label {
+    padding-left: 0.5em;
+    font-size: 0.85em;
+}
+.identificationForm {
+    max-width: 500px;
+    margin: auto;
+}
+
+/* Terms and Conditions */
+.termsAndConditionsScroller textarea {
+    height: inherit;
+    width: calc(100% - 1em) !important;
+}
+.termsAndConditionsScroller {
+    height: calc(100vh - 10em);
+    overflow: scroll;
+    max-width: 500px;
+    margin: auto;
+}
+.termsAndConditionsCheckbox .checkbox-box {
+    float: right;
+    width: 2em;
+}
+
 @media only screen and (max-width: 800px) {
     .recaptchaContainer {
         width: 100%;
@@ -386,8 +424,11 @@ span.copySuccessMessageFlat {
         font-size: 1.5em;
         margin-top: 0.25em;
     }
-}
-
-.hidden {
-    display: none !important;
+    .identificationForm {
+        max-width: 100%;
+        margin: auto;
+    }
+    .termsAndConditionsScroller{
+        max-width: 100%
+    }
 }
