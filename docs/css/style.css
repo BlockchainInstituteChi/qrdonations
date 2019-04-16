@@ -367,6 +367,8 @@ span.copySuccessMessageFlat {
 .hidden {
     display: none !important;
 }
+
+/*Name and email screen*/
 .donorNameInput, .donorEmailInput {
     width: 100%;
     display: block;
@@ -381,6 +383,22 @@ label.checkbox-label {
 .identificationForm {
     max-width: 500px;
     margin: auto;
+}
+
+/* Terms and Conditions */
+.termsAndConditionsScroller textarea {
+    height: inherit;
+    width: calc(100% - 1em) !important;
+}
+.termsAndConditionsScroller {
+    height: calc(100vh - 10em);
+    overflow: scroll;
+    max-width: 500px;
+    margin: auto;
+}
+.termsAndConditionsCheckbox .checkbox-box {
+    float: right;
+    width: 2em;
 }
 
 @media only screen and (max-width: 800px) {
@@ -409,5 +427,8 @@ label.checkbox-label {
     .identificationForm {
         max-width: 100%;
         margin: auto;
+    }
+    .termsAndConditionsScroller{
+        max-width: 100%
     }
 }

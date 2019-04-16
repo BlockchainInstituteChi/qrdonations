@@ -89,56 +89,56 @@
 
             <h1>Declarations</h1>
             <div class="termsAndConditionsScroller">
-                <h3>By donating to The Blockchain Institute</h3>
+                <h3>Please review our Terms and Conditions</h3>
                 <textarea disabled>
-                    Thank you for your interest in supporting the Blockchain Institute. All contributions accepted on-line
-                    will be used for general support of the organization. Before we process your contribution, we ask that
-                    you answer the following questions that relate to our compliance with laws applicable to the Blockchain
-                    Institute as a section 501(c)(3) organization accepting contributions in the United States.
+Thank you for your interest in supporting the Blockchain Institute. All contributions accepted on-line
+will be used for general support of the organization. Before we process your contribution, we ask that
+you answer the following questions that relate to our compliance with laws applicable to the Blockchain
+Institute as a section 501(c)(3) organization accepting contributions in the United States.
 
-                    o I am an individual donor, and I certify as follows (check all that apply):
-                    o I do not reside in a sanctioned country. (Information on sanctioned countries available
-                    here: https://www.treasury.gov/resource-
-                    center/sanctions/Programs/Pages/faq_10_page.aspx.)
-                    o I am not a national of a sanctioned country.
-                    o I am not on the List of Specially Designated Nationals and Blocked Parties maintained by
-                    the United States government and available here
-                    [https://www.treasury.gov/ofac/downloads/sdnlist.pdf] or other sanctions lists
-                    [https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/Other-OFAC-
-                    Sanctions-Lists.aspx].
-                    o I am making this gift in my own right and not on behalf of any other person.
-                    o [For anonymous donors who have not provided names and physical mailing addresses]
-                    This contribution combined with all other contributions my family members,
-                    organizations I control, and I have made to the Blockchain Institute during this calendar
-                    year are worth less than $5000.
-                    o [For anonymous donors who have not provided names and physical mailing addresses]
-                    Neither I nor any of my family members nor any company I control has received or
-                    expects to receive payments or other distributions of cash or property from the
-                    Blockchain Institute, and the funds being contributed are not the proceeds of illegal
-                    activity.
+o I am an individual donor, and I certify as follows (check all that apply):
+o I do not reside in a sanctioned country. (Information on sanctioned countries available
+here: https://www.treasury.gov/resource-
+center/sanctions/Programs/Pages/faq_10_page.aspx.)
+o I am not a national of a sanctioned country.
+o I am not on the List of Specially Designated Nationals and Blocked Parties maintained by
+the United States government and available here
+[https://www.treasury.gov/ofac/downloads/sdnlist.pdf] or other sanctions lists
+[https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/Other-OFAC-
+Sanctions-Lists.aspx].
+o I am making this gift in my own right and not on behalf of any other person.
+o [For anonymous donors who have not provided names and physical mailing addresses]
+This contribution combined with all other contributions my family members,
+organizations I control, and I have made to the Blockchain Institute during this calendar
+year are worth less than $5000.
+o [For anonymous donors who have not provided names and physical mailing addresses]
+Neither I nor any of my family members nor any company I control has received or
+expects to receive payments or other distributions of cash or property from the
+Blockchain Institute, and the funds being contributed are not the proceeds of illegal
+activity.
 
-                    OR
-                    o I am authorized to make this gift on behalf of an organizational donor (i.e., donor is a
-                    corporation, trust, partnership, LLC, association or other entity organized separately from the
-                    individuals who control it), and I am further authorized by that organizational donor to certify as
-                    follows (check all that apply):
-                    o The donor is not organized under the law of a sanctioned country (Information on
-                    sanctioned countries available here: https://www.treasury.gov/resource-
-                    center/sanctions/Programs/Pages/faq_10_page.aspx) nor is it located in a sanctioned
-                    country.
-                    o The donor is not on the List of Specially Designated Nationals and Blocked Parties
-                    [https://www.treasury.gov/ofac/downloads/sdnlist.pdf] or other sanctions lists
-                    [https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/Other-OFAC-
-                    Sanctions-Lists.aspx], and no individual on the List of Specially Designated Nationals and
-                    Blocked Parties maintained by the United States government owns 50% or more of the
-                    organization.
+OR
+o I am authorized to make this gift on behalf of an organizational donor (i.e., donor is a
+corporation, trust, partnership, LLC, association or other entity organized separately from the
+individuals who control it), and I am further authorized by that organizational donor to certify as
+follows (check all that apply):
+o The donor is not organized under the law of a sanctioned country (Information on
+sanctioned countries available here: https://www.treasury.gov/resource-
+center/sanctions/Programs/Pages/faq_10_page.aspx) nor is it located in a sanctioned
+country.
+o The donor is not on the List of Specially Designated Nationals and Blocked Parties
+[https://www.treasury.gov/ofac/downloads/sdnlist.pdf] or other sanctions lists
+[https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/Other-OFAC-
+Sanctions-Lists.aspx], and no individual on the List of Specially Designated Nationals and
+Blocked Parties maintained by the United States government owns 50% or more of the
+organization.
                 </textarea>
-                <div class="termsAndConditionsCheckbox">
+                <div class="termsAndConditionsCheckbox" ng-click="next(4, passThrough)">
                     <input class="checkbox-box" type="checkbox" id="termsAndConditionsCheckbox" ng-model="termsAndConditions" checked>
                     <label  class="checkbox-label" for="taxReceiptCheckBox"> I agree to the terms and conditions.</label><br>
                 </div>
             </div>
-
+        </div>
         <div class="stripe {{display[4]}}">
             <div class="backButton" ng-click="back(3)">
                 <i class="fas fa-chevron-left"></i>
