@@ -363,6 +363,26 @@ span.copySuccessMessageFlat {
     padding: 1em;
 }
 
+
+.hidden {
+    display: none !important;
+}
+.donorNameInput, .donorEmailInput {
+    width: 100%;
+    display: block;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+label.checkbox-label {
+    padding-left: 0.5em;
+    font-size: 0.85em;
+}
+.identificationForm {
+    max-width: 500px;
+    margin: auto;
+}
+
 @media only screen and (max-width: 800px) {
     .recaptchaContainer {
         width: 100%;
@@ -386,8 +406,8 @@ span.copySuccessMessageFlat {
         font-size: 1.5em;
         margin-top: 0.25em;
     }
-}
-
-.hidden {
-    display: none !important;
+    .identificationForm {
+        max-width: 100%;
+        margin: auto;
+    }
 }
