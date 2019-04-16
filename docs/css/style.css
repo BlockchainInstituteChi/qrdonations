@@ -400,7 +400,13 @@ label.checkbox-label {
     float: right;
     width: 2em;
 }
-
+span.currencyAlt {
+    display: block;
+    color: grey;
+    font-size: 0.75em;
+    width: 60%;
+    margin: auto;
+}
 @media only screen and (max-width: 800px) {
     .recaptchaContainer {
         width: 100%;
