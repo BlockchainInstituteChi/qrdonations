@@ -72,6 +72,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 								"name":"Bitcoin Gold",
 								"code":"BTG",
 								"icon":"cc BTC"
+							},{
+								"name":"Litecoin Test",
+								"code":"LTCT",
+								"icon":"LTC"
 							}
 		];
 
@@ -140,9 +144,9 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		// 	"hidden",
 		// 	"hidden"
 		// ];
-		// $scope.currency = "BTC"
-		// $scope.currencyChoice = "BTC"
-		// $scope.currencyName = "Bitcoin"
+		// $scope.currency = "LTCT"
+		// $scope.currencyChoice = "LTCT"
+		// $scope.currencyName = "Litecoin Test"
 		// $scope.address = "DDSR8DrYfHpj92fdfnVpNXkrJBo2S97J4A"
 		// cryptoHandler({"address" : $scope.address}, function(result){
 		// 	console.log('ran', result)
