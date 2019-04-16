@@ -113,28 +113,11 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}];
 		// console.log($scope.supportedCurrencies);
 
-		$scope.display = [
-			"",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden",
-			"hidden"
-		];
-
-
-	    // - - - - - - - - - for testing purposes only - - - - - - - - - 
 		// $scope.display = [
-		// 	"hidden",
-		// 	"hidden",
-		// 	"hidden",
 		// 	"",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
 		// 	"hidden",
 		// 	"hidden",
 		// 	"hidden",
@@ -144,13 +127,31 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		// 	"hidden",
 		// 	"hidden"
 		// ];
-		// $scope.currency = "LTCT"
-		// $scope.currencyChoice = "LTCT"
-		// $scope.currencyName = "Litecoin Test"
-		// $scope.address = "DDSR8DrYfHpj92fdfnVpNXkrJBo2S97J4A"
-		// cryptoHandler({"address" : $scope.address}, function(result){
-		// 	console.log('ran', result)
-		// })
+
+
+	    // - - - - - - - - - for testing purposes only - - - - - - - - - 
+		$scope.display = [
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden"
+		];
+		$scope.currency = "ETH"
+		$scope.currencyChoice = "ETH"
+		$scope.currencyName = "Ethereum"
+		$scope.currentPrice = "165.75594803"
+		$scope.address = "0x0274a03dc5d0a7c86dc9f7e8b4a1a70951403eb4"
+		cryptoHandler({"address" : $scope.address}, function(result){
+			console.log('ran', result)
+		})
 
 		// - - - - - - - - - for testing purposes only - - - - - - - - - 
 
@@ -589,7 +590,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		if ( typeof(response.price) === "undefined" ) {
 			// console.log('response.data.price was undefined', response.price)
 			var transactionuri = $scope.currencyName.toLowerCase() + ":" + response.address 
-
+			$scope.donationAmountAlt = "-"
 		} else {
 			// console.log('response.data.price was defined', parseFloat(response.price), $scope.donationamount)
 			var amount = ($scope.donationAmount / parseFloat(response.price))
@@ -602,6 +603,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 			var transactionuri = cleanCurrencyName.toLowerCase() + ":" + response.address + "?amount=" + amount.toFixed(8) + "?value=" + amount.toFixed(8)
 			// console.log('trans:', transactionuri)
+			$scope.donationAmountAlt = amount.toFixed(8)
 		}
 
 		$scope.uri = transactionuri

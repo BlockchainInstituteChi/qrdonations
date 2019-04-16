@@ -181,7 +181,8 @@ organization.
             </canvas>
             <!-- <hr> -->
             <div class="donationAmount">
-                ${{donationAmount}} in {{currency}}
+                ${{donationAmount}} 
+                <span class="currencyAlt"> {{donationAmountAlt}} {{currency}} </span>
             </div> 
             <br>
             <span class="addressCopier" ng-click="copyAddressToClipboard()">
