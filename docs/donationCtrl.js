@@ -73,7 +73,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 								"code":"BTG",
 								"icon":"cc BTC"
 							}
-							
+
 		];
 
 	$scope.donationOptions = [ 
@@ -448,6 +448,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     // stripe will call this once it has successfully created a token for the payment details
     $scope.onToken = function(token) {
         console.log(token);
+        callStripe(token);
         $scope.token = token
         hide(4)
         show(7)
@@ -474,10 +475,29 @@ angular.module('donationsManager', ['vcRecaptcha'])
         });
     };
 
+    function callStripe (token) {
+    	var url = $scope.server + 'ps/'
+    	var payload = {
+    		"stripeToken" : token,
+    		"donationAmount" : $scope.donationAmount,
+    		"donorName" : $scope.donorName,
+    		"donorEmail" : $scope.donorEmail
+    	}
+
+    	$http.post( url, payload)
+	  		.then(function(response) { 
+	  		  	
+	  			console.log('called server to process stripe payload ', payload, "received", response )
+   	
+	        }). 
+	        catch(function(error) { 
+	          console.log(error);
+	        }); 
+    }
+
 	$scope.checkStripe = function (callback) {
 
 	}
-
 
 	function validateEmail(email) {
 		console.log('testing email', email)
