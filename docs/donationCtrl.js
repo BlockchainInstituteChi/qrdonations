@@ -447,7 +447,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
     // stripe will call this once it has successfully created a token for the payment details
     $scope.onToken = function(token) {
-        // console.log(token);
+        console.log(token);
         $scope.token = token
         hide(4)
         show(7)
@@ -455,7 +455,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     };
 
     $scope.onStripe = function(apiKey, userEmail) {
-    	// console.log('donating', $scope.donationAmount)
+    	console.log('donating', $scope.donationAmount)
         var handler = StripeCheckout.configure({
             key: apiKey,
             image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
