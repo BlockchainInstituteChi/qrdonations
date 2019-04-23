@@ -79,13 +79,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	$scope.donationOptions = [ 
 		{
 			"id" : "1",
-			"amount" : "1250.00"
+			"amount" : "125.00"
 		},{
 			"id" : "2",
 			"amount" : "500.00"
 		},{
-			"id" : "4",
-			"amount" : "125.00"
+			"id" : "3",
+			"amount" : "1250.00"
 		}
 	]
 
