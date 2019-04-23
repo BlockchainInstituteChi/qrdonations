@@ -93,6 +93,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		// console.log('setting donations amount to', amount)
 		$scope.donationAmount = parseInt(amount, 10);;
 		// console.log('set amount to ', $scope.donationAmount)
+		$scope.next(1, $scope.checkAmountChoice);
 	} 
 
 	$scope.refresh = function () {
