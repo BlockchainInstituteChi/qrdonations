@@ -158,7 +158,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 		$scope.copySuccessMessage = "hidden"
 
-
+		$scope.taxReceipt = true;
 		$scope.showEmail = "hidden"
 		$scope.set = currencyList;
 		$scope.mode = ""
