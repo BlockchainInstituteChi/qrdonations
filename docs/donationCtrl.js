@@ -189,11 +189,11 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	// Pagination Controls
 	$scope.next = function (stepId, callBackTest) {
 
-		console.log('next triggered', $scope.currency, $scope.currencyChoice, $scope.mode, stepId);
-		console.log(stepId, callBackTest)
-		console.log(callBackTest)
+		// console.log('next triggered', $scope.currency, $scope.currencyChoice, $scope.mode, stepId);
+		// console.log(stepId, callBackTest)
+		// console.log(callBackTest)
 		if (callBackTest) {
-			console.log('testing with ' + callBackTest)
+			// console.log('testing with ' + callBackTest)
 			callBackTest( function(result) {
 				if (true === result) {
 					$scope.errorMessage = undefined;
@@ -218,7 +218,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			proceed (stepId)
 		}
 
-		console.log('hidden is', $scope.display)
+		// console.log('hidden is', $scope.display)
 		checkAndHide()
 	}
 
@@ -232,7 +232,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}	
 
 	$scope.back = function (stepId) {
-		console.log('display', $scope.display, "mode:", $scope.mode, "stepId", stepId)
+		// console.log('display', $scope.display, "mode:", $scope.mode, "stepId", stepId)
 
 		if ( ( $scope.currency === "USD") && ( stepId === 7 ) ) {
 			
@@ -282,11 +282,15 @@ angular.module('donationsManager', ['vcRecaptcha'])
     }
 
 	$scope.checkIdentification = function (callback) {
-		console.log('donorName', $scope.donorName)
-		console.log('donorEmail', $scope.donorEmail)
-		
+
 		if ( $scope.donorName === "" ) {
 			return callback({'error':'You must enter your name to proceed.'})
+		}  else if ( $scope.donorName.length < 3 ) {
+			return callback({'error':'You must enter a name longer than three characters.'})
+
+		} else if ( !($scope.donorName.split(' ').length > 1) ) {
+			return callback({'error':'You must enter your first and last name separated by a space.'})
+
 		} else if ( validateEmail($scope.donorEmail) ) {
 			return callback(true)
 
@@ -447,7 +451,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
     // stripe will call this once it has successfully created a token for the payment details
     $scope.onToken = function(token) {
-        console.log(token);
+        console.log("Stripe Token: ", token);
         callStripe(token);
         $scope.token = token
         hide(4)
@@ -456,7 +460,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     };
 
     $scope.onStripe = function(apiKey, userEmail) {
-    	console.log('donating', $scope.donationAmount)
+    	// console.log('donating', $scope.donationAmount)
         var handler = StripeCheckout.configure({
             key: apiKey,
             image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -487,11 +491,11 @@ angular.module('donationsManager', ['vcRecaptcha'])
     	$http.post( url, payload)
 	  		.then(function(response) { 
 	  		  	
-	  			console.log('called server to process stripe payload ', payload, "received", response )
+	  			// console.log('called server to process stripe payload ', payload, "received", response )
    	
 	        }). 
 	        catch(function(error) { 
-	          console.log(error);
+	          // console.log(error);
 	        }); 
     }
 
@@ -500,10 +504,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	function validateEmail(email) {
-		console.log('testing email', email)
+		// console.log('testing email', email)
 	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	    console.log('re ', re)
-	    console.log('re-re', re.test(String(email).toLowerCase()))
+	    // console.log('re ', re)
+	    // console.log('re-re', re.test(String(email).toLowerCase()))
 	    return re.test(String(email).toLowerCase());
 	}
 
@@ -559,7 +563,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     	var payload = {};
 
     	if ( $scope.mode === "crypto" ) {
-			console.log('testing captcha');
+			// console.log('testing captcha');
 			payload.response = $scope.response
 			payload.taxReceipt = $scope.taxReceipt
 			payload.email = $scope.donorEmail
@@ -593,14 +597,14 @@ angular.module('donationsManager', ['vcRecaptcha'])
    	
 	        }). 
 	        catch(function(error) { 
-	          console.log(error);
+	          // console.log(error);
 	          cb(false);
 	        }); 
 
     }
 
     function cryptoHandler (response, cb) {
-		console.log("crypto mode response received", response, $scope.currencyname)
+		// console.log("crypto mode response received", response, $scope.currencyname)
 		$scope.address = response.address
 
 		
@@ -647,7 +651,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 			for ( var i = 0; i < data.length; i ++ ) {
 				// check to see that the first characters of the result match the stirng submitted
-				console.log(data[i].key.substring(0,str.length));
+				// console.log(data[i].key.substring(0,str.length));
 
 				if ( data[i].name.substring(0,str.length).toUpperCase() === str.toUpperCase() ) {
 
@@ -685,14 +689,14 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	function hideCopySuccessMessage () {
-		console.log('hiding copy success message')
+		// console.log('hiding copy success message')
 		$scope.copySuccessMessage = "hidden";
 
 	}
 
 
 	function displayCopySuccessMessage () {
-		console.log('displaying copy success message')
+		// console.log('displaying copy success message')
 		$scope.copySuccessMessage = "";
 		$interval(hideCopySuccessMessage, 4000)
 	}
@@ -712,16 +716,16 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	// Recaptcha Logic
     $scope.setResponse = function (response) {
-        console.info('Response available');
+        // console.info('Response available');
         $scope.response = response;
         $scope.next(6, $scope.checkCaptcha)
     };
     $scope.setWidgetId = function (widgetId) {
-        console.info('Created widget ID: %s', widgetId);
+        // console.info('Created widget ID: %s', widgetId);
         $scope.widgetId = widgetId;
     };
     $scope.cbExpiration = function() {
-        console.info('Captcha expired. Resetting response object');
+        // console.info('Captcha expired. Resetting response object');
         vcRecaptchaService.reload($scope.widgetId);
         $scope.response = null;
      };
