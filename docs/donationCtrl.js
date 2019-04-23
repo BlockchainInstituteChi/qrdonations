@@ -79,13 +79,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	$scope.donationOptions = [ 
 		{
 			"id" : "1",
-			"amount" : "1000.00"
+			"amount" : "1250.00"
 		},{
 			"id" : "2",
 			"amount" : "500.00"
 		},{
 			"id" : "4",
-			"amount" : "100.00"
+			"amount" : "125.00"
 		}
 	]
 
@@ -162,7 +162,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.showEmail = "hidden"
 		$scope.set = currencyList;
 		$scope.mode = ""
-		$scope.donationAmount = 100.00
+		$scope.donationAmount = 125.00
 	};
 
 	$scope.navToHome = function () {

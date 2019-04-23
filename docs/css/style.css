@@ -24,12 +24,13 @@ fieldset.currencyList {
 :checked + label {
    color: black;
 }
-.currencySelectButton.ng-scope {
+.currencySelectButton {
     margin: 0.5em;
     width: 8em;
     display: inline-grid;
     height: 8em;
     position: relative;
+    padding: 0.25em;
 }
 button.currencySelect {
     width: 100%;
@@ -37,7 +38,7 @@ button.currencySelect {
     height: 100%;
     position: absolute;
 }
-.currencySelectButton.donationAmount.ng-scope {
+.currencySelectButton.donationAmount {
     width: 6em;
     height: 3.25em;
 }
@@ -387,15 +388,21 @@ label.checkbox-label {
 
 /* Terms and Conditions */
 .termsAndConditionsScroller textarea {
+
     font-weight: 600;
     border: solid 0.2px #9e9e9e59;
     padding: 1em;
-    width: calc(100% - 6em) !important;
+    width: calc(100% - 2em) !important;
     line-height: 1.5em;
     height: 100%;
+    display: inline-block;
+    min-height: 300px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
 }
 .termsAndConditionsScroller {
-    height: calc(100vh - 2em);
+    height: max-content;
     max-width: 500px;
     margin: auto;
 }
