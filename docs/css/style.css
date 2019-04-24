@@ -285,7 +285,6 @@ span.addressCopier {
     width: 100%;
     display: inline-block;
     margin-bottom: 1em;
-    overflow: scroll;
 }
 .copyButton i {
     margin-left: 1em;
@@ -299,6 +298,9 @@ span.addressCopier {
     max-width: 100vw;
     min-width: 30vw;
     text-align: center;
+    background-color: lightgrey;
+    cursor: copy;
+    font-family: monospace;
 }
 .addressCopier label {
     margin-right: 1em;
@@ -323,7 +325,6 @@ input#addressCopier {
     width: 25em;
     font-size: 120%;
     max-width: calc(100% - 1em);
-    overflow: scroll;
 }
 
 span.copySuccessMessageFlat {
@@ -388,7 +389,8 @@ label.checkbox-label {
 
 /* Terms and Conditions */
 .termsAndConditionsScroller textarea {
-
+    background-color: lightgrey;
+    cursor: not-allowed;
     font-weight: 600;
     border: solid 0.2px #9e9e9e59;
     padding: 1em;
@@ -399,6 +401,7 @@ label.checkbox-label {
     min-height: 300px;
     margin-top: 1em;
     margin-bottom: 1em;
+    font-family: monospace;
 
 }
 .termsAndConditionsScroller {

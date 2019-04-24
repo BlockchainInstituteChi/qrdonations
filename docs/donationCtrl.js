@@ -7,8 +7,8 @@
 angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', '$interval', function( $http, $scope, $window, $interval ){
 
-	$scope.server = "https://app.theblockchaininstitute.org/";
-	// $scope.server = "http://localhost:8889/";
+	// $scope.server = "https://app.theblockchaininstitute.org/";
+	$scope.server = "http://localhost:8888/";
 	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
 
 	var currencyList = [
@@ -221,6 +221,9 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 		// console.log('hidden is', $scope.display)
 		checkAndHide()
+		if (stepId === 4) {
+			grecaptcha.reset(); 
+		}
 	}
 
 	$scope.passThrough = function (callback) {
@@ -550,9 +553,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.display[divId] = "";
 		// console.log('display', $scope.display)
 
-		if (divId === 4) {
-			grecaptcha.reset();
-		}
 	}
 
 	$scope.init();

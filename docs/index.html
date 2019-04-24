@@ -72,8 +72,8 @@
             <h1>Please enter your name and email address:</h1>
             <p class="errorMessage">{{errorMessage}}</p>
             <div class="identificationForm">
-                <input type="text" placeholder="Your Name" class="donorNameInput" ng-model="donorName">
-                <input type="email" placeholder="Your Email" class="donorEmailInput" ng-model="donorEmail">
+                <input type="text" placeholder="Your Name" id="name" class="donorNameInput" ng-model="donorName">
+                <input type="email" placeholder="Your Email" id="email" class="donorEmailInput" ng-model="donorEmail">
                 <input class="checkbox-box" type="checkbox" id="taxReceiptCheckBox" ng-model="taxReceipt" checked>
                 <label  class="checkbox-label" for="taxReceiptCheckBox"> I would like a tax receipt</label><br>
             </div>
@@ -130,7 +130,8 @@ country.
             </div>
             <h1>Verify Amount</h1>
             <span class="currencyTypeLabel">$</span><input class="donationAmount" ng-model="donationAmount" type="number" value="100.00" placeholder="100.00" min="0.01" step="0.01" max="5000">
-            <a href="" ng-click="onStripe('pk_live_j9F9S8Av7YGE4VH0CH4y891l')"><button class="submitDonation">Pay with Stripe</button></a>
+            <a href="" ng-click="onStripe('pk_live_j9F9S8Av7YGE4VH0CH4y891l')">
+            <!-- <a href="" ng-click="onStripe('pk_test_xfP1IdV5ytXTYwsCj8jjtxs3')"><button class="submitDonation">Pay with Stripe</button></a> -->
             
             <div class="securePaymentsMessage"><img src="/images/secure-stripe-payment-logo.png"></div>
 
@@ -186,9 +187,9 @@ country.
 
 
         <div class="thanks {{display[7]}}">
-            <div class="backButton" ng-click="back(6)">
+            <!-- <div class="backButton" ng-click="back(6)">
                 <i class="fas fa-chevron-left"></i>
-            </div>
+            </div> -->
             <h1>Thank you for supporting Blockchain Institute!</h1>
   
             <p>Contributions like yours are what makes it possible for us to continue creating educational resources on the importance of decentralization and digital privacy as we transition into the blockchain age.</p>
