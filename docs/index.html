@@ -78,7 +78,18 @@
                 <label  class="checkbox-label" for="taxReceiptCheckBox"> I would like a tax receipt</label><br>
             </div>
             <br>         
-            <button class="nextBtn" type="next" ng-click="next(3, checkIdentification)">Next</button>
+            <div class="recaptchaContinue">
+                <h3>Verify you're human to continue:</h3>
+                <div
+                    class="recaptchaContainer"
+                    vc-recaptcha
+                    theme="'light'"
+                    key="key"
+                    on-create="setWidgetId(widgetId)"
+                    on-success="setResponse(response)"
+                    on-expire="cbExpiration()"
+                ></div>
+            </div>
             
         </div>
 
@@ -136,27 +147,6 @@ country.
             
             <div class="securePaymentsMessage"><img src="/images/secure-stripe-payment-logo.png"></div>
 
-        </div>
-
-        <div class="reCaptcha {{display[5]}}">
-            <div class="backButton" ng-click="back(5)">
-                <i class="fas fa-chevron-left"></i>
-            </div>
-            <h1>Please verify that you're human:</h1>
-            <div
-                class="recaptchaContainer"
-                vc-recaptcha
-                theme="'light'"
-                key="key"
-                on-create="setWidgetId(widgetId)"
-                on-success="setResponse(response)"
-                on-expire="cbExpiration()"
-            ></div>
-
-            <br>            
-            
-            <span class="norecaptcha">It looks like you might be using a browser that isn't supported by Google's ReCaptcha. We're sorry about the inconvenience, but you may need to try disabling spam protection or use a different browser.</span>
-            <!-- <button class="nextBtn" type="next" ng-click="next(5, checkCaptcha)">Next</button>   -->         
         </div>
 
         <div class="qrcode {{display[6]}}">

@@ -74,10 +74,12 @@ span.currencyTypeLabel {
     margin-right: -20px;
     font-size: 1.25em;
 }
+
 input.donationAmount {
     padding-left: 20px;
     text-align: left;
     font-size: 1.25em;
+    text-align: center;
 }
 button.submitDonation {
     padding: 2em;
@@ -429,6 +431,10 @@ span.currencyAlt {
 }
 a.walletLink {
     display: none;
+}
+.recaptchaContainer {
+    width: calc(50% - 2.5em);
+    margin: auto;
 }
 @media only screen and (max-width: 800px) {
     .recaptchaContainer {

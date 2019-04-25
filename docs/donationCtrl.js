@@ -7,8 +7,8 @@
 angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', '$interval', function( $http, $scope, $window, $interval ){
 
-	$scope.server = "https://app.theblockchaininstitute.org/";
-	// $scope.server = "http://localhost:8888/";
+	// $scope.server = "https://app.theblockchaininstitute.org/";
+	$scope.server = "http://localhost:8888/";
 	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
 
 	var currencyList = [
@@ -719,7 +719,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     $scope.setResponse = function (response) {
         // console.info('Response available');
         $scope.response = response;
-        $scope.next(6, $scope.checkCaptcha)
+        $scope.next(3, $scope.checkCaptcha)
     };
     $scope.setWidgetId = function (widgetId) {
         // console.info('Created widget ID: %s', widgetId);
