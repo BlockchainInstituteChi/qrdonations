@@ -1,0 +1,463 @@
+body {
+    font-family: 'Kanit',sans-serif;
+} 
+a {
+    color: #4bab9f;
+}
+.hidden {
+	display: none !important;
+}
+.radioSet input {
+    display: none;
+}
+.radioSet.ng-scope {
+    display: inline-block;
+    margin-right: 1em;
+}
+fieldset.currencyList {
+    width: 15em;
+    margin: auto;
+    text-align: center;
+    border-color: transparent;    
+}
+
+:checked + label {
+   color: black;
+}
+.currencySelectButton {
+    margin: 0.5em;
+    width: 8em;
+    display: inline-grid;
+    height: 8em;
+    position: relative;
+    padding: 0.25em;
+}
+button.currencySelect {
+    width: 100%;
+    border-radius: 0.5em;
+    height: 100%;
+    position: absolute;
+}
+.currencySelectButton.donationAmount {
+    width: 6em;
+    height: 3.25em;
+}
+
+i.cc {
+    font-size: 3em;
+}
+input#search {
+    width: 100%;
+    height: 1.5em;
+    font-size: 1.5em;
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+.container {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+fieldset {
+    border: transparent;
+}
+input#taxReceiptCheckBox {
+    height: 1.5em;
+}
+
+/* Cash payments screen */
+span.currencyTypeLabel {
+    position: relative;
+    margin-right: -20px;
+    font-size: 1.25em;
+}
+input.donationAmount {
+    padding-left: 20px;
+    text-align: left;
+    font-size: 1.25em;
+}
+button.submitDonation {
+    padding: 2em;
+    border-radius: 5px;
+    width: 30%;
+    font-size: 0.75em;
+    display: block;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    text-transform: uppercase;
+    background-color: darkseagreen;
+}
+.securePaymentsMessage img {
+    max-width: 400px;
+    width: 25em;
+    margin: auto;
+    display: block;
+}
+
+/* Mode Selection */
+.modeSelectButton:hover i {
+    background-color: #2fd151;
+    color: black;
+}
+
+.modeSelectButton:hover h3 {
+    color: #2fd151;
+}
+.modeSelectButton {
+    display: inline-block;
+    width: 30%;
+}
+button.radioSet.modeSelect {
+    width: 70%;
+    display: inline-block;
+    border-radius: 5px;
+}
+.modeSelect i {
+    background-color: black;
+    padding: 1em;
+    border-radius: 5em;
+    color: white;
+    font-size: 1.5em;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+}
+.modeSelect h3 {
+    font-size: 2em;
+    text-transform: uppercase;
+    margin-bottom: 0.35em;
+}
+
+/* Currency Select */
+button.currencySelect:hover i, button.currencySelect:hover h3, .radioSet.currencySelect.selected i, .radioSet.currencySelect.selected h3 {
+    color: #4bab9f;
+}
+
+button.currencySelect.selected {
+    border: solid #4bab9f;
+}
+button {
+    outline: none;
+}
+
+
+/* Recaptcha */
+.ng-isolate-scope {
+    width: 30%;
+    margin: auto;
+}
+
+button.nextBtn {
+    width: 30%;
+    height: 2em;
+    border-radius: 0.25em;
+    font-size: 1.25em;
+    margin-bottom: 1em;
+    text-transform: uppercase;
+}
+
+/* Stripe */
+button.submitDonation {
+    padding: 0.25em;
+    border-radius: 5px;
+    width: 30%;
+    font-size: 1.5em;
+    display: block;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 0.25em;
+    text-transform: uppercase;
+    background-color: #1073aa;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+}
+.stripe a {
+    text-decoration: none;
+}
+.emailInput {
+    width: 15em;
+    height: 1em;
+    font-size: 1em;
+    margin-top: 1em;
+    padding-left: 0.4em;
+}
+
+.donationAmountInput {
+    display: block;
+    margin: auto;
+    margin-bottom: 1em;
+}
+
+
+span.yourDonationMatters {
+    margin-bottom: 2em !important;
+    display: inline-block;
+}
+
+i.fas.fa-chevron-left {
+    position: absolute;
+    left: 1em;
+    top: 1em;
+    font-size: 2em;
+    color: #00000078;
+}
+.currencySelectButton i.fas {
+    font-size: 2.5em;
+}
+label.checkbox-label {
+    float: left;
+    text-align: left;
+    max-width: calc(100% - 2em);
+}
+.checkbox-box {
+    float: right;
+}
+.checkbox-container {
+    margin-top: 1em;
+    display: inline-block;
+    width: 100%;
+}
+
+p.errorMessage {
+    color: red;
+}
+.donationAmount button {
+    padding: 1.25em 0.5em 1.25em 0.5em;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: white;
+    background-color: #1073aa;
+}
+
+
+button.yesToAll {
+    float: right !important;
+    margin-right: -3em;
+    background: white;
+    color: #1073aa;
+    border-radius: 0.25em;
+    border: solid 0.5px #1073aa;
+    float: initial;
+    padding: 0.5em;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+input:focus, button:focus {
+    outline: none;
+}
+
+
+.donationAmount button, button.nextBtn  {
+    border-radius: 0;
+}
+.norecaptcha {
+    display: none;
+    width: 75%;
+
+}
+
+/* CopyMessage */
+.copySuccessMessage {
+    max-width: 150px;
+    position: absolute;
+    left: calc(50vw - 5em);
+    top: calc(50vh - 3em);
+    background: #4bab9fde;
+    padding: 1em;
+    border-radius: 0.5em;
+    font-weight: bold;
+    color: white;
+}
+.copySuccessMessage a {
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0.25em;
+}
+
+/* Address Display */
+span.addressCopier {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 1em;
+}
+.copyButton i {
+    margin-left: 1em;
+    background: #bababa;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    color: white;
+}
+.addressCopier input {
+    width: 150px;
+    max-width: 100vw;
+    min-width: 30vw;
+    text-align: center;
+    background-color: lightgrey;
+    cursor: copy;
+    font-family: monospace;
+}
+.addressCopier label {
+    margin-right: 1em;
+}
+.securePaymentsMessage, .securePaymentsMessage img {
+    max-width: 100%;
+    overflow: hidden;
+}
+button.nextBtn {
+    min-width: 200px;
+    max-width: 100vw;
+    min-height: 3em;
+}
+.addressCopier i {
+    position: absolute;
+    margin-left: -1.25em;
+    margin-top: 0.25em;
+}
+
+input#addressCopier {
+    font-family: monospace;
+    width: 25em;
+    font-size: 120%;
+    max-width: calc(100% - 1em);
+}
+
+span.copySuccessMessageFlat {
+    display: block;
+    color: #4bab9fde;
+    margin-bottom: 1em;
+}
+.walletLink {
+    display: block;
+    font-size: 1.15em;
+    margin-bottom: 1em;
+}
+
+/* Final Page Options */
+/*.option {
+    width: 30%;
+    max-width: 300px;
+    display: inline-block;
+    overflow: hidden;
+    height: 10em;
+    box-shadow: #00000038 1pt 1pt 9px !important;
+}
+.option img {
+    width: 100%;
+}
+.option h1 {
+    font-size: 1em;
+    margin-top: 0.25em;
+}*/
+.refreshButton i {
+    padding: 1em;
+}
+.refreshButton {
+    width: 10em;
+    max-width: 100%;
+    display: inline-block;
+    box-shadow: #00000038 1pt 1pt 9px !important;
+    padding: 1em;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+/*Name and email screen*/
+.donorNameInput, .donorEmailInput {
+    width: 100%;
+    display: block;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+label.checkbox-label {
+    padding-left: 0.5em;
+    font-size: 0.85em;
+}
+.identificationForm {
+    max-width: 500px;
+    margin: auto;
+}
+
+/* Terms and Conditions */
+.termsAndConditionsScroller textarea {
+    background-color: lightgrey;
+    cursor: not-allowed;
+    font-weight: 600;
+    border: solid 0.2px #9e9e9e59;
+    padding: 1em;
+    width: calc(100% - 2em) !important;
+    line-height: 1.5em;
+    height: 100%;
+    display: inline-block;
+    min-height: 300px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-family: monospace;
+
+}
+.termsAndConditionsScroller {
+    height: max-content;
+    max-width: 500px;
+    margin: auto;
+}
+.termsAndConditionsCheckbox .checkbox-box {
+    float: right;
+    width: 2em;
+    padding-bottom: 3em;    
+
+}
+.termsAndConditionsCheckbox {
+    padding-left: 1em;
+    padding-right: 1.5em;
+}
+
+span.currencyAlt {
+    display: block;
+    color: grey;
+    font-size: 0.75em;
+    width: 60%;
+    margin: auto;
+}
+a.walletLink {
+    display: none;
+}
+@media only screen and (max-width: 800px) {
+    .recaptchaContainer {
+        width: 100%;
+        overflow: hidden;
+        height: -webkit-fill-available;
+    }
+    i.fas.fa-chevron-left {
+        left: 0.5em;
+    }
+    button.submitDonation {
+        margin: 0;
+        width: 100%;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    .option {
+        width: 100%;
+        height: 12em;
+    }
+    .option h1 {
+        font-size: 1.5em;
+        margin-top: 0.25em;
+    }
+    .identificationForm {
+        max-width: 100%;
+        margin: auto;
+    }
+    .termsAndConditionsScroller{
+        max-width: 100%
+    }
+}
