@@ -618,6 +618,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     	$scope.isHidden.qrCodeView = "hidden"
     	$scope.isHidden.stripeView = "hidden"
     	$scope.isHidden.formView = ""
+    	grecaptcha.reset(); 
     }
 
     function cryptoHandler (response, cb) {
