@@ -11,6 +11,8 @@ a {
     box-shadow: 1px 1px 5px #00000080;
     width: 30%;
     text-align: center;
+    margin: auto;
+    margin-top: 20vh;
 }
 .container h1 {
     text-transform: uppercase;
@@ -20,7 +22,6 @@ a {
 
 /* Amount Entry Fields */
 .amountEntry {
-    width: 100%;
     text-align: center;
     padding: 1em;
 }
@@ -66,9 +67,7 @@ span.dollarSign {
     display: inline-flex;
     width: calc(100% - 3.5em);
     margin-left: 1em;
-    text-align: center;
 }
-
 select {
     width: 1.5em;
     display: inline-flex;
@@ -80,10 +79,78 @@ select {
     text-align: center;
 }
 
+/* clickAndSubmit */
+.clickAndSubmit .topRow {
+    text-align: left;
+    padding: 0.6em;
+}
+label.checkbox-label {
+    font-size: 0.85em;
+    vertical-align: text-top;
+}
+.bottomRow .left {
+    width: 90%;
+    margin: auto;
+}
+button.submitDonation {
+    width: 90%;
+    height: 2em;
+    font-size: 1.25em;
+    text-transform: uppercase;
+    background: #0c74a8;
+    color: white;
+    font-weight: bolder;
+    margin-bottom: 1em;
+    border: none;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+
+/* QR Code view */
+.backButton {
+    text-align: left;
+    padding: 1em;
+}
+.qrCodeView h1 {
+    position: relative;
+    width: 80%;
+    margin: auto;
+    margin-top: -2em;
+}
+
+a.walletLink {
+    display: block;
+    padding: 1em;
+}
+
+
+
+span.copySuccessMessageFlat {
+    display: block;
+    padding: 0.5em;
+}
+
+
+
+.securePaymentsMessage img {
+    width: 90%;
+    margin: auto;
+}
+
+
+
+
+
+/*
 @media only screen and (max-width: 800px) {
     .container {
         width: 100vw;
         overflow: hidden;
         height: -webkit-fill-available;
     }
-}
+}*/

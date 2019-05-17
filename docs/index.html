@@ -32,7 +32,7 @@
             <div class="amountEntry">
                 <div class="left">
                     <span class="dollarSign">$</span>
-                    <input ng-bind="localCurrencyAmount"  type="number">
+                    <input ng-model="donationAmount"  type="number">
                 </div>
                 <i ng-click="updateConvertedValue()" class="fas fa-arrows-alt-h"></i>
                 <div class="right">
@@ -42,18 +42,18 @@
             <div class="currencySelectDropdown">
                 <input type="text" ng-model="selectedCurrency">
                 <select ng-model="selectedCurrency">
-                    <option ng-repeat="x in set">{{x.name}} ({{x.code}})</option>
+                    <option ng-click="setCurrency(x.code, x.name)" ng-repeat="x in set">{{x.name}} ({{x.code}})</option>
                 </select>
             </div>
             <div class="nameAndEmail">
-                <input type="text" ng-bind="donorName">
-                <input type="text" ng-bind="donorEmail">
+                <input type="text" placeholder="Satoshi Nakomoto" ng-model="donorName">
+                <input type="text" placeholder="satoshi@theblockchaininstitute.org" ng-model="donorEmail">
                 
             </div>
             <div class="clickAndSubmit">
                 <div class="topRow">
                     <input class="checkbox-box" type="checkbox" id="termsAndConditionsCheckbox" ng-model="termsAndConditions" checked>
-                    <label  class="checkbox-label" for="taxReceiptCheckBox"> I agree to the terms and conditions.</label>
+                    <label  class="checkbox-label" for="termsAndConditionsCheckbox"> I agree to the terms and conditions.</label>
                 </div>
                 <div class="bottomRow">
                     <div class="left">
@@ -65,20 +65,52 @@
                             on-create="setWidgetId(widgetId)"
                             on-success="setResponse(response)"
                             on-expire="cbExpiration()"
+                            style="transform:scale(0.89);-webkit-transform:scale(0.89);transform-origin:0 0;-webkit-transform-origin:0 0;"
                         ></div>
                     </div>
                     <div class="right">
-                        <button class="submitDonation" ng-click="submitDonation()">Donate Now</button>
+                        <button class="submitDonation {{isHidden.cryptoMode}}" ng-click="revealQRCode()">Reveal QR Code</button>
+                        <a class="{{isHidden.stripeMode}}" href="" ng-click="onStripe('pk_live_j9F9S8Av7YGE4VH0CH4y891l')"><button class="submitDonation">Pay with Stripe</button></a>
                     </div>
                 </div>
 
             </div>
         </div>
         <div class="stripeView {{isHidden.stripeView}}">
+            <div class="backButton" ng-click="back(4)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <h1>Verify Amount</h1>
+            <span class="currencyTypeLabel">$</span><input class="donationAmount" ng-model="donationAmount" type="number" value="100.00" placeholder="100.00" min="0.01" step="0.01" max="5000">
+            <a href="" ng-click="onStripe('pk_live_j9F9S8Av7YGE4VH0CH4y891l')">
+                <button class="submitDonation">Pay with Stripe</button></a>
+            <!-- <a href="" ng-click="onStripe('pk_test_xfP1IdV5ytXTYwsCj8jjtxs3')"><button class="submitDonation">Pay with Stripe</button></a> -->
+            
+            <div class="securePaymentsMessage"><img src="/images/secure-stripe-payment-logo.png"></div>
+
             
         </div>
         <div class="qrCodeView {{isHidden.qrCodeView}}">
-
+                <div class="backButton" ng-click="backFromQR()">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <h1> Scan the QR Code below to donate your funds:</h1>
+                <canvas id="qrCode">
+                </canvas>
+                <!-- <hr> -->
+                <div class="donationAmount">
+                    ${{donationAmount}} 
+                    <span class="currencyAlt"> {{donationAmountAlt}} {{currency}} </span>
+                </div> 
+                <br>
+                <span class="addressCopier" ng-click="copyAddressToClipboard()">
+                    <input id="addressCopier" type="text" ng-model="address" class="addressCopier" disabled>
+                    <i class="fa fa-copy"></i>
+                </span>
+                <span class="copySuccessMessageFlat {{copySuccessMessage}}">Address copied to keyboard!</span>
+                <a href="{{ uri }}" class="walletLink">Open in Wallet</a>
+                <button class="nextBtn submitDonation" type="next" ng-click="next(7)">Next</button>
+                <div class="securePaymentsMessage"><h3>Secure payments powered by</h3><img src="/images/coinpayments-logo.png"></div>            
         </div>
     </div>
   </body>
