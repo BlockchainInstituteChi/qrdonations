@@ -375,7 +375,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	$scope.setCurrency = function (code, name) {
 
-		console.log('setCurrency', code, name)
+		// console.log('setCurrency', code, name)
 		// if ( typeof($scope.currency) != "undefined" ) {
 		// 	// Deselect previous item
 		// 	document.getElementById($scope.currency + "_button").className = ((document.getElementById($scope.currency + "_button").className).split('selected')).join(' ')	
@@ -742,18 +742,18 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	$scope.updateUSDValue = function () {
 		if ($scope.currency === "USD" ) $scope.donationAmount = $scope.altCurrencyAmount;
 		if (checkPricesFilled()) {
-			console.log('updateConversion')
+			// console.log('updateConversion')
 			for ( var i = 0; i < $scope.currentPrices.length; i++ ) {
 
 				if ($scope.currency === $scope.currentPrices[i].code) {
 					$scope.donationAmount = $scope.altCurrencyAmount * $scope.currentPrices[i].price 
-					console.log('updating usd price for ', $scope.currentPrices[i].code, " to ",  $scope.currentPrices[i].price)
+					// console.log('updating usd price for ', $scope.currentPrices[i].code, " to ",  $scope.currentPrices[i].price)
 					$scope.isDisabled.conversions = "";
 				}
 				console.log($scope.currency, " did not match ", $scope.currentPrices[i].code)
 			}
 		} else {
-			console.log('prices aren\'t filled, disabling input')
+			// console.log('prices aren\'t filled, disabling input')
 			
 			$scope.isDisabled.conversions = "disabled";
 		}		
@@ -763,18 +763,18 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	function updateConversion () {
 		if ($scope.currency === "USD" ) $scope.altCurrencyAmount = $scope.donationAmount;
 		if (checkPricesFilled()) {
-			console.log('updateConversion')
+			// console.log('updateConversion')
 			for ( var i = 0; i < $scope.currentPrices.length; i++ ) {
 
 				if ($scope.currency === $scope.currentPrices[i].code) {
 					$scope.altCurrencyAmount = $scope.donationAmount / $scope.currentPrices[i].price 
-					console.log('updating price for ', $scope.currentPrices[i].code, " to ",  $scope.currentPrices[i].price)
+					// console.log('updating price for ', $scope.currentPrices[i].code, " to ",  $scope.currentPrices[i].price)
 					$scope.isDisabled.conversions = "";
 				}
-				console.log($scope.currency, " did not match ", $scope.currentPrices[i].code)
+				// console.log($scope.currency, " did not match ", $scope.currentPrices[i].code)
 			}
 		} else {
-			console.log('prices aren\'t filled, disabling input')
+			// console.log('prices aren\'t filled, disabling input')
 			
 			$scope.isDisabled.conversions = "disabled";
 		}

@@ -41,6 +41,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: -1.5em;
     padding-right: 0.5em;
     font-weight: 600;
+    padding-left: 1.5em;
 }
 span.dollarSign {
     padding-right: 0.5em;
@@ -174,12 +175,15 @@ span.copySuccessMessageFlat {
     margin: auto;
 }
 
+span.currencyAlt {
+    color: gray;
+    display: block;
+}
 
 
 
 
-/*
-@media only screen and (max-width: 800px) {
+@media only screen /*and (max-width: 800px) {
     .container {
         width: 100vw;
         overflow: hidden;

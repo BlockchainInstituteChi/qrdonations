@@ -32,7 +32,7 @@
             <div class="amountEntry">
                 <div class="left">
                     <span class="dollarSign">$</span>
-                    <input  ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" ng-keyup="updateConversion()" ng-click="updateConversion()" ng-model="donationAmount"  type="number">
+                    <input step='0.01' value='0.00' placeholder='0.00'  ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" ng-keyup="updateConversion()" ng-click="updateConversion()" ng-model="donationAmount"  type="number">
                 </div>
                 <i ng-click="updateConvertedValue()" class="fas fa-arrows-alt-h"></i>
                 <div class="right {{isDisabled.conversions}}">  
