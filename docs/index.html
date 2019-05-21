@@ -35,8 +35,8 @@
                     <input ng-model="donationAmount"  type="number">
                 </div>
                 <i ng-click="updateConvertedValue()" class="fas fa-arrows-alt-h"></i>
-                <div class="right">
-                    <input ng-bind="altCurrencyAmount" type="number">
+                <div class="right {{isDisabled.conversions}}">
+                    <input ng-model="altCurrencyAmount" type="number">
                 </div>
             </div>
             <div class="currencySelectDropdown">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="right">
                         <button class="submitDonation {{isHidden.cryptoMode}}" ng-click="revealQRCode()">Reveal QR Code</button>
-                        <a class="{{isHidden.stripeMode}}" href="" ng-click="onStripe('pk_live_j9F9S8Av7YGE4VH0CH4y891l')"><button class="submitDonation">Pay with Stripe</button></a>
+                        <a ng-disabled="{{isDisabled.stripeButton}}" class="{{isHidden.stripeMode}} " href="" ng-click="onStripe('pk_live_j9F9S8Av7YGE4VH0CH4y891l')"><button class="submitDonation">Pay with Stripe</button></a>
                     </div>
                 </div>
 

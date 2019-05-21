@@ -65,10 +65,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 								"code":"BCH",
 								"icon":"cc BCH"
 							},{
-								"name":"Tether",
-								"code":"USDT",
-								"icon":"cc USDT"
-							},{
 								"name":"Bitcoin Gold",
 								"code":"BTG",
 								"icon":"cc BTC"
@@ -88,6 +84,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			"amount" : "1250.00"
 		}
 	]
+
 
 	$scope.setDonationAmount = function (amount) {
 		// console.log('setting donations amount to', amount)
@@ -113,6 +110,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	//  
 	$scope.init = function () {
 
+		$scope.currentPrices = [];
+
 
 		$scope.supportedCurrencies = [{
 			"name":"BTC"
@@ -128,7 +127,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		};
 
 		$scope.showTaxReceipt = ""
-
+		$scope.isDisabled = {};
+		$scope.isDisabled.stripeButton = "all"
 		$scope.copySuccessMessage = "hidden"
 		$scope.selectedCurrency = "Dollars (USD)"
 		$scope.taxReceipt = true;
@@ -139,10 +139,12 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.donorName = "Alex Morris"
 		$scope.donorEmail = "alex@theblockchaininstitute.org"
 		toggleToStripeMode();
+		getCurrentPrices ();
 	};
 
 	$scope.navToHome = function () {
 		$window.location = "https://theblockchaininstitute.org/"
+
 	}
 
 	$scope.navToCourses = function () {
@@ -228,6 +230,25 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		checkAndHide()
 
 	}	
+
+	function getCurrentPrices () {
+		console.log('getting crypto prices')
+	   	$http.get( "https://s3.us-east-2.amazonaws.com/bci-static/misc/ticket.json")
+  		.then(function(response) { 
+  		  	// console.log("got crypto prices", response);
+  		  	$scope.currentPrices = response.data.prices;
+  		  	// console.log('set currentPrices', $scope.currentPrices)
+  		  	
+  		  	checkPricesFilled()
+  		  	// return response;
+  			// console.log('called server to process stripe payload ', payload, "received", response )
+	
+        }). 
+        catch(function(error) { 
+          // console.log(error);
+        }); 
+	}
+
 
 	function checkAndHide () {	
 		// console.log('amount is', $scope.donationAmount)
@@ -333,7 +354,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		var split = $scope.selectedCurrency.split(' ')
 
 		console.log(split)
-
 		// hack fix for two letter names. need to make this better
 		if ( split.length > 2 ) {
 			var code = split[2].slice(0, split[1].length-1).slice(1, split[1].length-1);
@@ -345,6 +365,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		if (code === "BC") code = "BCH"
 		if (code === "BT") code = "BTG"
 		$scope.setCurrency(code, name);
+
+		updateConversion()
 	});
 
 	$scope.setCurrency = function (code, name) {
@@ -475,6 +497,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
     };
 
     $scope.onStripe = function(apiKey, userEmail) {
+    	$scope.isDisabled.stripeButton = "all"
     	// console.log('donating', $scope.donationAmount)
         var handler = StripeCheckout.configure({
             key: apiKey,
@@ -718,6 +741,31 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	}
 
+	function updateConversion () {
+		if (checkPricesFilled()) {
+			console.log('updateConversion')
+			for ( var i = 0; i < $scope.currentPrices.length; i++ ) {
+				if ($scope.currency === $scope.currentPrices[i].code) {
+					$scope.altCurrencyAmount = $scope.donationAmount / $scope.currentPrices[i].price 
+					console.log('updating price for ', $scope.currentPrices[i].code, " to ",  $scope.currentPrices[i].price)
+				}
+				console.log($scope.currency, " did not match ", $scope.currentPrices[i].code)
+			}
+		} else {
+			console.log('prices aren\'t filled, disabling input')
+		}
+	}
+
+	function checkPricesFilled () {
+		if ( $scope.currentPrices[0] != undefined ) {
+			// console.log('checked prices and they are ', $scope.currentPrices)
+			return true
+		} else {
+			// console.log('no current prices set')
+			getCurrentPrices()
+			return false
+		}
+	}
 
 	function displayCopySuccessMessage () {
 		// console.log('displaying copy success message')
@@ -741,6 +789,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	// Recaptcha Logic
     $scope.setResponse = function (response) {
         // console.info('Response available');
+        $scope.isDisabled.stripeButton = ""
         $scope.response = response;
         // $scope.next(6, $scope.checkCaptcha)
     };
