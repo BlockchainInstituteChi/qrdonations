@@ -181,7 +181,11 @@ span.currencyAlt {
 }
 
 
-
+label.checkbox-label {
+    font-size: 0.75em;
+    vertical-align: text-top;
+    text-transform: uppercase;
+}
 
 @media only screen /*and (max-width: 800px) {
     .container {
