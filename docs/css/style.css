@@ -58,6 +58,10 @@ span.dollarSign {
     margin: 1em;
     margin-bottom: 0;
 }
+.right.disabled, .right.disabled input {
+    color: lightgrey !important;
+    border: dotted 1px lightgrey !important;
+}
 
 /* Dropdown */
 .currencySelectDropdown {

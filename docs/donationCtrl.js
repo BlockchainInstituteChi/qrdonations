@@ -131,6 +131,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.isDisabled.stripeButton = "all"
 		$scope.copySuccessMessage = "hidden"
 		$scope.selectedCurrency = "Dollars (USD)"
+
 		$scope.taxReceipt = true;
 		$scope.showEmail = "hidden"
 		$scope.set = currencyList;
@@ -140,6 +141,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.donorEmail = "alex@theblockchaininstitute.org"
 		toggleToStripeMode();
 		getCurrentPrices ();
+		updateConversion();
 	};
 
 	$scope.navToHome = function () {
@@ -698,7 +700,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 			for ( var i = 0; i < data.length; i ++ ) {
 				// check to see that the first characters of the result match the stirng submitted
-				// console.log(data[i].key.substring(0,str.length));
+					// console.log(data[i].key.substring(0,str.length));
 
 				if ( data[i].name.substring(0,str.length).toUpperCase() === str.toUpperCase() ) {
 
@@ -735,26 +737,54 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	    displayCopySuccessMessage();
 	}
 
+	$scope.updateUSDValue = function () {
+		if ($scope.currency === "USD" ) $scope.donationAmount = $scope.altCurrencyAmount;
+		if (checkPricesFilled()) {
+			console.log('updateConversion')
+			for ( var i = 0; i < $scope.currentPrices.length; i++ ) {
+
+				if ($scope.currency === $scope.currentPrices[i].code) {
+					$scope.donationAmount = $scope.altCurrencyAmount * $scope.currentPrices[i].price 
+					console.log('updating usd price for ', $scope.currentPrices[i].code, " to ",  $scope.currentPrices[i].price)
+					$scope.isDisabled.conversions = "";
+				}
+				console.log($scope.currency, " did not match ", $scope.currentPrices[i].code)
+			}
+		} else {
+			console.log('prices aren\'t filled, disabling input')
+			
+			$scope.isDisabled.conversions = "disabled";
+		}		
+	}
+	$scope.updateConversion = updateConversion;
+	
+	function updateConversion () {
+		if ($scope.currency === "USD" ) $scope.altCurrencyAmount = $scope.donationAmount;
+		if (checkPricesFilled()) {
+			console.log('updateConversion')
+			for ( var i = 0; i < $scope.currentPrices.length; i++ ) {
+
+				if ($scope.currency === $scope.currentPrices[i].code) {
+					$scope.altCurrencyAmount = $scope.donationAmount / $scope.currentPrices[i].price 
+					console.log('updating price for ', $scope.currentPrices[i].code, " to ",  $scope.currentPrices[i].price)
+					$scope.isDisabled.conversions = "";
+				}
+				console.log($scope.currency, " did not match ", $scope.currentPrices[i].code)
+			}
+		} else {
+			console.log('prices aren\'t filled, disabling input')
+			
+			$scope.isDisabled.conversions = "disabled";
+		}
+	}
+
+
 	function hideCopySuccessMessage () {
 		// console.log('hiding copy success message')
 		$scope.copySuccessMessage = "hidden";
 
 	}
 
-	function updateConversion () {
-		if (checkPricesFilled()) {
-			console.log('updateConversion')
-			for ( var i = 0; i < $scope.currentPrices.length; i++ ) {
-				if ($scope.currency === $scope.currentPrices[i].code) {
-					$scope.altCurrencyAmount = $scope.donationAmount / $scope.currentPrices[i].price 
-					console.log('updating price for ', $scope.currentPrices[i].code, " to ",  $scope.currentPrices[i].price)
-				}
-				console.log($scope.currency, " did not match ", $scope.currentPrices[i].code)
-			}
-		} else {
-			console.log('prices aren\'t filled, disabling input')
-		}
-	}
 
 	function checkPricesFilled () {
 		if ( $scope.currentPrices[0] != undefined ) {

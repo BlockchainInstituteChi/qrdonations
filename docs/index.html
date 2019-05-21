@@ -32,11 +32,11 @@
             <div class="amountEntry">
                 <div class="left">
                     <span class="dollarSign">$</span>
-                    <input ng-model="donationAmount"  type="number">
+                    <input ng-keyup="updateConversion()" ng-model="donationAmount"  type="number">
                 </div>
                 <i ng-click="updateConvertedValue()" class="fas fa-arrows-alt-h"></i>
                 <div class="right {{isDisabled.conversions}}">
-                    <input ng-model="altCurrencyAmount" type="number">
+                    <input ng-keyup="updateUSDValue()" ng-disable="{{isDisabled.conversions}}" ng-model="altCurrencyAmount" type="number">
                 </div>
             </div>
             <div class="currencySelectDropdown">
