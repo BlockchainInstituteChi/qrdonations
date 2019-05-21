@@ -149,6 +149,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	}
 
+	
+
 	$scope.navToCourses = function () {
 		$window.location = "https://theblockchaininstitute.org/courses/"
 	}	
@@ -757,7 +759,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}		
 	}
 	$scope.updateConversion = updateConversion;
-	
+
 	function updateConversion () {
 		if ($scope.currency === "USD" ) $scope.altCurrencyAmount = $scope.donationAmount;
 		if (checkPricesFilled()) {

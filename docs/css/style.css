@@ -4,6 +4,11 @@ body {
 a {
     color: #4bab9f;
 }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+}
 
 /* Major View Elements */
 .container {
@@ -32,10 +37,15 @@ a {
     display: inline-flex;
 }
 .amountEntry .left input {
-    width: calc(100% - 1.5em);
+    width: 100%;
+    margin-left: -1.5em;
+    padding-right: 0.5em;
+    font-weight: 600;
 }
 span.dollarSign {
     padding-right: 0.5em;
+    z-index: 1;
+    color: lightgrey;
 }
 .amountEntry i {
     display: inline-flex;
@@ -59,7 +69,7 @@ span.dollarSign {
     margin: 1em;
     margin-bottom: 0;
 }
-.right.disabled, .right.disabled input {
+.right.disabled input {
     color: lightgrey !important;
     border: dotted 1px lightgrey !important;
 }
@@ -70,6 +80,15 @@ span.altCurrencyCode {
     z-index: 1;
     left: 0;
     color: lightgrey;
+    font-size: 0.85em;
+    padding-left: 0.25em;
+    padding-top: 0.05em;
+}
+.amountEntry .right input {
+    padding-left: 3em;
+    padding-right: 0.25em;;
+    position: absolute;
+    width: 6em;
 }
 
 /* Dropdown */
