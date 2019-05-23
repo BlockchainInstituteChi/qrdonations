@@ -123,7 +123,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.isHidden = {
 			"formView" : "",
 			"stripeView" : "hidden",
-			"qrCodeView" : "hidden"
+			"qrCodeView" : "hidden",
+			"loader" 	 : "hidden"
 		};
 
 		$scope.showTaxReceipt = ""
@@ -143,6 +144,18 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		getCurrentPrices ();
 		updateConversion();
 	};
+
+	$scope.toggleLoaderDisplay = function () {
+		if ($scope.isHidden.loader === "hidden" ) {
+		
+			$scope.isHidden.loader = ""
+		
+		} else {
+			
+			$scope.isHidden.loader = "hidden"
+
+		}
+	}
 
 	$scope.toggleTermsAndConditions = function () {
 		console.log('toggling terms and conditions from ', $scope.termsAndConditions)
@@ -472,10 +485,16 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.revealQRCode = function () {
+
 		validateForm ( function (result) {
+
 			if ( result.error ) {
 				$scope.error = result.error;
 			} else {
+
+	    		$scope.isHidden.formView = "hidden"
+				$scope.toggleLoaderDisplay();
+
 	    		$scope.checkCaptcha(function(result){
 	    			console.log('checkCaptcha returned')
 	    			// cryptoHandler(result, function(result) {
@@ -544,9 +563,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
     $scope.onStripe = function(apiKey, userEmail) {
     	validateForm (function (result) {
+
+
     		if ( result.error ) { 
     			$scope.error = result.error
     		} else {
+	    		$scope.isHidden.formView = "hidden"
+				$scope.toggleLoaderDisplay();
     			$scope.isDisabled.stripeButton = "all"
 		    	// console.log('donating', $scope.donationAmount)
 		        var handler = StripeCheckout.configure({
@@ -671,6 +694,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	  	$http.post( url, payload)
 	  		.then(function(response) { 
 	  		  	
+				$scope.isHidden.loader = "hidden"
 	  			if ( $scope.mode === "crypto" ) {
 	  				cryptoHandler(response.data, function(result) {
 	  					cb(result)

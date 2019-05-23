@@ -150,6 +150,7 @@ label.checkbox-label {
     vertical-align: text-top;
 }
 .bottomRow .left {
+
     width: 90%;
     margin: auto;
 }
@@ -227,6 +228,21 @@ label.checkbox-label {
     transform-origin:0 0;
     -webkit-transform-origin:0 0;
 }
+
+.loader {
+    max-width: 100% !important;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+.loader img {
+    width: calc(100% - 2em);
+    padding: 1em;
+    margin: auto;
+}
+
 
 
 @media only screen and (max-width: 800px) {

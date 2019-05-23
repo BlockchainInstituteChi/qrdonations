@@ -25,9 +25,7 @@
   </head>
 
   <body ng-app="donationsManager">
-    <div class="loader {{isHidden.loader}}">
-        <img src="">
-    </div>
+
     <div class="container" ng-controller="donationsCtrl">
         <div class="formView {{isHidden.formView}}">
             <h1>Donate to the blockchain institute</h1>
@@ -81,6 +79,9 @@
                 </div>
 
             </div>
+        </div>
+        <div class="loader {{isHidden.loader}}" ng-click="toggleLoaderDisplay()">
+            <img src="https://i.redd.it/ounq1mw5kdxy.gif">
         </div>
         <!-- <div class="stripeView {{isHidden.stripeView}}">
             <div class="backButton" ng-click="back(4)">
