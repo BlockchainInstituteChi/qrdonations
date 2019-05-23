@@ -165,6 +165,12 @@ button.submitDonation {
     border: none;
 }
 
+span.error {
+    color: red;
+    font-size: 0.75em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
 
 .hidden {
     display: none !important;

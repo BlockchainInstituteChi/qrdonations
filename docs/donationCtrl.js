@@ -7,8 +7,8 @@
 angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', '$interval', function( $http, $scope, $window, $interval ){
 
-	$scope.server = "https://app.theblockchaininstitute.org/";
-	// $scope.server = "http://localhost:8888/";
+	// $scope.server = "https://app.theblockchaininstitute.org/";
+	$scope.server = "http://localhost:8888/";
 	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
 
 	var currencyList = [
@@ -131,7 +131,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.isDisabled.stripeButton = "all"
 		$scope.copySuccessMessage = "hidden"
 		$scope.selectedCurrency = "Dollars (USD)"
-
+		$scope.termsAndConditions = true;
 		$scope.taxReceipt = true;
 		$scope.showEmail = "hidden"
 		$scope.set = currencyList;
@@ -143,6 +143,15 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		getCurrentPrices ();
 		updateConversion();
 	};
+
+	$scope.toggleTermsAndConditions = function () {
+		console.log('toggling terms and conditions from ', $scope.termsAndConditions)
+		if ($scope.termsAndConditions === true) {
+			$scope.termsAndConditions = false 
+		} else {
+			$scope.termsAndConditions = true
+		}
+	}
 
 	$scope.navToHome = function () {
 		$window.location = "https://theblockchaininstitute.org/"
@@ -463,15 +472,48 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.revealQRCode = function () {
+		validateForm ( function (result) {
+			if ( result.error ) {
+				$scope.error = result.error;
+			} else {
+	    		$scope.checkCaptcha(function(result){
+	    			console.log('checkCaptcha returned')
+	    			// cryptoHandler(result, function(result) {
+	    			// 	console.log('cryptoHandler returned ', result)
 
-    		$scope.checkCaptcha(function(result){
-    			console.log('checkCaptcha returned')
-    			// cryptoHandler(result, function(result) {
-    			// 	console.log('cryptoHandler returned ', result)
+	    			// })
+	    		})		
+			}
 
-    			// })
-    		})
+
+    	})
 	}
+
+	function validateForm (callback) {
+		console.log('RESPONSE:', $scope.response)
+		console.log('terms:', $scope.termsAndConditions)
+
+		if ( $scope.donorName === "" ) {
+			return callback({'error':'You must enter your name to proceed.'})
+		}  else if ( $scope.donorName.length < 3 ) {
+			return callback({'error':'You must enter a name longer than three characters.'})
+
+		} else if ( !($scope.donorName.split(' ').length > 1) ) {
+			return callback({'error':'You must enter your first and last name separated by a space.'})
+
+		} else if ( !validateEmail($scope.donorEmail) ) {
+			return callback({'error':'You must enter a valid email address'})
+
+		} else if ( $scope.termsAndConditions != true ) {
+			return callback({'error':'You must accept the terms and conditions.'})
+		} else if ( typeof($scope.response) === "undefined" ) {
+			return callback({'error':'Please click the recaptcha to verify that you are not a robot.'})
+		} else {
+			return callback(true)
+		} 
+
+	}
+
 
 	$scope.checkCountryOfOriginVerification = function (callback) {
 		// console.log($scope.countryOfOrigin)
@@ -501,24 +543,31 @@ angular.module('donationsManager', ['vcRecaptcha'])
     };
 
     $scope.onStripe = function(apiKey, userEmail) {
-    	$scope.isDisabled.stripeButton = "all"
-    	// console.log('donating', $scope.donationAmount)
-        var handler = StripeCheckout.configure({
-            key: apiKey,
-            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-            locale: 'auto',
-            token: $scope.onToken
-        });
+    	validateForm (function (result) {
+    		if ( result.error ) { 
+    			$scope.error = result.error
+    		} else {
+    			$scope.isDisabled.stripeButton = "all"
+		    	// console.log('donating', $scope.donationAmount)
+		        var handler = StripeCheckout.configure({
+		            key: apiKey,
+		            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+		            locale: 'auto',
+		            token: $scope.onToken
+		        });
 
-        handler.open({
-            panelLabel : 'Donate',
-            name : 'Blockchain Institute',
-            amount : $scope.donationAmount * 100, 
-            description : 'Amount in USD',
-            email : userEmail,
-            zipCode : true,
-            allowRememberMe : false
-        });
+		        handler.open({
+		            panelLabel : 'Donate',
+		            name : 'Blockchain Institute',
+		            amount : $scope.donationAmount * 100, 
+		            description : 'Amount in USD',
+		            email : userEmail,
+		            zipCode : true,
+		            allowRememberMe : false
+		        });
+    		}
+    	})
+    	
     };
 
     function callStripe (token) {

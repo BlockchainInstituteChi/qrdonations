@@ -25,10 +25,13 @@
   </head>
 
   <body ng-app="donationsManager">
-
+    <div class="loader {{isHidden.loader}}">
+        <img src="">
+    </div>
     <div class="container" ng-controller="donationsCtrl">
         <div class="formView {{isHidden.formView}}">
             <h1>Donate to the blockchain institute</h1>
+            <span class="error" ng-bind="error"></span>
             <div class="amountEntry">
                 <div class="left">
                     <span class="dollarSign">$</span>
@@ -56,7 +59,7 @@
             </div>
             <div class="clickAndSubmit">
                 <div class="topRow">
-                    <input class="checkbox-box" type="checkbox" id="termsAndConditionsCheckbox" ng-model="termsAndConditions" checked>
+                    <input class="checkbox-box" type="checkbox" id="termsAndConditionsCheckbox" ng-click="toggleTermsAndConditions()" checked>
                     <label  class="checkbox-label" for="termsAndConditionsCheckbox"> I agree to the terms and conditions.</label>
                 </div>
                 <div class="bottomRow">
@@ -79,7 +82,7 @@
 
             </div>
         </div>
-        <div class="stripeView {{isHidden.stripeView}}">
+        <!-- <div class="stripeView {{isHidden.stripeView}}">
             <div class="backButton" ng-click="back(4)">
                 <i class="fas fa-chevron-left"></i>
             </div>
@@ -87,12 +90,12 @@
             <span class="currencyTypeLabel">$</span><input class="donationAmount" ng-model="donationAmount" type="number" value="100.00" placeholder="100.00" min="0.01" step="0.01" max="5000">
             <a href="" ng-click="onStripe('pk_live_j9F9S8Av7YGE4VH0CH4y891l')">
                 <button class="submitDonation">Pay with Stripe</button></a>
-            <!-- <a href="" ng-click="onStripe('pk_test_xfP1IdV5ytXTYwsCj8jjtxs3')"><button class="submitDonation">Pay with Stripe</button></a> -->
+            <a href="" ng-click="onStripe('pk_test_xfP1IdV5ytXTYwsCj8jjtxs3')"><button class="submitDonation">Pay with Stripe</button></a>
             
             <div class="securePaymentsMessage"><img src="/images/secure-stripe-payment-logo.png"></div>
 
             
-        </div>
+        </div> -->
         <div class="qrCodeView {{isHidden.qrCodeView}}">
                 <div class="backButton" ng-click="backFromQR()">
                     <i class="fas fa-chevron-left"></i>
