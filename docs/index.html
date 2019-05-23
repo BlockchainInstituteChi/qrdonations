@@ -40,13 +40,16 @@
                     <input step="any" ng-keyup="updateUSDValue()" ng-click="updateUSDValue()" ng-disable="{{isDisabled.conversions}}" ng-model="altCurrencyAmount" type="number">
                 </div>
             </div>
-            <div class="currencySelectDropdown">
+            <!-- <div class="currencySelectDropdown">
                 <input type="text" ng-model="selectedCurrency">
                 <select ng-model="selectedCurrency">
                     <option ng-click="setCurrency(x.code, x.name)" ng-repeat="x in set">{{x.name}} ({{x.code}})</option>
                 </select>
-            </div>
+            </div> -->
             <div class="nameAndEmail">
+                <select ng-model="selectedCurrency">
+                    <option ng-click="setCurrency(x.code, x.name)" ng-repeat="x in set">{{x.name}} ({{x.code}})</option>
+                </select>
                 <input type="text" placeholder="Satoshi Nakomoto" ng-model="donorName">
                 <input type="text" placeholder="satoshi@theblockchaininstitute.org" ng-model="donorEmail">
                 
@@ -66,7 +69,6 @@
                             on-create="setWidgetId(widgetId)"
                             on-success="setResponse(response)"
                             on-expire="cbExpiration()"
-                            style="transform:scale(0.89);-webkit-transform:scale(0.89);transform-origin:0 0;-webkit-transform-origin:0 0;"
                         ></div>
                     </div>
                     <div class="right">

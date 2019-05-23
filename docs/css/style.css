@@ -101,15 +101,25 @@ span.altCurrencyCode {
     width: calc(100% - 3.5em);
     margin-left: 1em;
 }
+
 select {
-    width: 1.5em;
     display: inline-flex;
-    margin-right: 1em;
-    margin-left: -1.5em;
-    padding: 0.1em;
-    padding-left: 1em;
-    padding-right: 1em;
     text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    background-image: url(/images/squarrow.png);
+    background-size: 2.5em 1.65em;
+    background-repeat: no-repeat;
+    height: 1.65em;
+    text-align: center;
+    border: 0.5px solid darkgrey;
+    width: calc(100% - 1.65em);
+    margin: auto;
+    margin-top: 1em;
+    margin-left: 0.25em;
+    text-align-last: center;
 }
 
 /* clickAndSubmit */
@@ -187,10 +197,24 @@ label.checkbox-label {
     text-transform: uppercase;
 }
 
-@media only screen /*and (max-width: 800px) {
-    .container {
-        width: 100vw;
-        overflow: hidden;
-        height: -webkit-fill-available;
+.recaptchaContainer {
+    transform:scale(0.89);
+    -webkit-transform:scale(0.89);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .container, .formView, body {
+        width: 100vw !important;
+        height: 100vh !important;
+        margin: 0 !important;
     }
-}*/
+    .recaptchaContainer {
+        transform:scale(0.65);
+        -webkit-transform:scale(0.65);
+        transform-origin:0 0;
+        -webkit-transform-origin:0 0;
+    }
+}
