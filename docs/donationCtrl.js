@@ -154,6 +154,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			
 			$scope.isHidden.loader = "hidden"
 
+			if ( $scope.currency === "USD" ) {
+				$scope.isHidden.formView = ""
+			}
+
 		}
 	}
 

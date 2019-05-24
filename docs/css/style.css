@@ -84,7 +84,7 @@ span.dollarSign {
     padding-left: 3em;
     padding-right: 0.25em;
     position: absolute;
-    width: 5.25em;
+    width: calc(100% - 1.75em);
 }
 .nameAndEmail input {
     width: calc(100% - 2em);
