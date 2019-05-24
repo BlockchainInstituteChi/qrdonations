@@ -55,6 +55,8 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: 600;
     padding-left: 1.5em;
     position: absolute;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
 }
 span.dollarSign {
     padding-right: 0.5em;
@@ -87,15 +89,18 @@ span.dollarSign {
     width: calc(100% - 1.75em);
 }
 .nameAndEmail input {
-    width: calc(100% - 2em);
+    width: calc(100% - 2.75em);
     margin: 1em;
     margin-bottom: 0;
+    padding: 0.25em;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
 }
 .right.disabled input {
     color: lightgrey !important;
     border: dotted 1px lightgrey !important;
-    padding-top: 0.15em;
-    padding-bottom: 0.15em;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
 }
 .amountEntry input {
     text-align: right;
@@ -106,7 +111,7 @@ span.altCurrencyCode {
     color: lightgrey;
     font-size: 0.85em;
     padding-left: 0.25em;
-    padding-top: 0.05em;
+    padding-top: 0.25em;
 }
 
 /* Dropdown */
@@ -130,13 +135,13 @@ select {
     background-size: 2em 1.65em;
     background-position: left;
     background-repeat: no-repeat;
-    height: 1.65em;
+    height: 1.95em;
     text-align: center;
     border: 0.5px solid darkgrey;
-    width: calc(100% - 1.65em);
+    width: calc(100% - 1.95em);
     margin: auto;
     margin-top: 1em;
-    margin-left: 0.25em;
+    margin-left: 0em;
     text-align-last: center;
 }
 
