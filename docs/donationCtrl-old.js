@@ -65,6 +65,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 								"code":"BCH",
 								"icon":"cc BCH"
 							},{
+								"name":"Tether",
+								"code":"USDT",
+								"icon":"cc USDT"
+							},{
 								"name":"Bitcoin Gold",
 								"code":"BTG",
 								"icon":"cc BTC"
@@ -85,7 +89,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}
 	]
 
-
 	$scope.setDonationAmount = function (amount) {
 		// console.log('setting donations amount to', amount)
 		$scope.donationAmount = parseInt(amount, 10);;
@@ -97,20 +100,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$window.location = "/"
 	}
 
-	function toggleToCryptoMode( ) {
-		$scope.isHidden.cryptoMode = ""
-		$scope.isHidden.stripeMode = "hidden"
-	}
-
-	function toggleToStripeMode( ) {
-		$scope.isHidden.cryptoMode = "hidden"
-		$scope.isHidden.stripeMode = ""
-	}
-
 	//  
 	$scope.init = function () {
-
-		$scope.currentPrices = [];
 
 
 		$scope.supportedCurrencies = [{
@@ -120,62 +111,64 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}];
 		// console.log($scope.supportedCurrencies);
 
-		$scope.isHidden = {
-			"formView" : "",
-			"stripeView" : "hidden",
-			"qrCodeView" : "hidden",
-			"loader" 	 : "hidden"
-		};
+		$scope.display = [
+			"",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden",
+			"hidden"
+		];
+
+
+	    // - - - - - - - - - for testing purposes only - - - - - - - - - 
+		// $scope.display = [
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden",
+		// 	"hidden"
+		// ];
+		// $scope.currency = "ETH"
+		// $scope.currencyChoice = "ETH"
+		// $scope.currencyName = "Ethereum"
+		// $scope.currentPrice = "165.75594803"
+		// $scope.address = "0x0274a03dc5d0a7c86dc9f7e8b4a1a70951403eb4"
+		// cryptoHandler({"address" : $scope.address}, function(result){
+		// 	console.log('ran', result)
+		// })
+
+		// - - - - - - - - - for testing purposes only - - - - - - - - - 
+
+
 
 		$scope.showTaxReceipt = ""
-		$scope.isDisabled = {};
-		$scope.isDisabled.stripeButton = "all"
+
 		$scope.copySuccessMessage = "hidden"
-		$scope.selectedCurrency = "Dollars (USD)"
-		$scope.termsAndConditions = true;
+
 		$scope.taxReceipt = true;
 		$scope.showEmail = "hidden"
 		$scope.set = currencyList;
 		$scope.mode = ""
 		$scope.donationAmount = 125.00
-		$scope.donorName = "Alex Morris"
-		$scope.donorEmail = "alex@theblockchaininstitute.org"
-		toggleToStripeMode();
-		getCurrentPrices ();
-		updateConversion();
 	};
-
-	$scope.toggleLoaderDisplay = function () {
-		if ($scope.isHidden.loader === "hidden" ) {
-		
-			$scope.isHidden.loader = ""
-		
-		} else {
-			
-			$scope.isHidden.loader = "hidden"
-
-			if ( $scope.currency === "USD" ) {
-				$scope.isHidden.formView = ""
-			}
-
-		}
-	}
-
-	$scope.toggleTermsAndConditions = function () {
-		// console.log('toggling terms and conditions from ', $scope.termsAndConditions)
-		if ($scope.termsAndConditions === true) {
-			$scope.termsAndConditions = false 
-		} else {
-			$scope.termsAndConditions = true
-		}
-	}
 
 	$scope.navToHome = function () {
 		$window.location = "https://theblockchaininstitute.org/"
-
 	}
-
-	
 
 	$scope.navToCourses = function () {
 		$window.location = "https://theblockchaininstitute.org/courses/"
@@ -260,25 +253,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		checkAndHide()
 
 	}	
-
-	function getCurrentPrices () {
-		// console.log('getting crypto prices')
-	   	$http.get( "https://s3.us-east-2.amazonaws.com/bci-static/misc/ticket.json")
-  		.then(function(response) { 
-  		  	// console.log("got crypto prices", response);
-  		  	$scope.currentPrices = response.data.prices;
-  		  	// console.log('set currentPrices', $scope.currentPrices)
-  		  	
-  		  	checkPricesFilled()
-  		  	// return response;
-  			// console.log('called server to process stripe payload ', payload, "received", response )
-	
-        }). 
-        catch(function(error) { 
-          // console.log(error);
-        }); 
-	}
-
 
 	function checkAndHide () {	
 		// console.log('amount is', $scope.donationAmount)
@@ -380,45 +354,24 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}
 	}
 
-	$scope.$watch('selectedCurrency', function(){
-		var split = $scope.selectedCurrency.split(' ')
-
-		// console.log(split)
-		// hack fix for two letter names. need to make this better
-		if ( split.length > 2 ) {
-			var code = split[2].slice(0, split[1].length-1).slice(1, split[1].length-1);
-			var name = split[0] + " " + split[1] 
-		} else {
-			var code = split[1].slice(0, split[1].length-1).slice(1, split[1].length-1);
-			var name = split[0]
-		}
-		if (code === "BC") code = "BCH"
-		if (code === "BT") code = "BTG"
-		$scope.setCurrency(code, name);
-
-		updateConversion()
-	});
-
 	$scope.setCurrency = function (code, name) {
 
-		// console.log('setCurrency', code, name)
-		// if ( typeof($scope.currency) != "undefined" ) {
-		// 	// Deselect previous item
-		// 	document.getElementById($scope.currency + "_button").className = ((document.getElementById($scope.currency + "_button").className).split('selected')).join(' ')	
-		// }
+		if ( typeof($scope.currency) != "undefined" ) {
+			// Deselect previous item
+			document.getElementById($scope.currency + "_button").className = ((document.getElementById($scope.currency + "_button").className).split('selected')).join(' ')	
+		}
 
 		if ( code === "USD" ) {
 			$scope.setMode('cash')
-			toggleToStripeMode()
 		} else {
 			$scope.setMode('crypto')
-			toggleToCryptoMode()
 		}		
 
 		// console.log("Setting currency to " + code);
 		$scope.currency = code;
 		$scope.currencyName = name;
 		updateSelected(code);
+		$scope.next(2)
 	}
 
 	function updateSelected (code) {
@@ -479,64 +432,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			}
 		} else {
 			return callback(true)
-		}		 cryptoHandler
+		}		 
 	}
-
-	function toggleQRCodeReveal() {
-		$scope.isHidden.qrCodeView = ""
-		$scope.isHidden.formView = "hidden"
-		
-	}
-
-	$scope.revealQRCode = function () {
-
-		validateForm ( function (result) {
-
-			if ( result.error ) {
-				$scope.error = result.error;
-			} else {
-
-	    		$scope.isHidden.formView = "hidden"
-				$scope.toggleLoaderDisplay();
-
-	    		$scope.checkCaptcha(function(result){
-	    			console.log('checkCaptcha returned')
-	    			// cryptoHandler(result, function(result) {
-	    			// 	console.log('cryptoHandler returned ', result)
-
-	    			// })
-	    		})		
-			}
-
-
-    	})
-	}
-
-	function validateForm (callback) {
-		// console.log('RESPONSE:', $scope.response)
-		// console.log('terms:', $scope.termsAndConditions)
-
-		if ( $scope.donorName === "" ) {
-			return callback({'error':'You must enter your name to proceed.'})
-		}  else if ( $scope.donorName.length < 3 ) {
-			return callback({'error':'You must enter a name longer than three characters.'})
-
-		} else if ( !($scope.donorName.split(' ').length > 1) ) {
-			return callback({'error':'You must enter your first and last name separated by a space.'})
-
-		} else if ( !validateEmail($scope.donorEmail) ) {
-			return callback({'error':'You must enter a valid email address'})
-
-		} else if ( $scope.termsAndConditions != true ) {
-			return callback({'error':'You must accept the terms and conditions.'})
-		} else if ( typeof($scope.response) === "undefined" ) {
-			return callback({'error':'Please click the recaptcha to verify that you are not a robot.'})
-		} else {
-			return callback(true)
-		} 
-
-	}
-
 
 	$scope.checkCountryOfOriginVerification = function (callback) {
 		// console.log($scope.countryOfOrigin)
@@ -558,43 +455,32 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
     // stripe will call this once it has successfully created a token for the payment details
     $scope.onToken = function(token) {
-        // console.log("Stripe Token: ", token);
+        console.log("Stripe Token: ", token);
         callStripe(token);
         $scope.token = token
-
+        hide(4)
+        show(7)
         $scope.$apply();
     };
 
     $scope.onStripe = function(apiKey, userEmail) {
-    	validateForm (function (result) {
+    	// console.log('donating', $scope.donationAmount)
+        var handler = StripeCheckout.configure({
+            key: apiKey,
+            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            locale: 'auto',
+            token: $scope.onToken
+        });
 
-
-    		if ( result.error ) { 
-    			$scope.error = result.error
-    		} else {
-	    		$scope.isHidden.formView = "hidden"
-				$scope.toggleLoaderDisplay();
-    			$scope.isDisabled.stripeButton = "all"
-		    	// console.log('donating', $scope.donationAmount)
-		        var handler = StripeCheckout.configure({
-		            key: apiKey,
-		            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-		            locale: 'auto',
-		            token: $scope.onToken
-		        });
-
-		        handler.open({
-		            panelLabel : 'Donate',
-		            name : 'Blockchain Institute',
-		            amount : $scope.donationAmount * 100, 
-		            description : 'Amount in USD',
-		            email : userEmail,
-		            zipCode : true,
-		            allowRememberMe : false
-		        });
-    		}
-    	})
-    	
+        handler.open({
+            panelLabel : 'Donate',
+            name : 'Blockchain Institute',
+            amount : $scope.donationAmount * 100, 
+            description : 'Amount in USD',
+            email : userEmail,
+            zipCode : true,
+            allowRememberMe : false
+        });
     };
 
     function callStripe (token) {
@@ -608,7 +494,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
     	$http.post( url, payload)
 	  		.then(function(response) { 
-	  		  	// console.log('calling stripe server')
+	  		  	
 	  			// console.log('called server to process stripe payload ', payload, "received", response )
    	
 	        }). 
@@ -698,7 +584,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	  	$http.post( url, payload)
 	  		.then(function(response) { 
 	  		  	
-				$scope.isHidden.loader = "hidden"
 	  			if ( $scope.mode === "crypto" ) {
 	  				cryptoHandler(response.data, function(result) {
 	  					cb(result)
@@ -718,20 +603,12 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	        }); 
 
     }
-    $scope.backFromQR = function () {
-    	$scope.isHidden.qrCodeView = "hidden"
-    	$scope.isHidden.stripeView = "hidden"
-    	$scope.isHidden.formView = ""
-    	grecaptcha.reset(); 
-    }
 
     function cryptoHandler (response, cb) {
-		toggleQRCodeReveal()
-
 		// console.log("crypto mode response received", response, $scope.currencyname)
 		$scope.address = response.address
 
-		// console.log('scope.address is : ' , $scope.address)
+		
 		if ( typeof(response.price) === "undefined" ) {
 			// console.log('response.data.price was undefined', response.price)
 			var transactionuri = $scope.currencyName.toLowerCase() + ":" + response.address 
@@ -752,13 +629,9 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}
 
 		$scope.uri = transactionuri
-		// console.log('scope.uri is ', $scope.uri)
-		// console.log('transactionuri is ', transactionuri)
 		// console.log('trans:', transactionuri)
 		initCanvas(transactionuri);
 		cb(true); 
-		$scope.apply()
-
 
     }
 
@@ -779,7 +652,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 			for ( var i = 0; i < data.length; i ++ ) {
 				// check to see that the first characters of the result match the stirng submitted
-					// console.log(data[i].key.substring(0,str.length));
+				// console.log(data[i].key.substring(0,str.length));
 
 				if ( data[i].name.substring(0,str.length).toUpperCase() === str.toUpperCase() ) {
 
@@ -795,7 +668,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	$scope.copyAddressToClipboard = function () {
 	    // console.log('copy triggered ')
-	    // console.log('scope.address:', $scope.address)
+
 	    // create temp element
 	    var copyElement = document.createElement("span");
 	    copyElement.appendChild(document.createTextNode($scope.address));
@@ -816,67 +689,12 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	    displayCopySuccessMessage();
 	}
 
-	$scope.updateUSDValue = function () {
-		if ($scope.currency === "USD" ) $scope.donationAmount = $scope.altCurrencyAmount;
-		if (checkPricesFilled()) {
-			// console.log('updateConversion')
-			for ( var i = 0; i < $scope.currentPrices.length; i++ ) {
-
-				if ($scope.currency === $scope.currentPrices[i].code) {
-					$scope.donationAmount = $scope.altCurrencyAmount * $scope.currentPrices[i].price 
-					// console.log('updating usd price for ', $scope.currentPrices[i].code, " to ",  $scope.currentPrices[i].price)
-					$scope.isDisabled.conversions = "";
-				}
-				// console.log($scope.currency, " did not match ", $scope.currentPrices[i].code)
-			}
-		} else {
-			// console.log('prices aren\'t filled, disabling input')
-			
-			$scope.isDisabled.conversions = "disabled";
-			// $scope.$applyAsync();
-		}		
-	}
-	$scope.updateConversion = updateConversion;
-
-	function updateConversion () {
-		if ($scope.currency === "USD" ) $scope.altCurrencyAmount = $scope.donationAmount;
-		if (checkPricesFilled()) {
-			// console.log('updateConversion')
-			for ( var i = 0; i < $scope.currentPrices.length; i++ ) {
-
-				if ($scope.currency === $scope.currentPrices[i].code) {
-					$scope.altCurrencyAmount = $scope.donationAmount / $scope.currentPrices[i].price 
-					// console.log('updating price for ', $scope.currentPrices[i].code, " to ",  $scope.currentPrices[i].price)
-					$scope.isDisabled.conversions = "";
-				}
-				// console.log($scope.currency, " did not match ", $scope.currentPrices[i].code)
-			}
-		} else {
-			// console.log('prices aren\'t filled, disabling input')
-			
-			$scope.isDisabled.conversions = "disabled";
-			// $scope.$applyAsync();
-		}
-	}
-
-
 	function hideCopySuccessMessage () {
 		// console.log('hiding copy success message')
 		$scope.copySuccessMessage = "hidden";
 
 	}
 
-
-	function checkPricesFilled () {
-		if ( $scope.currentPrices[0] != undefined ) {
-			// console.log('checked prices and they are ', $scope.currentPrices)
-			return true
-		} else {
-			// console.log('no current prices set')
-			getCurrentPrices()
-			return false
-		}
-	}
 
 	function displayCopySuccessMessage () {
 		// console.log('displaying copy success message')
@@ -900,9 +718,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	// Recaptcha Logic
     $scope.setResponse = function (response) {
         // console.info('Response available');
-        $scope.isDisabled.stripeButton = ""
         $scope.response = response;
-        // $scope.next(6, $scope.checkCaptcha)
+        $scope.next(6, $scope.checkCaptcha)
     };
     $scope.setWidgetId = function (widgetId) {
         // console.info('Created widget ID: %s', widgetId);

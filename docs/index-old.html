@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+    <!-- Angular Components  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
+    <link rel='stylesheet' id='cryptocoins-css'  href='./css/cryptocoins.css'> 
+    <link rel='stylesheet' id='custom-css'  href='./css/style.css'> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://checkout.stripe.com/checkout.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <noscript><link rel='stylesheet' id='noscript-css'  href='./css/noscript.css'></noscript>
+    <script src="https://rawgit.com/VividCortex/angular-recaptcha/master/release/angular-recaptcha.js"></script>
+    <script type="text/javascript" src="scripts/qrcode.js"></script>
+    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Serif', rel='stylesheet'>
+    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700', rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">     
+
+  </head>
+
+  <body ng-app="donationsManager">
+
+    <div class="container" ng-controller="donationsCtrl">
+
+        <div class="currencySelect {{display[0]}}">
+            <h1>Select a donation amount</h1>
+            <span class="yourDonationMatters">Every dollar we collect goes towards educating young software developers and entrepreneurs. Your donation could provide the resources needed to build the internet of the future.</span>
+            <div  ng-repeat="x in donationOptions" class="currencySelectButton donationAmount">
+                <button id="{{x.id}}_amount_button" class="radioSet currencySelect {{x.selected}}" ng-click="setDonationAmount(x.amount)">
+                    <span class="amountChoice">${{x.amount}}</span>
+                </button>
+            </div><br>
+            <span>Custom Amount: </span>            
+            <div class="donationAmountInput">
+                <span class="currencyTypeLabel">$</span><input class="donationAmount" ng-model="donationAmount" type="number" value="125.00" placeholder="125.00" min="0.01" step="0.01" max="5000">    
+            </div>
+            <span>Next: </span><br>
+            <button class="nextBtn" type="next" ng-click="next(1, checkAmountChoice)">Choose Currency</button>
+        </div>
+
+        <div class="currencySelect {{display[1]}}">
+            <div class="backButton" ng-click="back(1)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <!-- <h1>Select a currency:</h1> -->
+            <!-- <p class="errorMessage">{{errorMessage}}</p> -->
+            <!-- <input class="form-control" class="container-fluid" type="text" placeholder="Start typing to filter currency choices" id="search" ng-model="searchBarText" ng-keyup="search();"><hr> -->
+                <div  ng-repeat="x in set" class="currencySelectButton">
+                    <button id="{{x.code}}_button" class="radioSet currencySelect {{x.selected}}" ng-click="setCurrency(x.code, x.name)">
+                        <br>
+                        <i class="{{x.icon}}"></i>
+                        <h3>{{x.name}}<br>({{x.code}})</h3>
+                    </button>
+                </div>
+            <br>         
+             <div class="securePaymentsMessage"><h3>Secure payments powered by</h3><img src="/images/secure-stripe-payment-logo.png"></div>
+             <div class="securePaymentsMessage"><img src="/images/coinpayments-logo.png"></div>
+
+            
+        </div>
+
+        <div class="currencySelect {{display[2]}}">
+            <div class="backButton" ng-click="back(2)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <h1>Please enter your name and email address:</h1>
+            <p class="errorMessage">{{errorMessage}}</p>
+            <div class="identificationForm">
+                <input type="text" placeholder="Your Name" id="name" class="donorNameInput" ng-model="donorName">
+                <input type="email" placeholder="Your Email" id="email" class="donorEmailInput" ng-model="donorEmail">
+                <input class="checkbox-box" type="checkbox" id="taxReceiptCheckBox" ng-model="taxReceipt" checked>
+                <label  class="checkbox-label" for="taxReceiptCheckBox"> I would like a tax receipt</label><br>
+            </div>
+            <br>         
+            <button class="nextBtn" type="next" ng-click="next(3, checkIdentification)">Next</button>
+            
+        </div>
+
+        <div class="taxReceipt {{display[3]}}">
+            <div class="backButton" ng-click="back(3)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+
+            <h3>Please review our Terms and Conditions</h3>
+            <div class="termsAndConditionsScroller">
+                <!-- <span>You must scroll to the bottom to accept.</span> -->
+                <textarea disabled>
+Thank you for your interest in supporting the Blockchain Institute. All contributions accepted on-line will be used for general support of the organization. Before we process your contribution, we ask that you answer the following questions that relate to our compliance with laws applicable to the Blockchain Institute as a section 501(c)(3) organization accepting contributions in the United States.
+
+I am an individual donor, and I certify as follows
+
+- I do not reside in a sanctioned country. (Information on sanctioned countries available here: https://www.treasury.gov/resource-center/sanctions/Programs/Pages/faq_10_page.aspx.)
+
+- I am not a national of a sanctioned country.
+
+- I am not on the List of Specially Designated Nationals and Blocked Parties maintained by the United States government and available here [https://www.treasury.gov/ofac/downloads/sdnlist.pdf] or other sanctions lists
+[https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/Other-OFAC-
+Sanctions-Lists.aspx].
+
+- I am making this gift in my own right and not on behalf of any other person.
+
+Neither I nor any of my family members nor any company I control has received or expects to receive payments or other distributions of cash or property from the Blockchain Institute, and the funds being contributed are not the proceeds of illegal activity.
+
+OR
+
+I am authorized to make this gift on behalf of an organizational donor (i.e., donor is a corporation, trust, partnership, LLC, association or other entity organized separately from the individuals who control it), and I am further authorized by that organizational donor to certify as follows:
+
+- The donor is not organized under the law of a sanctioned country (Information on
+sanctioned countries available here: https://www.treasury.gov/resource-
+center/sanctions/Programs/Pages/faq_10_page.aspx) nor is it located in a sanctioned
+country.
+
+- The donor is not on the List of Specially Designated Nationals and Blocked Parties [https://www.treasury.gov/ofac/downloads/sdnlist.pdf] or other sanctions lists [https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/Other-OFAC-Sanctions-Lists.aspx], and no individual on the List of Specially Designated Nationals and Blocked Parties maintained by the United States government owns 50% or more of the organization.
+                </textarea>
+                <div class="termsAndConditionsCheckbox" ng-click="next(4, acceptConditions)">
+                    <input class="checkbox-box" type="checkbox" id="termsAndConditionsCheckbox" ng-model="termsAndConditions" checked>
+                    <label  class="checkbox-label" for="taxReceiptCheckBox"> I agree to the terms and conditions.</label><br>
+                </div>
+            </div>
+        </div>
+        <div class="stripe {{display[4]}}">
+            <div class="backButton" ng-click="back(4)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <h1>Verify Amount</h1>
+            <span class="currencyTypeLabel">$</span><input class="donationAmount" ng-model="donationAmount" type="number" value="100.00" placeholder="100.00" min="0.01" step="0.01" max="5000">
+            <a href="" ng-click="onStripe('pk_live_j9F9S8Av7YGE4VH0CH4y891l')">
+                <button class="submitDonation">Pay with Stripe</button></a>
+            <!-- <a href="" ng-click="onStripe('pk_test_xfP1IdV5ytXTYwsCj8jjtxs3')"><button class="submitDonation">Pay with Stripe</button></a> -->
+            
+            <div class="securePaymentsMessage"><img src="/images/secure-stripe-payment-logo.png"></div>
+
+        </div>
+
+        <div class="reCaptcha {{display[5]}}">
+            <div class="backButton" ng-click="back(5)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <h1>Please verify that you're human:</h1>
+            <div
+                class="recaptchaContainer"
+                vc-recaptcha
+                theme="'light'"
+                key="key"
+                on-create="setWidgetId(widgetId)"
+                on-success="setResponse(response)"
+                on-expire="cbExpiration()"
+            ></div>
+
+            <br>            
+            
+            <span class="norecaptcha">It looks like you might be using a browser that isn't supported by Google's ReCaptcha. We're sorry about the inconvenience, but you may need to try disabling spam protection or use a different browser.</span>
+            <!-- <button class="nextBtn" type="next" ng-click="next(5, checkCaptcha)">Next</button>   -->         
+        </div>
+
+        <div class="qrcode {{display[6]}}">
+            <div class="backButton" ng-click="back(6)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <h1> Scan the QR Code below to donate your funds:</h1>
+            <canvas id="qrCode">
+            </canvas>
+            <!-- <hr> -->
+            <div class="donationAmount">
+                ${{donationAmount}} 
+                <span class="currencyAlt"> {{donationAmountAlt}} {{currency}} </span>
+            </div> 
+            <br>
+            <span class="addressCopier" ng-click="copyAddressToClipboard()">
+                <input id="addressCopier" type="text" ng-model="address" class="addressCopier" disabled>
+                <i class="fa fa-copy"></i>
+            </span>
+            <span class="copySuccessMessageFlat {{copySuccessMessage}}">Address copied to keyboard!</span>
+            <a href="{{ uri }}" class="walletLink">Open in Wallet</a>
+            <button class="nextBtn" type="next" ng-click="next(7)">Next</button> 
+            <div class="securePaymentsMessage"><h3>Secure payments powered by</h3><img src="/images/coinpayments-logo.png"></div>            
+            <!-- <div class="copySuccessMessage {{copySuccessMessage}}">
+                <span>Address copied to keyboard!</span>
+                <a ng-click="hideCopySuccessMessage()">✕</a>
+            </div> -->
+        </div>
+
+
+        <div class="thanks {{display[7]}}">
+            <!-- <div class="backButton" ng-click="back(6)">
+                <i class="fas fa-chevron-left"></i>
+            </div> -->
+            <h1>Thank you for supporting Blockchain Institute!</h1>
+  
+            <p>Contributions like yours are what makes it possible for us to continue creating educational resources on the importance of decentralization and digital privacy as we transition into the blockchain age.</p>
+            <p>We are specifically interested in making the internet a safe & secure place as we declare the independence of cyberspace. Are you looking for more ways to help improve the adoption and understanding of blockchain technology? We want to hear from you! </p>
+            <p><i>If you'd like to earmark your contribution for a specific purpose, or you have any questions about your donation, please email us at info@theblockchaininstitute.org!</i></p>
+<!--             <div class='optionsContainer'>
+                <div ng-click="navToCourses()" class="option left">
+                    <img src="/images/Bitcoin-Dev-01-1080x501.png"></img>
+                    <h1>Try our FREE Courses!</h1>
+                </div>
+                <div ng-click="navToHome()" class="option right">
+                    <img src="/images/BC101-01-768x356.png"></img>
+                    <h1>Home</h1>
+                </div>
+            </div> -->
+            <div class="refreshButton" ng-click="refresh()"> 
+                <i class="fa fa-refresh"></i>Donate Again
+            </div>
+            <br>
+
+            <!-- <button class="nextBtn" type="next" ng-click="done()" >Done</button>  -->
+        </div>        
+
+    </div>
+  </body>
+
+
+  <footer>
+          <script type="text/javascript" src="donationCtrl.js" defer></script>
+  </footer>
