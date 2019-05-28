@@ -162,7 +162,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.toggleTermsAndConditions = function () {
-		console.log('toggling terms and conditions from ', $scope.termsAndConditions)
+		// console.log('toggling terms and conditions from ', $scope.termsAndConditions)
 		if ($scope.termsAndConditions === true) {
 			$scope.termsAndConditions = false 
 		} else {
@@ -262,7 +262,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}	
 
 	function getCurrentPrices () {
-		console.log('getting crypto prices')
+		// console.log('getting crypto prices')
 	   	$http.get( "https://s3.us-east-2.amazonaws.com/bci-static/misc/ticket.json")
   		.then(function(response) { 
   		  	// console.log("got crypto prices", response);
@@ -383,7 +383,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	$scope.$watch('selectedCurrency', function(){
 		var split = $scope.selectedCurrency.split(' ')
 
-		console.log(split)
+		// console.log(split)
 		// hack fix for two letter names. need to make this better
 		if ( split.length > 2 ) {
 			var code = split[2].slice(0, split[1].length-1).slice(1, split[1].length-1);
@@ -513,8 +513,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	function validateForm (callback) {
-		console.log('RESPONSE:', $scope.response)
-		console.log('terms:', $scope.termsAndConditions)
+		// console.log('RESPONSE:', $scope.response)
+		// console.log('terms:', $scope.termsAndConditions)
 
 		if ( $scope.donorName === "" ) {
 			return callback({'error':'You must enter your name to proceed.'})
@@ -558,7 +558,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
     // stripe will call this once it has successfully created a token for the payment details
     $scope.onToken = function(token) {
-        console.log("Stripe Token: ", token);
+        // console.log("Stripe Token: ", token);
         callStripe(token);
         $scope.token = token
 
@@ -608,7 +608,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
     	$http.post( url, payload)
 	  		.then(function(response) { 
-	  		  	console.log('calling stripe server')
+	  		  	// console.log('calling stripe server')
 	  			// console.log('called server to process stripe payload ', payload, "received", response )
    	
 	        }). 
@@ -728,10 +728,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
     function cryptoHandler (response, cb) {
 		toggleQRCodeReveal()
 
-		console.log("crypto mode response received", response, $scope.currencyname)
+		// console.log("crypto mode response received", response, $scope.currencyname)
 		$scope.address = response.address
 
-		console.log('scope.address is : ' , $scope.address)
+		// console.log('scope.address is : ' , $scope.address)
 		if ( typeof(response.price) === "undefined" ) {
 			// console.log('response.data.price was undefined', response.price)
 			var transactionuri = $scope.currencyName.toLowerCase() + ":" + response.address 
@@ -752,8 +752,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		}
 
 		$scope.uri = transactionuri
-		console.log('scope.uri is ', $scope.uri)
-		console.log('transactionuri is ', transactionuri)
+		// console.log('scope.uri is ', $scope.uri)
+		// console.log('transactionuri is ', transactionuri)
 		// console.log('trans:', transactionuri)
 		initCanvas(transactionuri);
 		cb(true); 
@@ -795,7 +795,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	$scope.copyAddressToClipboard = function () {
 	    // console.log('copy triggered ')
-	    console.log('scope.address:', $scope.address)
+	    // console.log('scope.address:', $scope.address)
 	    // create temp element
 	    var copyElement = document.createElement("span");
 	    copyElement.appendChild(document.createTextNode($scope.address));
@@ -827,12 +827,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 					// console.log('updating usd price for ', $scope.currentPrices[i].code, " to ",  $scope.currentPrices[i].price)
 					$scope.isDisabled.conversions = "";
 				}
-				console.log($scope.currency, " did not match ", $scope.currentPrices[i].code)
+				// console.log($scope.currency, " did not match ", $scope.currentPrices[i].code)
 			}
 		} else {
 			// console.log('prices aren\'t filled, disabling input')
 			
 			$scope.isDisabled.conversions = "disabled";
+			// $scope.$applyAsync();
 		}		
 	}
 	$scope.updateConversion = updateConversion;
@@ -854,6 +855,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			// console.log('prices aren\'t filled, disabling input')
 			
 			$scope.isDisabled.conversions = "disabled";
+			// $scope.$applyAsync();
 		}
 	}
 

@@ -80,6 +80,7 @@ span.dollarSign {
     display: inline-flex;
     position: relative;
     width: 40%;
+
 }
 
 .amountEntry .right input {
@@ -87,6 +88,7 @@ span.dollarSign {
     padding-right: 0.25em;
     position: absolute;
     width: calc(100% - 1.75em);
+    min-height: calc(100% - 0.25em);
 }
 .nameAndEmail input {
     width: calc(100% - 2.75em);
@@ -101,6 +103,7 @@ span.dollarSign {
     border: dotted 1px lightgrey !important;
     padding-top: 0.4em;
     padding-bottom: 0.4em;
+    min-height: unset;
 }
 .amountEntry input {
     text-align: right;
@@ -135,7 +138,7 @@ select {
     background-size: 2em 1.65em;
     background-position: left;
     background-repeat: no-repeat;
-    height: 1.95em;
+    height: 2.25em;
     text-align: center;
     border: 0.5px solid darkgrey;
     width: calc(100% - 1.95em);
