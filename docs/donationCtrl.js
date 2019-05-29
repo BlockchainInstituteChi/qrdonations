@@ -5,6 +5,14 @@
 
 
 angular.module('donationsManager', ['vcRecaptcha'])
+.config( [
+    '$compileProvider',
+    function( $compileProvider )
+    {   
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|bitcoin|ethereum|zcash|vertcoin|nem|litecoin|doegecoin|ripple|monero|dash|bitcoincash|bitcoingold):/);
+        // Angular before v1.2 uses $compileProvider.urlSanitizationWhitelist(...)
+    }
+])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', '$interval', function( $http, $scope, $window, $interval ){
 
 	$scope.server = "https://app.theblockchaininstitute.org/";
