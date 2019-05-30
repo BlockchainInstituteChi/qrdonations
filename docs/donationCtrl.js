@@ -150,8 +150,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.set = currencyList;
 		$scope.mode = ""
 		$scope.donationAmount = 125.00
-		$scope.donorName = "Alex Morris"
-		$scope.donorEmail = "alex@theblockchaininstitute.org"
+		//$scope.donorName = "Alex Morris"
+		//$scope.donorEmail = "alex@theblockchaininstitute.org"
 		toggleToStripeMode();
 		getCurrentPrices ();
 		updateConversion();
