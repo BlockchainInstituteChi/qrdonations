@@ -136,26 +136,50 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			"formView" : "",
 			"stripeView" : "hidden",
 			"qrCodeView" : "hidden",
-			"loader" 	 : "hidden"
+			"loader" 	 : "hidden",
+			"termsAndConditions" : "hidden"
 		};
 
 		$scope.showTaxReceipt = ""
 		$scope.isDisabled = {};
 		$scope.isDisabled.stripeButton = "all"
+		$scope.isDisabled.acceptTermsAndConditionsButton = "disabled"
 		$scope.copySuccessMessage = "hidden"
 		$scope.selectedCurrency = "Dollars (USD)"
-		$scope.termsAndConditions = true;
+		$scope.termsAndConditions = false;
 		$scope.taxReceipt = true;
 		$scope.showEmail = "hidden"
 		$scope.set = currencyList;
 		$scope.mode = ""
 		$scope.donationAmount = 125.00
-		$scope.donorName = "Alex Morris"
-		$scope.donorEmail = "alex@theblockchaininstitute.org"
+		// $scope.donorName = "Alex Morris"
+		// $scope.donorEmail = "alex@theblockchaininstitute.org"
 		toggleToStripeMode();
 		getCurrentPrices ();
 		updateConversion();
 	};
+
+
+	$scope.acceptTermsAndConditions = function () {
+
+
+
+	}
+
+	$scope.enableAcceptTermsAndConditionsButton = function () {
+
+
+
+	}
+
+	$scope.toggleTermsAndConditions = function () {
+		// console.log('toggling terms and conditions from ', $scope.termsAndConditions)
+		if ($scope.isHidden.termsAndConditions === "") {
+			$scope.termsAndConditions = "hidden" 
+		} else {
+			$scope.isHidden.termsAndConditions = ""
+		}
+	}
 
 	$scope.toggleLoaderDisplay = function () {
 		if ($scope.isHidden.loader === "hidden" ) {
@@ -172,22 +196,6 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 		}
 	}
-
-	$scope.toggleTermsAndConditions = function () {
-		// console.log('toggling terms and conditions from ', $scope.termsAndConditions)
-		if ($scope.termsAndConditions === true) {
-			$scope.termsAndConditions = false 
-		} else {
-			$scope.termsAndConditions = true
-		}
-	}
-
-	$scope.navToHome = function () {
-		$window.location = "https://theblockchaininstitute.org/"
-
-	}
-
-	
 
 	$scope.navToCourses = function () {
 		$window.location = "https://theblockchaininstitute.org/courses/"
