@@ -19,8 +19,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$window.location = "https://theblockchaininstitute.org/"
 	}
 
-	// $scope.server = "https://app.theblockchaininstitute.org/";
-	$scope.server = "http://localhost:8888/";
+	$scope.server = "https://app.theblockchaininstitute.org/";
+	//$scope.server = "http://localhost:8888/";
 	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
 
 	var currencyList = [
