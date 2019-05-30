@@ -24,9 +24,10 @@
 
   </head>
 
-  <body ng-app="donationsManager">
+  <body ng-app="donationsManager"  ng-controller="donationsCtrl">
+    <span class="cancelButton" ng-click="cancel()">✕</span>
 
-    <div class="container" ng-controller="donationsCtrl">
+    <div class="container">
         <div class="formView {{isHidden.formView}}">
             <h1>Donate to the blockchain institute</h1>
             <span class="error" ng-bind="error"></span>
