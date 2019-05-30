@@ -15,8 +15,12 @@ angular.module('donationsManager', ['vcRecaptcha'])
 ])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', '$interval', function( $http, $scope, $window, $interval ){
 
-	$scope.server = "https://app.theblockchaininstitute.org/";
-	// $scope.server = "http://localhost:8888/";
+	$scope.cancel = function () {
+		$window.location = "https://theblockchaininstitute.org/"
+	}
+
+	// $scope.server = "https://app.theblockchaininstitute.org/";
+	$scope.server = "http://localhost:8888/";
 	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
 
 	var currencyList = [
