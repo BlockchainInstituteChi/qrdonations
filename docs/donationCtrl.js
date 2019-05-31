@@ -144,7 +144,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 		$scope.isDisabled.stripeButton = "all"
 		$scope.copySuccessMessage = "hidden"
 		$scope.selectedCurrency = "Dollars (USD)"
-		$scope.termsAndConditions = true;
+		$scope.termsAndConditions = false;
 		$scope.taxReceipt = true;
 		$scope.showEmail = "hidden"
 		$scope.set = currencyList;
