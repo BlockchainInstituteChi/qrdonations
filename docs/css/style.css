@@ -246,7 +246,7 @@ label.checkbox-label {
     overflow: hidden;
 }
 .loader img {
-    width: calc(100% - 2em);
+    width:  calc(40% - 2em);
     padding: 1em;
     margin: auto;
 }
