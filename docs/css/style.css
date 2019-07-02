@@ -249,6 +249,30 @@ label.checkbox-label {
     width:  calc(40% - 2em);
     padding: 1em;
     margin: auto;
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+
+.termsAndConditions textarea {
+    width: 80%;
+    display: block;
+    margin: auto;
+    min-height: 80%;
+    position: relative;
+}
+.termsAndConditions span.cancelButton {
+    position: relative;
+    top: 0.25em;
+    left: 0.5em;
+    display: block;
+    text-align: left;
+}
+.termsAndConditions textarea {
+    width: 80%;
+    display: block;
+    margin: auto;
+    min-height: 70vh;
+    position: relative;
 }
 
 span.cancelButton {

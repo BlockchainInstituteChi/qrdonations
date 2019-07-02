@@ -27,7 +27,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 							{
 								"name":"Dollars",
 							 	"code":"USD",
-								"icon":"fas fa-dollar-sign"
+								"icon":"fas fad-ollar-sign"
 							},{
 								"name":"Bitcoin",
 								"code":"BTC",
@@ -136,7 +136,8 @@ angular.module('donationsManager', ['vcRecaptcha'])
 			"formView" : "",
 			"stripeView" : "hidden",
 			"qrCodeView" : "hidden",
-			"loader" 	 : "hidden"
+			"loader" 	 : "hidden",
+			"termsAndConditions" : "hidden"
 		};
 
 		$scope.showTaxReceipt = ""
@@ -172,6 +173,20 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 		}
 	}
+
+	$scope.displayTermsAndConditions = function () {
+
+		$scope.isHidden.termsAndConditions = "";
+		$scope.isHidden.formView = "hidden";
+
+	}
+
+	$scope.closeTermsAndConditions = function () {
+
+		$scope.isHidden.termsAndConditions = "hidden";
+		$scope.isHidden.formView = "";
+		
+	}	
 
 	$scope.toggleTermsAndConditions = function () {
 		// console.log('toggling terms and conditions from ', $scope.termsAndConditions)
