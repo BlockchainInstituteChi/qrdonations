@@ -273,6 +273,7 @@ label.checkbox-label {
     margin: auto;
     min-height: 70vh;
     position: relative;
+    margin-bottom: 1.5em;
 }
 
 span.cancelButton {
@@ -280,6 +281,8 @@ span.cancelButton {
     top: 1em;
     left: 1em;
 }
+
+
 
 @media only screen and (max-width: 800px) {
     .container, .formView, body {
