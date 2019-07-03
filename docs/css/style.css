@@ -252,7 +252,9 @@ label.checkbox-label {
     padding-top: 5em;
     padding-bottom: 5em;
 }
-
+.termsAndConditions {
+    background: white;
+}
 .termsAndConditions textarea {
     width: 80%;
     display: block;
@@ -301,4 +303,9 @@ span.cancelButton {
         font-size: 1.75em;
     }
 
+    .termsAndConditions textarea {
+        width: calc(100vw - 2em);
+        margin: 1em;
+        height: calc(100vh - 4em);
+    }
 }
