@@ -20,7 +20,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.server = "https://app.theblockchaininstitute.org/";
-	//$scope.server = "http://localhost:8888/";
+	// $scope.server = "http://localhost:8888/";
 	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
 
 	var currencyList = [
@@ -79,6 +79,10 @@ angular.module('donationsManager', ['vcRecaptcha'])
 							},{
 								"name":"Bitcoin Gold",
 								"code":"BTG",
+								"icon":"cc BTC"
+							},{
+								"name":"Bitcoin Test",
+								"code":"BTCT",
 								"icon":"cc BTC"
 							}
 
@@ -637,7 +641,13 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	  		.then(function(response) { 
 	  		  	// console.log('calling stripe server')
 	  			// console.log('called server to process stripe payload ', payload, "received", response )
-   	
+	  			
+	  				alert('Payment submitted successfully! Navigating to homepage in 3 seconds.')
+	  				setTimeout(function () {
+	  					window.location = "https://weteachblockchain.org/"; 
+	  				}, 3000)
+	  				
+	  			
 	        }). 
 	        catch(function(error) { 
 	          // console.log(error);
