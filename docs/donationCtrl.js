@@ -16,12 +16,12 @@ angular.module('donationsManager', ['vcRecaptcha'])
 .controller('donationsCtrl',[ '$http', '$scope', '$window', '$interval', function( $http, $scope, $window, $interval ){
 
 	$scope.cancel = function () {
-		$window.location = "https://theblockchaininstitute.org/"
+		$window.location = "https://weteachblockchain.org/"
 	}
 
-	$scope.server = "https://app.theblockchaininstitute.org/";
+	$scope.server = "https://app.weteachblockchain.org/";
 	// $scope.server = "http://localhost:8888/";
-	$scope.contactUrl = "https://theblockchaininstitute.org/contact/"
+	$scope.contactUrl = "https://weteachblockchain.org/contact/"
 
 	var currencyList = [
 							{
@@ -202,14 +202,14 @@ angular.module('donationsManager', ['vcRecaptcha'])
 	}
 
 	$scope.navToHome = function () {
-		$window.location = "https://theblockchaininstitute.org/"
+		$window.location = "https://weteachblockchain.org/"
 
 	}
 
 	
 
 	$scope.navToCourses = function () {
-		$window.location = "https://theblockchaininstitute.org/courses/"
+		$window.location = "https://weteachblockchain.org/courses/"
 	}	
 
 	$scope.setMode = function (mode) {
@@ -683,7 +683,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 
 	$scope.done = function () {
-		$window.location = "https://theblockchaininstitute.org"
+		$window.location = "https://weteachblockchain.org"
 	}
 
 	function proceed (stepId) {
