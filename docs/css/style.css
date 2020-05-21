@@ -136,7 +136,7 @@ select {
     background: transparent;
     background-image: url(/images/squarrow.png);
     background-size: 2em 1.65em;
-    background-position: left;
+    background-position: right;
     background-repeat: no-repeat;
     height: 2.25em;
     text-align: center;
@@ -310,13 +310,3 @@ span.cancelButton {
     }
 }
 
-/* Safari 10.1+ */
-
-@media not all and (min-resolution:.001dpcm) { @media {
-
-    .safari_only { 
-
-        display: none;
-        
-    }
-}}
