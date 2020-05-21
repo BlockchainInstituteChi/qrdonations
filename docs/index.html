@@ -52,7 +52,7 @@
                 </select>
             </div> -->
             <div class="nameAndEmail">
-                <select ng-model="selectedCurrency">
+                <select ng-model="selectedCurrency" class="safari-only">
                     <option ng-click="setCurrency(x.code, x.name)" ng-repeat="x in set">{{x.name}} ({{x.code}})</option>
                 </select>
                 <input type="text" placeholder="Satoshi Nakomoto" ng-model="donorName">
