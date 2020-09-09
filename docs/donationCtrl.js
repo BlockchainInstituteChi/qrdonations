@@ -294,7 +294,7 @@ angular.module('donationsManager', ['vcRecaptcha'])
 
 	function getCurrentPrices () {
 		// console.log('getting crypto prices')
-	   	$http.get( "https://s3.us-east-2.amazonaws.com/bci-static/misc/ticket.json")
+	   	$http.get( "https://ticker-container.s3.us-east-2.amazonaws.com/misc/ticket.json")
   		.then(function(response) { 
   		  	// console.log("got crypto prices", response);
   		  	$scope.currentPrices = response.data.prices;
